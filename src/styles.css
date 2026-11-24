@@ -46,6 +46,22 @@ body {
   transition: background-color 520ms ease, color 520ms ease;
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: 4.5rem;
+  z-index: 19;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    var(--cv-bg) 0%,
+    var(--cv-bg) 58%,
+    color-mix(in srgb, var(--cv-bg) 70%, transparent) 82%,
+    transparent 100%
+  );
+}
+
 button {
   font: inherit;
   color: inherit;
@@ -123,6 +139,12 @@ a:focus-visible {
   max-width: 60vw;
   display: grid;
   gap: 0.3rem;
+  padding: 0.3rem 0.55rem;
+  border: 1px solid color-mix(in srgb, var(--cv-line) 70%, transparent);
+  border-radius: 14px;
+  background: var(--cv-surface);
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--cv-text-strong) 8%, transparent);
+  backdrop-filter: blur(8px);
 }
 
 .brand-name {
@@ -185,7 +207,11 @@ a.chrome-button {
   flex-direction: column;
   gap: 0.15rem;
   padding: 0.8rem 0.7rem;
-  border-left: 1px solid color-mix(in srgb, var(--cv-line) 80%, transparent);
+  border: 1px solid color-mix(in srgb, var(--cv-line) 80%, transparent);
+  border-radius: 14px;
+  background: var(--cv-surface);
+  box-shadow: 0 12px 30px color-mix(in srgb, var(--cv-text-strong) 10%, transparent);
+  backdrop-filter: blur(8px);
 }
 
 .side-index-label {
@@ -202,6 +228,7 @@ a.chrome-button {
   align-items: center;
   gap: 0.6rem;
   width: 100%;
+  min-width: 8.5rem;
   padding: 0.35rem 0.4rem;
   border: 0;
   background: transparent;
@@ -241,8 +268,13 @@ a.chrome-button {
   min-height: 100svh;
   display: grid;
   align-content: center;
-  padding: clamp(5.5rem, 10vh, 8rem) calc(var(--cv-edge) + 6rem) clamp(3rem, 8vh, 6rem) calc(var(--cv-edge) + 6rem);
+  padding: clamp(5.5rem, 10vh, 8rem) calc(var(--cv-edge) + 6rem) clamp(3rem, 8vh, 6rem) calc(var(--cv-edge) + 13rem);
   scroll-margin-top: 0;
+}
+
+#section-objectives {
+  align-content: start;
+  padding-top: clamp(7.5rem, 13vh, 11rem);
 }
 
 .section-inner {
@@ -339,7 +371,8 @@ a.chrome-button {
   padding: 1.1rem 1.2rem;
   border: 1px solid color-mix(in srgb, var(--cv-line) 85%, transparent);
   border-radius: 16px;
-  background: color-mix(in srgb, var(--cv-surface) 92%, var(--cv-bg-deep) 8%);
+  background: color-mix(in srgb, var(--cv-surface) 98%, var(--cv-bg-deep) 2%);
+  backdrop-filter: blur(8px);
   box-shadow: 0 12px 32px color-mix(in srgb, var(--cv-text-strong) 8%, transparent);
 }
 
@@ -391,6 +424,93 @@ a.chrome-button {
   font-size: 0.76rem;
   line-height: 1.45;
   color: var(--cv-text-muted);
+}
+
+.mini-label {
+  margin: 0 0 0.4rem;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cv-accent-strong);
+}
+
+.objective-general,
+.output-shelf {
+  max-width: 960px;
+  margin-bottom: 1rem;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid color-mix(in srgb, var(--cv-line) 85%, transparent);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--cv-surface) 98%, var(--cv-bg-deep) 2%);
+  backdrop-filter: blur(8px);
+}
+
+.objective-general p:last-child {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: var(--cv-text);
+}
+
+.objective-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+  gap: 0.55rem;
+  max-width: 960px;
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.objective-item {
+  display: grid;
+  gap: 0.22rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid color-mix(in srgb, var(--cv-line) 85%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--cv-surface) 98%, var(--cv-bg-deep) 2%);
+  backdrop-filter: blur(8px);
+}
+
+.objective-item strong {
+  font-size: 0.78rem;
+  color: var(--cv-text-strong);
+}
+
+.objective-item span {
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: var(--cv-text-muted);
+}
+
+.output-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.3rem 1.4rem;
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.76rem;
+  line-height: 1.5;
+  color: var(--cv-text-muted);
+}
+
+#section-objectives .title {
+  max-width: none;
+  font-size: clamp(2.6rem, 5vw, 5.2rem);
+  letter-spacing: -0.04em;
+}
+
+#section-objectives .heading-row {
+  margin-bottom: 0.6rem;
+}
+
+#section-objectives .lead {
+  margin-bottom: 0.8rem;
+}
+
+#section-objectives .points {
+  margin-bottom: 0.8rem;
 }
 
 .loading-screen {
@@ -696,6 +816,19 @@ a.chrome-button {
 }
 
 @media (max-width: 900px) {
+  .brand {
+    max-width: 40vw;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  .brand-sub {
+    font-size: 0.72rem;
+  }
+
   .side-index {
     top: auto;
     bottom: 0;
@@ -718,6 +851,7 @@ a.chrome-button {
   .index-button {
     flex: 0 0 auto;
     width: auto;
+    min-width: 0;
     font-size: 0;
   }
 

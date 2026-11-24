@@ -11,6 +11,42 @@ import { initScenes } from "./scenes/index.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
+function renderSectionExtras(section) {
+  if (!section.objectives && !section.outputs) return "";
+  const blocks = [];
+  if (section.scene?.generalText) {
+    blocks.push(`
+      <div class="objective-general">
+        <p class="mini-label">${escapeHtml(section.scene.general)}</p>
+        <p>${escapeHtml(section.scene.generalText)}</p>
+      </div>
+    `);
+  }
+  if (section.objectives) {
+    blocks.push(`
+      <ol class="objective-list">
+        ${section.objectives.map(item => `
+          <li class="objective-item">
+            <strong>${escapeHtml(item.title)}</strong>
+            <span>${escapeHtml(item.line)}</span>
+          </li>
+        `).join("")}
+      </ol>
+    `);
+  }
+  if (section.outputs) {
+    blocks.push(`
+      <div class="output-shelf">
+        <p class="mini-label">${escapeHtml(section.scene.shelfLabel)}</p>
+        <ul class="output-list">
+          ${section.outputs.map(item => `<li>${escapeHtml(item)}</li>`).join("")}
+        </ul>
+      </div>
+    `);
+  }
+  return blocks.join("");
+}
+
 const { ui, sections } = content;
 const reduced = Boolean(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches);
 document.documentElement.dataset.motion = reduced ? "reduced" : "full";
@@ -47,7 +83,7 @@ actions.className = "chrome chrome-actions";
 actions.innerHTML = `
   <button class="chrome-button" type="button" data-open-theme>${escapeHtml(ui.themeButton)}</button>
   <button class="chrome-button" type="button" data-toggle-low>${escapeHtml(ui.lowGraphicsButton)}</button>
-  <a class="chrome-button" href="./characters/">Characters</a>
+  <a class="chrome-button" href="./characters/">${escapeHtml(ui.charactersButton)}</a>
   <button class="chrome-button" type="button" data-open-help>${escapeHtml(ui.helpButton)}</button>
 `;
 
@@ -76,6 +112,7 @@ deck.innerHTML = sections.map((section, index) => `
       </div>
       <p class="lead">${escapeHtml(section.lead)}</p>
       <ul class="points">${section.points.map(point => `<li class="point">${escapeHtml(point)}</li>`).join("")}</ul>
+      ${renderSectionExtras(section)}
       <div class="cards">${renderCards(section.cards, ui)}</div>
     </div>
   </section>
@@ -221,6 +258,25 @@ sectionsWithElements.forEach((section, index) => {
     onEnter: () => setActive(index),
     onEnterBack: () => setActive(index)
   });
+
+  const inner = section.element.querySelector(".section-inner");
+  gsap.timeline({
+    scrollTrigger: {
+      trigger: section.element,
+      start: "top 45%",
+      end: "bottom 55%",
+      scrub: true,
+      invalidateOnRefresh: true
+    }
+  })
+    .fromTo(inner,
+      { opacity: 0, y: reduced ? 0 : 36 },
+      { opacity: 1, y: 0, duration: 0.15, ease: "none" }
+    )
+    .to(inner, { opacity: 1, duration: 0.7 })
+    .to(inner,
+      { opacity: 0, y: reduced ? 0 : -28, duration: 0.15, ease: "none" }
+    );
 });
 
 overlays.setNotes(sections[0]);

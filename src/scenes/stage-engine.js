@@ -161,6 +161,17 @@ export function createStageEngine({ container, count }) {
     lastFrame: 0
   };
 
+  const cameraRig = {
+    x: 0,
+    y: 1.2,
+    z: 0,
+    lookX: 0,
+    lookY: 1.1,
+    lookZ: -12,
+    fov: 52,
+    roll: 0
+  };
+
   const sections = [];
   const layers = [];
   const lowGraphicsObjects = [];
@@ -279,6 +290,23 @@ export function createStageEngine({ container, count }) {
     }
   }
 
+  function getCameraTarget() {
+    const floatIndex = state.progress * (count - 1);
+    const index = Math.min(count - 1, Math.max(0, Math.round(floatIndex)));
+    const profile = sections[index]?.userData?.camera || {};
+    const from = profile.from || profile;
+    const to = profile.to || from;
+    const local = Math.min(1, Math.max(0, (floatIndex - index + 0.35) / 0.7));
+    const keys = ["x", "y", "z", "lookX", "lookY", "lookZ", "fov", "roll"];
+    const target = {};
+    for (const key of keys) {
+      const start = Number.isFinite(from[key]) ? from[key] : cameraRig[key];
+      const end = Number.isFinite(to[key]) ? to[key] : start;
+      target[key] = lerp(start, end, local);
+    }
+    return target;
+  }
+
   function render(frameTime) {
     const seconds = frameTime ? frameTime / 1000 : 0;
     const delta = state.lastFrame ? Math.min(0.25, seconds - state.lastFrame) : 0.016;
@@ -291,16 +319,26 @@ export function createStageEngine({ container, count }) {
     state.pointer.x = lerp(state.pointer.x, state.pointerTarget.x, pointerEase);
     state.pointer.y = lerp(state.pointer.y, state.pointerTarget.y, pointerEase);
 
+    const cameraTarget = getCameraTarget();
+    const cameraEase = state.reducedMotion ? 1 : 1 - Math.exp(-delta * 3.4);
+    for (const key of Object.keys(cameraRig)) {
+      cameraRig[key] = lerp(cameraRig[key], cameraTarget[key], cameraEase);
+    }
+    if (Math.abs(camera.fov - cameraRig.fov) > 0.01) {
+      camera.fov = cameraRig.fov;
+      camera.updateProjectionMatrix();
+    }
     camera.position.set(
-      state.pointer.x * (state.reducedMotion ? 0 : 0.95),
-      1.2 + state.pointer.y * (state.reducedMotion ? 0 : 0.5),
-      state.cameraZ
+      cameraRig.x + state.pointer.x * (state.reducedMotion ? 0 : 0.95),
+      cameraRig.y + state.pointer.y * (state.reducedMotion ? 0 : 0.5),
+      state.cameraZ + cameraRig.z
     );
     camera.lookAt(
-      state.pointer.x * 0.2,
-      1.1 + state.pointer.y * 0.12,
-      state.cameraZ - 12
+      cameraRig.lookX + state.pointer.x * 0.2,
+      cameraRig.lookY + state.pointer.y * 0.12,
+      state.cameraZ + cameraRig.z + cameraRig.lookZ
     );
+    camera.rotation.z += cameraRig.roll;
 
     for (const layer of layers) {
       const base = layer.userData.basePosition;
@@ -399,6 +437,9 @@ export function createStageEngine({ container, count }) {
           y: Number(state.pointer.y.toFixed(3))
         },
         activeIndex: state.activeIndex,
+        camera: Object.fromEntries(
+          Object.entries(cameraRig).map(([key, value]) => [key, Number(value.toFixed(3))])
+        ),
         lowGraphics: state.lowGraphics,
         hold: state.hold,
         reducedMotion: state.reducedMotion,

@@ -19,6 +19,7 @@ export const content = {
     timerPause: "Pause",
     timerReset: "Reset",
     lowGraphicsButton: "Graphics",
+    charactersButton: "Characters",
     lowGraphicsOn: "Low graphics: on",
     lowGraphicsOff: "Low graphics: off",
     helpTitle: "Presenter controls",
@@ -51,8 +52,7 @@ export const content = {
       points: [
         "Emilia Ambalada Poblete Integrated High School",
         "3I's: Inquiries, Investigation and Immersion",
-        "Proponents: Kyle Compoto, Johndy Jade Joel L. Blanco, Rihana Ogatis, Daniella Pauleen Bangero",
-        "Innovation Adviser: [Name of Innovation Adviser]",
+        "Four proponents · adviser name still [to be added]",
         "November 2026 — revised edition"
       ],
       cards: [
@@ -81,33 +81,48 @@ export const content = {
       eyebrow: "Paper part one",
       title: "Project Contacts",
       tagline: "The people named in the revised paper",
-      lead: "The project record names the proponents, the school evaluators, and the approving authorities.",
+      lead: "The paper names the team, the evaluator, and the approving authorities.",
       points: [
-        "Kyle Compoto — Innovator · Project Web Developer",
-        "Johndy Jade Joel L. Blanco — Researcher · Data Engineer",
-        "Rihana Ogatis — Researcher · [Role to be assigned]",
-        "Daniella Pauleen Bangero — Researcher · [Role to be assigned]",
-        "Sir Yvan A. Reyes — ICT Coordinator · Project Evaluator",
-        "Mrs. Marivic C. Canillo and Mrs. Gina Marie G. Pinza — Project Approving Authorities"
+        "Four proponents: Kyle, Johndy, Rihana and Daniella",
+        "Innovation Adviser: [Name to be added]",
+        "Evaluator: Sir Yvan A. Reyes · ICT Coordinator",
+        "Approving authorities: Mrs. Marivic C. Canillo · Mrs. Gina Marie G. Pinza"
       ],
       cards: [
         {
           label: "Still open",
-          body: "Innovation adviser, two student roles, and several email addresses remain bracketed in the paper.",
+          body: "Two student roles and the adviser name remain bracketed in the paper.",
           actionLabel: "Paper §I",
-          actionText: "[Name of Innovation Adviser] · [Email to be added] · [Role to be assigned]"
+          actionText: "Rihana Ogatis and Daniella Pauleen Bangero — [Role to be assigned]. Innovation Adviser — [Name to be added]."
         },
         {
           label: "Evaluation path",
-          body: "Monitoring and evaluation are planned with the ICT Coordinator, Sir Yvan A. Reyes.",
+          body: "Monitoring and evaluation are planned with the ICT Coordinator.",
           actionLabel: "Paper §VII",
           actionText: "Monitoring and evaluation will be carried out by the project group together with the ICT Coordinator, Sir Yvan A. Reyes."
         }
       ],
+      scene: {
+        id: "team-desk",
+        desk: [
+          { name: "Kyle Compoto", role: "Project Web Developer" },
+          { name: "Johndy Jade Joel L. Blanco", role: "Data Engineer" },
+          { name: "Rihana Ogatis", role: "[Role to be assigned]" },
+          { name: "Daniella Pauleen Bangero", role: "[Role to be assigned]" },
+          { name: "Innovation Adviser", role: "[Name to be added]" },
+          { name: "Sir Yvan A. Reyes", role: "Project Evaluator" },
+          { name: "Mrs. Marivic C. Canillo", role: "Approving Authority" },
+          { name: "Mrs. Gina Marie G. Pinza", role: "Approving Authority" }
+        ],
+        reactions: [
+          { companion: "moss", mood: "thinking", threshold: 0.12, text: "Names first. Placeholders stay placeholders." },
+          { companion: "pip", mood: "cheering", threshold: 0.58, text: "The approval path is visible now." }
+        ]
+      },
       notes: [
-        "Read the names and roles straight from the contact table.",
-        "Do not fill in the bracketed adviser name, roles, or emails from memory.",
-        "Point out that the ICT Coordinator is the named evaluation lead in Part VII."
+        "Read the desk cards from left to right: proponents, adviser, evaluator, approving authorities.",
+        "Keep the two student roles and the adviser name bracketed; do not fill them from memory.",
+        "No email addresses are shown. The ICT Coordinator is the named evaluation lead in Part VII."
       ]
     },
     {
@@ -116,32 +131,46 @@ export const content = {
       eyebrow: "Paper part two",
       title: "Project Summary",
       tagline: "One accessible place, not five disconnected habits",
-      lead: "Students often have to piece their learning together from scattered places.",
+      lead: "Five linked needs become one accessible place in a working prototype.",
       points: [
-        "Five linked needs: trustworthy information, everyday technical problems, independent study, task organisation, and online study with classmates",
-        "17 main pages and 10 game pages in the working app",
-        "117 separate checks passed on 22 November 2026",
-        "Work stays on the student's own device unless they choose to sign in",
-        "Dates, greetings, daily practice, and streaks follow Philippine time"
+        "Five needs: reliable information · everyday tech problems · staying engaged · organising tasks · studying together",
+        "17 main pages · 10 games · phone and computer",
+        "Work stays on the device unless the student signs in",
+        "Philippine time: dates, greetings, practice and streaks"
       ],
       cards: [
         {
-          label: "What the checks mean",
-          body: "The 117 checks describe the app's condition; they are not proof of student learning.",
+          label: "Working prototype",
+          body: "Prepared paths are shown; unverified paths are named, not hidden.",
           actionLabel: "Paper §II",
-          actionText: "Those checks describe the app's condition; they are not proof of student learning."
+          actionText: "The project is a working prototype, so prepared but untested paths are stated plainly."
         },
         {
-          label: "Stage",
-          body: "The present stage is checking the prototype and preparing it for handover.",
+          label: "What checks mean",
+          body: "117 checks passed on 22 November 2026 — app condition, not learning.",
           actionLabel: "Paper §II",
-          actionText: "The original plan allowed twelve weeks in the second term of school year 2026–2027, subject to school permission and to teachers being available to review content."
+          actionText: "Those checks describe the app's condition; they are not proof of student learning."
         }
       ],
+      scene: {
+        id: "five-needs",
+        needs: [
+          "Reliable information",
+          "Everyday tech problems",
+          "Staying engaged",
+          "Organising tasks",
+          "Studying together"
+        ],
+        hub: "CampusVerse",
+        reactions: [
+          { companion: "lumen", mood: "happy", threshold: 0.18, text: "Five small needs. One place to notice." },
+          { companion: "moss", mood: "thinking", threshold: 0.62, text: "One place, not five disconnected habits." }
+        ]
+      },
       notes: [
-        "Lead with the five needs, then show the app as one answer to all five.",
-        "Use the paper's counts: 17 main pages, 10 game pages, and 117 checks on 22 November 2026.",
-        "Do not turn passing checks into a claim about better learning."
+        "Lead with the five needs, then let the 3D paths converge on one place.",
+        "Use the paper's counts: 17 main pages, 10 games, and 117 checks on 22 November 2026.",
+        "Say working prototype, and never turn passing checks into a learning claim."
       ]
     },
     {
@@ -150,31 +179,48 @@ export const content = {
       eyebrow: "Paper part three",
       title: "Background and Rationale",
       tagline: "Proposed problems, not measured findings",
-      lead: "The five problem areas remain the project's guide, but the evidence has not been gathered yet.",
+      lead: "The five problem areas guide the design, but the evidence is still planned.",
       points: [
-        "Observations, surveys, or interviews of EAPIHS students are still [not yet collected]",
-        "The answer is one place for cited reading, safety-first troubleshooting, practice, tools, companions, and study rooms",
-        "The solver puts urgent safety advice before ordinary study advice and never asks a student to handle a dangerous hazard",
-        "12 colour themes and 16 subject looks support reading comfort, with reduced motion available",
-        "Internet access may be needed for sign-in, shared work, sources, messaging, and video calls"
+        "Five problem areas are PROPOSED, not measured",
+        "Observations, surveys and interviews: not yet gathered",
+        "Answer: cited reading, safety-first help, practice, tools, companions and study rooms",
+        "Not a teacher, counsellor, technician or emergency service"
       ],
       cards: [
         {
-          label: "Safety limit",
-          body: "The keyword classifier can miss urgent wording or flag ordinary text; it is not a crisis monitor.",
+          label: "Safety first",
+          body: "Urgent advice comes before study advice; no guide asks a student to handle a dangerous hazard.",
           actionLabel: "Paper §III",
           actionText: "Automated answers do not replace a teacher, a counsellor, a qualified technician, or emergency services."
         },
         {
-          label: "Crisis signposts",
-          body: "NCMH, Hopeline, and 911 cards use official links; two NCMH numbers are unconfirmed and school review is pending.",
+          label: "Limits",
+          body: "The keyword classifier can miss urgent wording; it is not a crisis monitor.",
           actionLabel: "Paper §III",
-          actionText: "No number is dialled automatically."
+          actionText: "Two NCMH numbers are unconfirmed and school review is pending; no number is dialled automatically."
         }
       ],
+      scene: {
+        id: "scattered-learning",
+        scattered: [
+          "A note from a teacher",
+          "A search result",
+          "A tip from a friend",
+          "A task list",
+          "A separate chat"
+        ],
+        stamp: "PROPOSED",
+        mergeLabel: "CampusVerse",
+        safetyLabel: "Safety first",
+        themes: "12 themes · 16 looks",
+        reactions: [
+          { companion: "pip", mood: "thinking", threshold: 0.14, text: "Proposed is not the same as proven." },
+          { companion: "moss", mood: "happy", threshold: 0.58, text: "Safety first. Then the study tip." }
+        ]
+      },
       notes: [
         "Call the five problems proposed, because no student survey or interview has been collected.",
-        "Explain the safety-first rule before mentioning any study tip.",
+        "Let the scattered pieces merge, then give the safety-first limit before any study advice.",
         "Keep the 12 themes and 16 subject looks framed as reading comfort, not as evidence of engagement."
       ]
     },
@@ -183,37 +229,63 @@ export const content = {
       numeral: "IV",
       eyebrow: "Paper part four",
       title: "Objectives and Outputs",
-      tagline: "Nine objectives rewritten against the prototype",
-      lead: "Each objective says what a student can now do, what supports it, and what is still open.",
+      tagline: "Nine student-facing objectives, then a delivery shelf",
+      lead: "One general objective, nine short objectives, then the outputs a panel can see.",
       points: [
-        "Library: 17 short explainers, 11 subjects, 4 guided paths, 45 links checked 27 Oct 2026, 10 newer entries checked 12 Nov 2026; all remain editorial drafts",
-        "Solver: 12 situations; 8 of 10 listed numbers checked 14 Nov 2026; professional review outstanding",
-        "Games: Campus Chess, Word Forge, Equation Forge, The Missing Margin, Pattern Pursuit, Study Shelf, Cipher Desk, Signal Garden, CSS Atelier, Cortex Run — practice only",
-        "Tools: calculator; Planner with Tasks, Budget, and Notes; student and teacher views change layout only",
-        "Study rooms and one-to-one video are prepared but not tried with two real accounts",
-        "Four companions: Moss, Pip, Lumen, and Juniper — scripted drawings, not live helpers",
-        "17 main pages, 10 game pages, 12 colour themes, 16 subject looks; earlier sweeps are baseline evidence only",
-        "Profiles are owner-only; no ranking, rating, leaderboard, or public player page",
-        "Open work: real sign-in, two-person video, expert review, student and teacher trials, other browsers, screen readers"
+        "One accessible place for reading, practice, tools and studying together",
+        "Each objective says what works now, what supports it and what stays open",
+        "Outputs: prototype, cited library, safety-first solver, ten games, tools, group/video, evidence record",
+        "No claim of better grades, stronger engagement or improved learning"
+      ],
+      objectives: [
+        { title: "1. Traceable reading", line: "Read cited explainers; verified review is still open." },
+        { title: "2. Safer help", line: "Get first-aid signposts; professional review is still open." },
+        { title: "3. Practice games", line: "Play ten practice games; no ranks or ratings." },
+        { title: "4. Academic tools", line: "Use calculator, Tasks, Budget and Notes; views change layout only." },
+        { title: "5. Study together", line: "Create rooms and chat; two-account proof is still open." },
+        { title: "6. Companions", line: "Meet four scripted companions; they are not live helpers." },
+        { title: "7. Student devices", line: "Use themes and six checked sizes; other-browser proof is open." },
+        { title: "8. Protected accounts", line: "Owner-only profiles; live account checks are still open." },
+        { title: "9. Test and improve", line: "117 checks passed; student, expert and screen-reader trials remain." }
+      ],
+      outputs: [
+        "Working prototype",
+        "Cited articles with draft status",
+        "Safety-first solver and contact sheet",
+        "Ten-game practice area",
+        "Calculator, planner, budget and notes",
+        "Group and video features prepared, not proven",
+        "Record of checks, gaps and improvements"
       ],
       cards: [
         {
           label: "Evidence we have",
-          body: "117 checks passed on 22 November 2026, plus earlier thirteen-scenario and sweep reviews.",
+          body: "117 checks passed on 22 November 2026; earlier sweeps are baseline only.",
           actionLabel: "Paper §IV",
           actionText: "Earlier browser reviews recorded thirteen interaction scenarios and theme and screen-size sweeps."
         },
         {
           label: "Evidence we do not claim",
-          body: "No better grades, stronger engagement, or improved learning is claimed.",
+          body: "No better grades, stronger engagement or improved learning is claimed.",
           actionLabel: "Paper §IV",
           actionText: "No claim of better grades, stronger engagement, or improved learning is made, because no such evaluation has been carried out."
         }
       ],
+      scene: {
+        id: "objectives-outputs",
+        general: "General objective",
+        generalText: "An accessible, easy-to-use place that brings reading, practice, tools and study together — honest about what is tested.",
+        shelfLabel: "Expected outputs",
+        reactions: [
+          { companion: "juniper", mood: "cheering", threshold: 0.22, text: "Nine objectives, plainly written." },
+          { companion: "moss", mood: "thinking", threshold: 0.52, text: "Each one says what works and what stays open." },
+          { companion: "lumen", mood: "happy", threshold: 0.82, text: "The shelf shows what can be demonstrated." }
+        ]
+      },
       notes: [
-        "This is the longest section; keep the nine points as short headings, then let the cards carry the proof distinction.",
-        "Name the ten games from the paper. Do not present ranking, rating, or leaderboards as features.",
-        "Stress that articles are editorial drafts and that no expert or student trial has been completed."
+        "Give the general objective once, then let the nine cards rotate; do not read every line aloud.",
+        "The tenth move is the delivery shelf: these are the things a panel can actually be shown.",
+        "Articles stay editorial drafts, and no expert or student trial has been completed."
       ]
     },
     {

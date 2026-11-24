@@ -283,18 +283,66 @@ export function createCharacterKit(engine) {
     canvas.width = 512;
     canvas.height = 132;
     const context = canvas.getContext("2d");
-    context.fillStyle = "rgba(255,253,248,0.94)";
-    context.strokeStyle = "rgba(18,38,58,0.18)";
+    const maxWidth = 452;
+
+    context.fillStyle = "rgba(255,253,248,0.96)";
+    context.strokeStyle = "rgba(18,38,58,0.22)";
     context.lineWidth = 3;
     roundRect(context, 8, 8, 496, 116, 22);
     context.fill();
     context.stroke();
-    context.fillStyle = "#12263a";
-    context.font = "700 42px system-ui, sans-serif";
-    context.fillText(title, 30, 58);
-    context.fillStyle = "#3f6b55";
-    context.font = "600 26px system-ui, sans-serif";
-    context.fillText(subtitle, 30, 98);
+
+    function fitLines(text, maxLines, baseSize, minSize, weight) {
+      const words = String(text || "").split(/\s+/).filter(Boolean);
+      if (!words.length) return { lines: [], size: baseSize, lineHeight: baseSize };
+      for (let size = baseSize; size >= minSize; size -= 2) {
+        context.font = `${weight} ${size}px system-ui, sans-serif`;
+        const lines = [];
+        let current = "";
+        for (const word of words) {
+          const candidate = current ? `${current} ${word}` : word;
+          if (!current || context.measureText(candidate).width <= maxWidth) {
+            current = candidate;
+          } else {
+            lines.push(current);
+            current = word;
+          }
+        }
+        if (current) lines.push(current);
+        if (lines.length <= maxLines) {
+          return { lines, size, lineHeight: size * 0.98 };
+        }
+      }
+      context.font = `${weight} ${minSize}px system-ui, sans-serif`;
+      const lines = words.slice(0, maxLines);
+      if (words.length > maxLines) {
+        let last = lines[maxLines - 1];
+        while (last.length > 1 && context.measureText(`${last}…`).width > maxWidth) {
+          last = last.slice(0, -1).trimEnd();
+        }
+        lines[maxLines - 1] = `${last}…`;
+      }
+      return { lines, size: minSize, lineHeight: minSize * 0.98 };
+    }
+
+    const heading = fitLines(title, 2, 34, 22, 700);
+    const detail = fitLines(subtitle, 2, 22, 15, 600);
+    context.textBaseline = "alphabetic";
+
+    context.fillStyle = "#0c1a26";
+    context.font = `700 ${heading.size}px system-ui, sans-serif`;
+    const headingTop = heading.lines.length > 1 ? 16 : 28;
+    heading.lines.forEach((line, index) => {
+      context.fillText(line, 30, headingTop + heading.size * 0.92 + index * heading.lineHeight);
+    });
+
+    context.fillStyle = "#2f5544";
+    context.font = `600 ${detail.size}px system-ui, sans-serif`;
+    const detailTop = heading.lines.length > 1 ? 86 : 76;
+    detail.lines.forEach((line, index) => {
+      context.fillText(line, 30, detailTop + detail.size * 0.9 + index * detail.lineHeight);
+    });
+
     const texture = new THREE.CanvasTexture(canvas);
     texture.colorSpace = THREE.SRGBColorSpace;
     const surface = new THREE.SpriteMaterial({ map: texture, transparent: true, depthTest: false });

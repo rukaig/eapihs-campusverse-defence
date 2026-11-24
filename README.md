@@ -44,5 +44,23 @@ at runtime.
   three moods, speech bubbles, `say()` / `setMood()` / `walkTo()`, theme-aware
   identity colours, plus nine original study props. Debug turntable is at
   `/characters` in dev and `/characters/` in the built folder.
-- Next: replace the test scene with the eight paper-part scenes and full app
-  tour from `RECON.md`.
+- Phase 3 paper Parts I–IV: condensed copy, cream detail cards and speaker notes
+  for contacts, summary, background and objectives/outputs. Four distinct
+  procedural sets replace the test scene — a team register desk, five needs
+  converging into one portal, scattered study objects merging into CampusVerse
+  with proposal and safety limits, and nine rotating objective cards leading to
+  a delivery shelf. Each part has its own camera rail; companions react at
+  scripted local progress points instead of only decorating the set. Section
+  fades, header protection and responsive gutters were tuned with repeated
+  `kiro-cli` screenshot reviews in `reference/phase3/`.
+- Phase 3 verification: `npm run build` passes; headless Chromium checks at
+  1920×1080, 1280×720, 800×360, 800×1280 and 360×800 report zero console or
+  page errors, zero external requests and zero horizontal overflow. The built
+  deck has one stage canvas, four distinct part stages, speaker notes, nine
+  objective cards, seven outputs and no contact emails. Reduced motion keeps
+  one canvas with no overflow, and `/characters/` still returns 200. Remaining
+  `kiro-cli` caveat: a few 3D labels or subtitle lines can still overlap body
+  copy at isolated mid-scroll positions; these are recorded as unsure rather
+  than claimed visually perfect.
+- Next: paper Parts V–VIII (methodology, cost, monitoring/evaluation and
+  sustainability), then the full app tour from `RECON.md`.

@@ -155,6 +155,7 @@ export function createTestScene({ engine, kit, index, section }) {
     companion: design.id,
     prop: propDesign.id,
     companionApi: companion,
+    companionApis: [companion],
     propApi: prop,
     setActive(active) {
       group.userData.active = active;

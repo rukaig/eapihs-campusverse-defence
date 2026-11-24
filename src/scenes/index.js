@@ -1,9 +1,20 @@
 import { createStageEngine } from "./stage-engine.js";
 import { createTestScene } from "./test-scene.js";
 import { createCharacterKit } from "../characters/index.js";
+import { createTeamDesk } from "./parts/team-desk.js";
+import { createFiveNeeds } from "./parts/five-needs.js";
+import { createScatteredLearning } from "./parts/scattered-learning.js";
+import { createObjectivesOutputs } from "./parts/objectives-outputs.js";
 
-// Scene registry. Every section registers one scene; Phase 2 can replace the
-// test-scene factory with part-specific sets without changing the public API.
+const PART_SCENES = {
+  "team-desk": createTeamDesk,
+  "five-needs": createFiveNeeds,
+  "scattered-learning": createScatteredLearning,
+  "objectives-outputs": createObjectivesOutputs
+};
+
+// Scene registry. Parts I-IV use their own 3D sets; other sections keep the
+// reusable foundation scene until their own phase.
 export function initScenes(sections, stageElement, initialPalette = {}) {
   sections.forEach((section, index) => {
     section.element.dataset.scene = section.id;
@@ -13,7 +24,8 @@ export function initScenes(sections, stageElement, initialPalette = {}) {
   const engine = createStageEngine({ container: stageElement, count: sections.length });
   const kit = createCharacterKit(engine);
   const scenes = sections.map((section, index) => {
-    const scene = createTestScene({ engine, kit, index, section });
+    const factory = PART_SCENES[section.scene?.id] || createTestScene;
+    const scene = factory({ engine, kit, index, section });
     engine.addSection(index, scene.group);
     return scene;
   });
@@ -39,24 +51,38 @@ export function initScenes(sections, stageElement, initialPalette = {}) {
     },
     setScrollProgress(progress) {
       engine.setScrollProgress(progress);
+      const floatIndex = progress * Math.max(1, sections.length - 1);
+      const active = Math.min(sections.length - 1, Math.max(0, Math.round(floatIndex)));
+      const local = Math.min(1, Math.max(0, (floatIndex - active + 0.35) / 0.7));
+      scenes.forEach((scene, index) => {
+        scene.setLocalProgress?.(index === active ? local : 0);
+      });
     },
     setPointer(x, y) {
       engine.setPointer(x, y);
     },
     getState() {
+      const engineState = engine.getState();
+      const floatIndex = (engineState.progress || 0) * Math.max(1, sections.length - 1);
+      const active = Math.min(sections.length - 1, Math.max(0, Math.round(floatIndex)));
       return {
-        ...engine.getState(),
-        scenes: scenes.map(scene => ({
+        ...engineState,
+        activeSceneIndex: active,
+        scenes: scenes.map((scene, index) => ({
           id: scene.group.name,
           companion: scene.companion,
-          prop: scene.prop
+          prop: scene.prop,
+          localProgress: Number((index === active ? Math.min(1, Math.max(0, (floatIndex - active + 0.35) / 0.7)) : 0).toFixed(3)),
+          ...(scene.getState?.() || {})
         }))
       };
     },
     getCharacters() {
       return {
-        companions: scenes.map(scene => scene.companionApi.getState()),
-        props: scenes.map(scene => scene.propApi.getState())
+        companions: scenes.flatMap(scene =>
+          (scene.companionApis || [scene.companionApi]).filter(Boolean).map(api => api.getState())
+        ),
+        props: scenes.map(scene => scene.propApi.getState()).filter(Boolean)
       };
     },
     dispose() {
