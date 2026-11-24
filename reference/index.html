@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CampusVerse defence — video reference frames</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: #141414;
+      color: #f2efe8;
+    }
+    body { margin: 0; padding: 24px; }
+    h1 { font-size: 1.25rem; margin: 0 0 4px; }
+    p { margin: 0 0 18px; opacity: 0.78; max-width: 70ch; line-height: 1.45; }
+    a { color: #9fd6ff; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 14px;
+    }
+    figure {
+      margin: 0;
+      background: #202020;
+      border: 1px solid #333;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    figure a { display: block; }
+    img { width: 100%; height: auto; display: block; }
+    figcaption {
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      opacity: 0.85;
+    }
+    .note {
+      margin: 0 0 18px;
+      padding: 10px 14px;
+      border-left: 3px solid #9fd6ff;
+      background: #1d2730;
+      border-radius: 4px;
+      max-width: 70ch;
+      line-height: 1.45;
+    }
+  </style>
+</head>
+<body>
+  <h1>Video reference — 30 extracted frames</h1>
+  <p>
+    Source: <code>/home/rukayl/Downloads/snaptik_7693124747588144391_v3.mp4</code>
+    (downloaded 2026-11-24 22:10). Full analysis is in
+    <a href="../RECON.md">RECON.md</a>.
+  </p>
+  <p class="note">
+    This model cannot view image pixels directly. The analysis in
+    <code>RECON.md</code> marks measured OCR/colour facts as <code>[measured]</code>
+    and your written style brief as <code>[brief]</code>. Use this viewer for the
+    visual comparison before Phase 2.
+  </p>
+  <p><a href="file:///home/rukayl/Downloads/snaptik_7693124747588144391_v3.mp4">Open the original video (file link)</a></p>
+  <div class="grid" id="grid"></div>
+  <script>
+    const grid = document.getElementById("grid");
+    for (let i = 1; i <= 30; i += 1) {
+      const name = `frame_${String(i).padStart(3, "0")}.jpg`;
+      const figure = document.createElement("figure");
+      const link = document.createElement("a");
+      link.href = `frames/${name}`;
+      const img = document.createElement("img");
+      img.src = `frames/${name}`;
+      img.alt = `Reference frame ${i}`;
+      img.loading = "lazy";
+      link.appendChild(img);
+      const caption = document.createElement("figcaption");
+      caption.textContent = `Frame ${String(i).padStart(2, "0")}`;
+      figure.append(link, caption);
+      grid.appendChild(figure);
+    }
+  </script>
+</body>
+</html>
