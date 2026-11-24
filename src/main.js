@@ -11,8 +11,24 @@ import { initScenes } from "./scenes/index.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
+function renderTimelineGroup(label, items, config) {
+  return `
+    <div class="timeline-group">
+      <p class="timeline-group-label">${escapeHtml(label)}</p>
+      <ul class="timeline-items">
+        ${items.map(item => `
+          <li class="timeline-item ${item.state === "done" ? "is-done" : "is-pending"}">
+            <span class="timeline-weeks">${escapeHtml(item.weeks)}</span>
+            <span class="timeline-title">${escapeHtml(item.title)}</span>
+            <span class="timeline-state">${escapeHtml(item.state === "done" ? config.doneLabel : config.pendingLabel)}</span>
+          </li>
+        `).join("")}
+      </ul>
+    </div>
+  `;
+}
+
 function renderSectionExtras(section) {
-  if (!section.objectives && !section.outputs) return "";
   const blocks = [];
   if (section.scene?.generalText) {
     blocks.push(`
@@ -40,6 +56,73 @@ function renderSectionExtras(section) {
         <p class="mini-label">${escapeHtml(section.scene.shelfLabel)}</p>
         <ul class="output-list">
           ${section.outputs.map(item => `<li>${escapeHtml(item)}</li>`).join("")}
+        </ul>
+      </div>
+    `);
+  }
+  if (section.timeline) {
+    const config = section.scene;
+    blocks.push(`
+      <div class="timeline-panel">
+        <p class="mini-label">${escapeHtml(config.railLabel)}</p>
+        <div class="timeline-groups">
+          ${renderTimelineGroup(config.preLabel, section.timeline.filter(item => item.group === "pre"), config)}
+          ${renderTimelineGroup(config.buildLabel, section.timeline.filter(item => item.group === "build"), config)}
+        </div>
+      </div>
+    `);
+  }
+  if (section.risks) {
+    const config = section.scene;
+    blocks.push(`
+      <div class="risk-panel">
+        <p class="mini-label">${escapeHtml(config.risksTitle)}</p>
+        <div class="risk-headings" aria-hidden="true">
+          <span>${escapeHtml(config.riskColumn)}</span>
+          <span>${escapeHtml(config.solutionColumn)}</span>
+        </div>
+        <ol class="risk-list">
+          ${section.risks.map(item => `
+            <li class="risk-pair">
+              <span class="risk-text">${escapeHtml(item.risk)}</span>
+              <span class="risk-solution">${escapeHtml(item.solution)}</span>
+            </li>
+          `).join("")}
+        </ol>
+      </div>
+    `);
+  }
+  if (section.criteria) {
+    blocks.push(`
+      <div class="criteria-panel">
+        <p class="mini-label">${escapeHtml(section.scene.stationCount)}</p>
+        <ol class="criteria-list">
+          ${section.criteria.map(item => `
+            <li class="criteria-station">
+              <strong>${escapeHtml(item.station)}</strong>
+              <span>${escapeHtml(item.status)}</span>
+            </li>
+          `).join("")}
+        </ol>
+      </div>
+    `);
+  }
+  if (section.stillToProve) {
+    blocks.push(`
+      <div class="still-panel">
+        <p class="mini-label">${escapeHtml(section.scene.stillLabel)}</p>
+        <ul class="still-list">
+          ${section.stillToProve.map(item => `<li>${escapeHtml(item)}</li>`).join("")}
+        </ul>
+      </div>
+    `);
+  }
+  if (section.handover) {
+    blocks.push(`
+      <div class="handover-panel">
+        <p class="mini-label">${escapeHtml(section.scene.handoverLabel)}</p>
+        <ul class="handover-list">
+          ${section.handover.map(item => `<li>${escapeHtml(item)}</li>`).join("")}
         </ul>
       </div>
     `);
@@ -153,6 +236,7 @@ sceneApi.setReducedMotion(reduced);
 subscribeToTheme(theme => sceneApi.updateTheme(theme));
 
 let activeIndex = 0;
+let scrollRatio = 0;
 let holding = false;
 let lowGraphics = reduced;
 
@@ -161,8 +245,9 @@ const progressCount = progress.querySelector(".progress-count");
 
 function updateProgress(ratio) {
   const clamped = Math.min(1, Math.max(0, ratio));
+  scrollRatio = clamped;
   progressFill.style.transform = `scaleX(${clamped})`;
-  const index = Math.min(sections.length - 1, Math.round(clamped * (sections.length - 1)));
+  const index = Math.min(sections.length - 1, Math.max(0, activeIndex));
   progressCount.textContent = `${String(index + 1).padStart(2, "0")} / ${String(sections.length).padStart(2, "0")}`;
   progress.setAttribute("aria-valuenow", String(index));
 }
@@ -175,6 +260,7 @@ function updateStatus() {
 function setActive(index) {
   if (index < 0 || index >= sections.length || index === activeIndex) return;
   activeIndex = index;
+  updateProgress(scrollRatio);
   sideIndex.querySelectorAll("[data-index]").forEach(button => {
     button.setAttribute("aria-current", String(Number(button.dataset.index) === index));
   });

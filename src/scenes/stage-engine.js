@@ -349,6 +349,7 @@ export function createStageEngine({ container, count }) {
 
     for (const group of sections) {
       if (!group) continue;
+      group.visible = group.userData.active;
       const targetScale = group.userData.active ? 1.03 : 0.985;
       const scale = lerp(group.scale.x, targetScale, state.reducedMotion ? 1 : 1 - Math.exp(-delta * 3.4));
       group.scale.setScalar(scale);

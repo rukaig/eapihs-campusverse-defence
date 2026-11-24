@@ -293,14 +293,33 @@ export const content = {
       numeral: "V",
       eyebrow: "Paper part five",
       title: "Project Methodology",
-      tagline: "Connected pages, conservative habits",
-      lead: "The group built connected pages in which each feature has its own look and purpose while sharing colours, navigation, and reading rules.",
+      tagline: "Connected pages, one shared reading contract",
+      lead: "Each activity keeps its own layout while sharing colours, navigation, sources and safety rules.",
       points: [
-        "Knowledge Library, School Problem Solver, Game Area, companions, calculator, planner, study rooms, assistant, private profiles, and install guide",
-        "Students are the main beneficiaries; teacher and wider-school access depends on final scope and permissions",
-        "The proposed twelve-week schedule is subject to school approval and available resources",
-        "Risks include sign-in, privacy, traceability, calls, layout, companion shortcuts, time, and missing review",
-        "Prepared access limits and released rules are not the same as a live test with real accounts"
+        "Web app: installable pages; work stays on the device until sign-in.",
+        "Optional hosted sign-in and data; assistant keys stay server-side.",
+        "Different because reading, safety, games, tools and companions share one place.",
+        "Students first; wider access depends on approved school permissions."
+      ],
+      timeline: [
+        { weeks: "Weeks 1–2", title: "Plan, problem and design", state: "done", group: "pre" },
+        { weeks: "Weeks 1–2", title: "Approval and student evidence", state: "pending", group: "pre" },
+        { weeks: "Weeks 3–4", title: "Pages, themes and install", state: "done", group: "build" },
+        { weeks: "Weeks 3–4", title: "Sign-in trial with real accounts", state: "pending", group: "build" },
+        { weeks: "Weeks 3–6", title: "Articles and solver drafts", state: "done", group: "build" },
+        { weeks: "Weeks 5–8", title: "Ten games and planner tools", state: "done", group: "build" },
+        { weeks: "Weeks 7–8", title: "Rooms and two-person call trial", state: "pending", group: "build" },
+        { weeks: "Weeks 9–12", title: "Checks, revision and records", state: "done", group: "build" }
+      ],
+      risks: [
+        { risk: "Sign-in or shared data fails", solution: "Review prepared limits; try real accounts." },
+        { risk: "Student information exposed", solution: "Owner-only profiles; collect only what is needed." },
+        { risk: "Sources cannot be traced", solution: "List sources; keep drafts hidden; require named review." },
+        { risk: "Video calls or messages fail", solution: "Trial two separate users; add a relay only after approval." },
+        { risk: "Layout breaks on devices", solution: "Six checked sizes; extend to real devices." },
+        { risk: "Companions become shortcuts", solution: "Scripted hints hide answers." },
+        { risk: "Time runs short", solution: "Core features first; report integrations as future work." },
+        { risk: "No expert or school review", solution: "Keep pending labels; commission a named review." }
       ],
       cards: [
         {
@@ -316,10 +335,25 @@ export const content = {
           actionText: "Student work is kept on the student's own device by default, and the Budget and Notes sections make no outside requests at all."
         }
       ],
+      scene: {
+        id: "workbench",
+        railLabel: "Twelve-week plan",
+        preLabel: "Pre-implementation",
+        buildLabel: "Implementation",
+        doneLabel: "Done",
+        pendingLabel: "Pending",
+        risksTitle: "Eight risk pairs",
+        riskColumn: "Risk",
+        solutionColumn: "Solution",
+        reactions: [
+          { companion: "moss", mood: "thinking", threshold: 0.14, text: "Build the core first. Name the rest." },
+          { companion: "pip", mood: "cheering", threshold: 0.62, text: "Eight risks, eight honest responses." }
+        ]
+      },
       notes: [
         "Describe the architecture as separate pages with shared tokens and reading rules.",
-        "Do not imply a teacher dashboard, parent page, or administrator area exists; the paper says none has been built.",
-        "Use the risk table to show that unverified paths are named, not hidden."
+        "Point to the twelve-week rail: completed work is done; approvals, student evidence and live access stay pending.",
+        "Do not imply a teacher dashboard, parent page or administrator area exists."
       ]
     },
     {
@@ -328,32 +362,44 @@ export const content = {
       eyebrow: "Paper part six",
       title: "Project Cost",
       tagline: "A prototype with no expenses committed",
-      lead: "Development and checking took place locally, and the app is shared through a small published set of pages.",
+      lead: "Development and checking happened locally; the app is shared through a small published set of pages.",
       points: [
-        "Total implementation cost: PHP 0",
-        "Free-tier hosting and shared data services",
-        "Existing school devices and internet connection",
-        "No paid service has been committed",
-        "Any paid service, including a better video connection, needs school approval first"
+        "Total implementation cost: PHP 0.",
+        "Free-tier hosting and shared data services.",
+        "Existing school devices and internet connection.",
+        "A better video connection would need school approval first."
       ],
       cards: [
         {
           label: "Why zero",
-          body: "The prototype uses web tools with free options; no subscription was bought for this build.",
+          body: "No subscription was bought for this build; free options cover the prototype.",
           actionLabel: "Paper §VI",
-          actionText: "No paid service has been committed: a better video connection would be considered only if the one-to-one check-in proves useful and the school approves the expense."
+          actionText: "A better video connection would be considered only if the one-to-one check-in proves useful and the school approves the expense."
         },
         {
           label: "Approval gate",
-          body: "A real figure would be entered only after quotations and school approval.",
+          body: "Any paid service is a proposal until the school approves it.",
           actionLabel: "Paper §VI",
-          actionText: "Any paid service must be approved before it is used."
+          actionText: "State the total as PHP 0; do not invent a price for a service that has not been approved."
         }
       ],
+      scene: {
+        id: "zero-cost",
+        total: "PHP 0",
+        totalLabel: "Total implementation cost",
+        freeLabel: "Free tier",
+        deviceLabel: "Existing devices",
+        approvalLabel: "Approval gate",
+        approvalText: "Paid service only after school approval",
+        reactions: [
+          { companion: "lumen", mood: "happy", threshold: 0.2, text: "Zero committed. No invented prices." },
+          { companion: "juniper", mood: "thinking", threshold: 0.66, text: "Ask first. Approve before spending." }
+        ]
+      },
       notes: [
-        "State the total as PHP 0. Do not read the paper's bracketed price fields as actual amounts.",
-        "Name the free-tier services by category, not by a paid vendor or price.",
-        "If the panel asks about video quality, say a relay would be considered only after approval."
+        "State the total as PHP 0 and do not invent amounts.",
+        "Name services by category, not by a paid vendor or price.",
+        "If asked about video quality, say a relay is only a proposal until the school approves it."
       ]
     },
     {
@@ -362,31 +408,56 @@ export const content = {
       eyebrow: "Paper part seven",
       title: "Monitoring and Evaluation",
       tagline: "App condition is not student learning",
-      lead: "Monitoring is meant to find out whether the prototype works, whether students can use it, and whether content is accurate and traceable.",
+      lead: "Six criteria guide the next review; the recorded checks describe the app, not student learning.",
       points: [
-        "117 checks cover library panels, safety guidance, calculator, games, tasks, budget, notes, themes, profiles, and page reopening",
-        "Real sign-in, shared data, profile photos, and the two-person video check-in are not yet covered by such proof",
-        "Earlier review: thirteen scenarios and nineteen pages across twelve themes and six screen sizes — baseline only",
-        "Tasks, budget entries, notes, and practice records have sensible saving; failed saves show a warning",
-        "No student survey has been given; no subject specialist has reviewed the seventeen explainers"
+        "117 checks passed (22 Nov 2026) — app condition, not learning.",
+        "Six stations: Functionality · Usability · Accessibility and responsiveness · Reliability · Information quality · Student feedback",
+        "Earlier sweeps: thirteen scenarios and six sizes — baseline only.",
+        "No student survey or expert article review has happened."
+      ],
+      criteria: [
+        { station: "Functionality", status: "117 checks" },
+        { station: "Usability", status: "Trial pending" },
+        { station: "Accessibility and responsiveness", status: "Baseline sweep" },
+        { station: "Reliability", status: "Local saves checked" },
+        { station: "Information quality", status: "Named review pending" },
+        { station: "Student feedback", status: "Survey pending" }
+      ],
+      stillToProve: [
+        "Real sign-in",
+        "Two-person video trial",
+        "Expert review of articles",
+        "Student trial and survey",
+        "Other browsers",
+        "Screen readers"
       ],
       cards: [
         {
-          label: "Open before release",
-          body: "Real accounts, separate users, clean install, offline trial, student and teacher trials, other browsers, and screen readers.",
+          label: "What 117 means",
+          body: "Internal evidence about pages, checks and behaviour — not proof of learning.",
           actionLabel: "Paper §VII",
-          actionText: "The method, participants, instruments, and success standards still need to be set before any student trial."
+          actionText: "The method, participants, instruments and success standards still need to be set before any student trial."
         },
         {
           label: "Information quality",
-          body: "A verified badge needs a named reviewer, a review date, HTTPS, and an allowlisted publisher; no entry qualifies yet.",
+          body: "A verified badge needs a named reviewer, a review date, HTTPS and an allowlisted publisher.",
           actionLabel: "Paper §VII",
-          actionText: "Teacher review is therefore the gate for this criterion, not a formality."
+          actionText: "No entry qualifies yet, and no subject specialist has reviewed the seventeen explainers."
         }
       ],
+      scene: {
+        id: "evidence-observatory",
+        tally: "117 checks passed (22 Nov 2026)",
+        stationCount: "Six criteria",
+        stillLabel: "Still to prove",
+        reactions: [
+          { companion: "pip", mood: "cheering", threshold: 0.16, text: "117 checks, clearly labelled." },
+          { companion: "moss", mood: "thinking", threshold: 0.64, text: "Checks describe the app, not learning." }
+        ]
+      },
       notes: [
         "Separate 117 passing checks from human evaluation every time the number is mentioned.",
-        "The sweep predates the current seventeen-page build, so call it baseline evidence.",
+        "Call the earlier sweeps baseline evidence, not a current full-app certificate.",
         "Be clear that no student survey and no expert article review have happened."
       ]
     },
@@ -395,29 +466,48 @@ export const content = {
       numeral: "VIII",
       eyebrow: "Paper part eight",
       title: "Project Sustainability",
-      tagline: "School ownership, accurate content, regular review",
-      lead: "Sustainability depends on school ownership, accurate content, and regular review of access rather than on a one-time effort.",
+      tagline: "School ownership, review, handover",
+      lead: "Sustainability depends on school ownership, accurate content and regular review of access.",
       points: [
-        "After approval, researchers and teachers should make the app available to EAPIHS students",
-        "Assigned teachers and members keep articles and guides current and record changes",
-        "A named review is recorded before any source or article changes status",
-        "Privacy and account management are reviewed every term by the ICT Coordinator and assigned members",
-        "A verification handover should record sign-in, video, install, and review results"
+        "After approval, make the app available to EAPIHS students.",
+        "Named content review before any article or source status changes.",
+        "Termly privacy review by the ICT Coordinator and assigned members.",
+        "Share at school events; hand records and remaining checks to the next team."
+      ],
+      handover: [
+        "School ownership",
+        "Named content review",
+        "Termly privacy review",
+        "School-event sharing",
+        "Verification handover"
       ],
       cards: [
         {
-          label: "Handover",
-          body: "The next group should inherit evidence rather than claims.",
+          label: "Verification handover",
+          body: "Record sign-in, video, install and review results; keep unverified paths labelled.",
           actionLabel: "Paper §VIII",
-          actionText: "Anything unverified should still be clearly labelled."
+          actionText: "Anything unverified should still be clearly labelled when the records are handed over."
         },
         {
-          label: "Defence approach",
-          body: "Present each feature as a student would meet it, demonstrate what works, and state what awaits approval, review, or trial.",
+          label: "Closing line",
+          body: "A future team should inherit evidence, not claims.",
           actionLabel: "Paper §VIII",
-          actionText: "That approach is stronger than overclaiming: it shows that the team knows both the value of the prototype and the limits of its proof."
+          actionText: "Present each feature as a student would meet it, demonstrate what works and state what is still waiting for approval, review or trial."
         }
       ],
+      scene: {
+        id: "handover-library",
+        handoverLabel: "Handover records",
+        ownershipLabel: "School ownership",
+        reviewLabel: "Named review",
+        privacyLabel: "Termly privacy",
+        eventLabel: "School events",
+        finalLabel: "Evidence, not claims",
+        reactions: [
+          { companion: "juniper", mood: "cheering", threshold: 0.18, text: "Pack the records, not the promises." },
+          { companion: "moss", mood: "happy", threshold: 0.68, text: "Review every term. Keep names and dates." }
+        ]
+      },
       notes: [
         "End on ownership and evidence, not on a promise of future grades.",
         "Name the term-by-term privacy review as the mechanism that keeps access current.",
@@ -427,34 +517,44 @@ export const content = {
     {
       id: "closing",
       numeral: "IX",
-      eyebrow: "Defence position",
-      title: "Show the Prototype",
-      tagline: "Name the proof still needed",
-      lead: "The group should present each feature as a student would meet it, give a short demonstration of what works, and state plainly which parts are still waiting for approval, review, or a real-world trial.",
+      eyebrow: "Defence close",
+      title: "Thank you",
+      tagline: "Questions",
+      lead: "CampusVerse brings several learning functions together and is honest about what has and has not been tested.",
       points: [
-        "Working: library, safety-first solver, ten practice games, calculator, planner, companions, themes, and install option",
-        "Prepared but unverified: real sign-in, shared data, two-person video, profile photos, and cloud access rules",
-        "Not done: student surveys, expert article review, physical-device and other-browser checks, screen-reader review",
-        "No claim of better grades, stronger engagement, or improved learning",
-        "Cost: PHP 0, with any paid service subject to school approval"
+        "Working: library, safety-first solver, ten games, tools, companions and themes.",
+        "Prepared but unverified: real sign-in, shared data and two-person video.",
+        "Still open: student survey, expert review, other browsers and screen readers.",
+        "Cost: PHP 0; any paid service needs school approval."
       ],
       cards: [
         {
-          label: "One sentence",
-          body: "CampusVerse brings several learning functions together, and it is honest about what has and has not been tested.",
-          actionLabel: "Paper §II",
-          actionText: "The project is a working prototype, so wherever something has been prepared but not yet tried with real accounts, two separate users, or a named reviewer, this paper says so plainly."
-        },
-        {
-          label: "Panel invitation",
-          body: "Judge the prototype by what can be shown and by the clarity of its remaining verification plan.",
+          label: "Ask us",
+          body: "We can demonstrate the prototype and show the gaps we recorded.",
           actionLabel: "Paper §VIII",
           actionText: "A future team should inherit evidence rather than claims."
+        },
+        {
+          label: "Do not claim",
+          body: "No better grades, stronger engagement or improved learning.",
+          actionLabel: "Paper §IV",
+          actionText: "No such evaluation has been carried out."
         }
       ],
+      scene: {
+        id: "thank-you",
+        mark: "CampusVerse",
+        line: "Evidence, not claims",
+        reactions: [
+          { companion: "moss", mood: "happy", threshold: 0.06, text: "Thanks for listening." },
+          { companion: "pip", mood: "cheering", threshold: 0.17, text: "Questions are welcome." },
+          { companion: "lumen", mood: "happy", threshold: 0.28, text: "Show the evidence." },
+          { companion: "juniper", mood: "cheering", threshold: 0.39, text: "Then hand it on." }
+        ]
+      },
       notes: [
         "Close with the prepared-versus-verified distinction; it is the safest position to defend.",
-        "Repeat the PHP 0 total only if cost comes up again.",
+        "All four companions are present: Moss, Pip, Lumen and Juniper.",
         "Do not end with a learning-impact claim; the paper explicitly refuses one."
       ]
     }

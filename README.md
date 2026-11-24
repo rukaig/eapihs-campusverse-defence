@@ -62,5 +62,31 @@ at runtime.
   `kiro-cli` caveat: a few 3D labels or subtitle lines can still overlap body
   copy at isolated mid-scroll positions; these are recorded as unsure rather
   than claimed visually perfect.
-- Next: paper Parts V–VIII (methodology, cost, monitoring/evaluation and
-  sustainability), then the full app tour from `RECON.md`.
+- Phase 4 paper Parts V–VIII and close: condensed copy, cream detail cards and
+  speaker notes for methodology, cost, monitoring/evaluation and sustainability.
+  Part V shows an eight-entry twelve-week rail split into pre-implementation and
+  implementation, with five done and three pending items, plus eight risk/solution
+  pairs on its workbench set. Part VI is a calm PHP 0 scene with free-tier and
+  existing-device notes and an approval gate; it deliberately omits the paper's
+  bracketed price rows. Part VII is an evidence observatory with six criteria
+  stations, the separate line "117 checks passed (22 Nov 2026)", and a distinct
+  "Still to prove" list. Part VIII is a handover library for school ownership,
+  named review, termly privacy review, school-event sharing and verification
+  handover. The closing "Thank you / Questions" scene gathers all four companions.
+  Each part has its own 3D set and camera rail, with scripted reactions; inactive
+  sets are hidden so labels cannot leak into the next scene.
+- Phase 4 verification: `npm run build` passes. Headless Chromium checks report
+  zero console/page errors, zero external requests and zero horizontal overflow at
+  1920×1080, 1280×720, 800×360, 800×1280 and 360×800. The built deck has ten
+  sections, five Phase 4 stages, eight timeline entries (5 done / 3 pending),
+  eight risk pairs, six criteria stations, six still-to-prove items, five
+  handover records, section notes and four closing companions. The cost section
+  contains no bracketed price rows, the exact 117-check line is present, all 12
+  colour themes plus Follow device apply with no overflow, reduced motion keeps
+  one canvas with no overflow, and the progress counter follows the active scene.
+  Final `kiro-cli` review of settled frames in `reference/phase4/` found no
+  concrete defects after the sidebar-spacing, scene-visibility and closing-frame
+  fixes. This is local headless Chromium and screenshot evidence only; it does not
+  verify physical devices, Safari/Edge/Firefox, screen readers, Firebase, two
+  independent clients, student learning or school approval.
+- Next: full app tour from `RECON.md`; do not start before Phase 4 is accepted.
