@@ -154,6 +154,8 @@ export function createStageEngine({ container, count }) {
     pointer: { x: 0, y: 0 },
     pointerTarget: { x: 0, y: 0 },
     activeIndex: 0,
+    local: 0,
+    explicitLocal: false,
     hold: false,
     lowGraphics: false,
     reducedMotion: false,
@@ -251,6 +253,7 @@ export function createStageEngine({ container, count }) {
   function setScrollProgress(progress) {
     const clamped = Math.min(1, Math.max(0, Number(progress) || 0));
     state.progress = clamped;
+    state.explicitLocal = false;
     state.targetZ = 10 - clamped * (count - 1) * SPACING;
     state.activeIndex = Math.min(count - 1, Math.round(clamped * (count - 1)));
     sections.forEach((group, index) => {
@@ -258,9 +261,23 @@ export function createStageEngine({ container, count }) {
     });
   }
 
+  function setSectionProgress(index, progress) {
+    if (!Number.isInteger(index) || index < 0 || index >= count) return;
+    const local = Math.min(1, Math.max(0, Number(progress) || 0));
+    state.activeIndex = index;
+    state.local = local;
+    state.explicitLocal = true;
+    state.progress = Math.min(1, (index + local * 0.7) / Math.max(1, count - 1));
+    state.targetZ = 10 - (index + local * 0.7) * SPACING;
+    sections.forEach((group, current) => {
+      if (group) group.userData.active = current === index;
+    });
+  }
+
   function setActive(index) {
     if (!Number.isInteger(index) || index < 0 || index >= count) return;
     state.activeIndex = index;
+    if (state.explicitLocal) state.local = 0;
     sections.forEach((group, current) => {
       if (group) group.userData.active = current === index;
     });
@@ -292,11 +309,15 @@ export function createStageEngine({ container, count }) {
 
   function getCameraTarget() {
     const floatIndex = state.progress * (count - 1);
-    const index = Math.min(count - 1, Math.max(0, Math.round(floatIndex)));
+    const index = state.explicitLocal
+      ? state.activeIndex
+      : Math.min(count - 1, Math.max(0, Math.round(floatIndex)));
     const profile = sections[index]?.userData?.camera || {};
     const from = profile.from || profile;
     const to = profile.to || from;
-    const local = Math.min(1, Math.max(0, (floatIndex - index + 0.35) / 0.7));
+    const local = state.explicitLocal
+      ? state.local
+      : Math.min(1, Math.max(0, (floatIndex - index + 0.35) / 0.7));
     const keys = ["x", "y", "z", "lookX", "lookY", "lookZ", "fov", "roll"];
     const target = {};
     for (const key of keys) {
@@ -409,6 +430,7 @@ export function createStageEngine({ container, count }) {
     trackMaterial,
     setPalette,
     setScrollProgress,
+    setSectionProgress,
     setPointer,
     setActive,
     setHold,

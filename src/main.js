@@ -173,10 +173,12 @@ actions.innerHTML = `
 const sideIndex = document.createElement("nav");
 sideIndex.className = "chrome side-index";
 sideIndex.setAttribute("aria-label", ui.sectionIndexLabel);
+const tourStart = sections.findIndex(section => section.chapter);
 sideIndex.innerHTML = `
   <p class="side-index-label">${escapeHtml(ui.sectionIndexLabel)}</p>
   ${sections.map((section, index) => `
-    <button class="index-button" type="button" data-index="${index}" aria-current="false">
+    ${index === tourStart ? `<p class="index-divider">${escapeHtml(ui.appTourLabel)}</p>` : ""}
+    <button class="index-button${section.chapter ? " is-tour" : ""}" type="button" data-index="${index}" aria-current="false">
       <span class="numeral">${escapeHtml(section.numeral)}</span>
       <span class="index-name">${escapeHtml(section.title)}</span>
     </button>
@@ -186,13 +188,14 @@ sideIndex.innerHTML = `
 const deck = document.createElement("main");
 deck.className = "deck";
 deck.innerHTML = sections.map((section, index) => `
-  <section class="section" id="section-${escapeHtml(section.id)}" data-section-index="${index}">
+  <section class="section" id="section-${escapeHtml(section.id)}" data-section-index="${index}" data-chapter="${escapeHtml(section.chapter || "")}">
     <div class="section-inner">
       <p class="eyebrow">${escapeHtml(section.eyebrow)}</p>
       <div class="heading-row">
         ${index === 0 ? `<h1 class="title">${escapeHtml(section.title)}</h1>` : `<h2 class="title">${escapeHtml(section.title)}</h2>`}
         <p class="tagline">${escapeHtml(section.tagline)}</p>
       </div>
+      ${section.status ? `<p class="status-chip ${escapeHtml(section.status.kind)}">${escapeHtml(section.status.text)}</p>` : ""}
       <p class="lead">${escapeHtml(section.lead)}</p>
       <ul class="points">${section.points.map(point => `<li class="point">${escapeHtml(point)}</li>`).join("")}</ul>
       ${renderSectionExtras(section)}
@@ -326,14 +329,8 @@ ScrollTrigger.create({
   start: "top top",
   end: "bottom bottom",
   invalidateOnRefresh: true,
-  onUpdate: self => {
-    sceneApi.setScrollProgress(self.progress);
-    updateProgress(self.progress);
-  },
-  onRefresh: self => {
-    sceneApi.setScrollProgress(self.progress);
-    updateProgress(self.progress);
-  }
+  onUpdate: self => updateProgress(self.progress),
+  onRefresh: self => updateProgress(self.progress)
 });
 
 sectionsWithElements.forEach((section, index) => {
@@ -343,6 +340,15 @@ sectionsWithElements.forEach((section, index) => {
     end: "bottom 45%",
     onEnter: () => setActive(index),
     onEnterBack: () => setActive(index)
+  });
+
+  ScrollTrigger.create({
+    trigger: section.element,
+    start: "top top",
+    end: "bottom bottom",
+    invalidateOnRefresh: true,
+    onUpdate: self => sceneApi.setSectionProgress(index, self.progress),
+    onRefresh: self => sceneApi.setSectionProgress(index, self.progress)
   });
 
   const inner = section.element.querySelector(".section-inner");

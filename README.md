@@ -89,4 +89,31 @@ at runtime.
   fixes. This is local headless Chromium and screenshot evidence only; it does not
   verify physical devices, Safari/Edge/Firefox, screen readers, Firebase, two
   independent clients, student learning or school approval.
-- Next: full app tour from `RECON.md`; do not start before Phase 4 is accepted.
+- Phase 5 app tour: 17 "Inside CampusVerse" stops in navigation order — Today,
+  Knowledge Library, Article reader, School Problem Solver, Crisis contacts,
+  Practice Arcade, Planner, Study Rooms, Room chat + video, Calculator, Animated
+  Companions, Strands & Well-being, Study Assistant, Private Profile, Sign-in
+  gate, Install Guide and Appearance settings. Each stop has a page name, one-line
+  purpose, four short function cards, an honesty badge, a local 3D laptop or phone
+  with a real screenshot or local canvas mock, and a scripted companion reaction.
+  Fifteen screenshots are historical local audit captures from the app source;
+  Strands and Appearance use local canvas mocks because no matching screenshot was
+  available. They are presentation textures, not live app verification. The deck
+  preserves "verified in local checks" versus "prepared, not verified" labels, the
+  paper's 17-page/10-game/12-theme/16-subject-look counts, PHP 0 and 117 checks,
+  and it shows no ranking, rating or public player page.
+- Phase 5 verification: `npm run build` passes with 27 sections and 27 stages —
+  ten paper sections, 17 tour stops and the closing scene. Headless Chromium checks
+  report zero console/page errors, zero external requests and zero horizontal
+  overflow at 1920×1080, 1280×720, 800×360, 800×1280 and 360×800. All 17 devices
+  become the active stage at their resting position; all 15 screenshots load; all
+  12 themes plus Follow device apply with no overflow; reduced motion keeps one
+  canvas; the progress counter reaches 27 / 27. A DOM overlap sweep found no
+  tour card or chrome collisions. Repeated `kiro-cli` reviews of settled frames
+  found no remaining concrete defects after the shelf-panel, screen-label,
+  floating-swatch, laptop-height and heading-rhythm fixes. This remains local
+  headless Chromium and screenshot evidence only; it does not verify physical
+  devices, Safari/Edge/Firefox, screen readers, live Firebase, two independent
+  clients, student learning or school approval.
+- Next: Phase 6 game tour with ten dedicated sets and the closing constellation
+  overview; do not start before Phase 5 is accepted.

@@ -10,6 +10,7 @@ import { createZeroCost } from "./parts/zero-cost.js";
 import { createEvidenceObservatory } from "./parts/evidence-observatory.js";
 import { createHandoverLibrary } from "./parts/handover-library.js";
 import { createThankYou } from "./parts/thank-you.js";
+import { createAppTour } from "./parts/app-tour.js";
 
 const PART_SCENES = {
   "team-desk": createTeamDesk,
@@ -20,7 +21,8 @@ const PART_SCENES = {
   "zero-cost": createZeroCost,
   "evidence-observatory": createEvidenceObservatory,
   "handover-library": createHandoverLibrary,
-  "thank-you": createThankYou
+  "thank-you": createThankYou,
+  "app-tour": createAppTour
 };
 
 // Scene registry. Every paper part and the closing scene has its own 3D set;
@@ -42,8 +44,13 @@ export function initScenes(sections, stageElement, initialPalette = {}) {
 
   engine.setPalette(initialPalette);
 
+  let currentIndex = 0;
+  let currentLocal = 0;
+
   return {
     setActive(index, section) {
+      currentIndex = index;
+      currentLocal = 0;
       scenes.forEach((scene, current) => scene.setActive(current === index));
       engine.setActive(index);
     },
@@ -62,27 +69,33 @@ export function initScenes(sections, stageElement, initialPalette = {}) {
     setScrollProgress(progress) {
       engine.setScrollProgress(progress);
       const floatIndex = progress * Math.max(1, sections.length - 1);
-      const active = Math.min(sections.length - 1, Math.max(0, Math.round(floatIndex)));
-      const local = Math.min(1, Math.max(0, (floatIndex - active + 0.35) / 0.7));
+      currentIndex = Math.min(sections.length - 1, Math.max(0, Math.round(floatIndex)));
+      currentLocal = Math.min(1, Math.max(0, (floatIndex - currentIndex + 0.35) / 0.7));
       scenes.forEach((scene, index) => {
-        scene.setLocalProgress?.(index === active ? local : 0);
+        scene.setLocalProgress?.(index === currentIndex ? currentLocal : 0);
       });
+    },
+    setSectionProgress(index, progress) {
+      if (index !== currentIndex) return;
+      currentLocal = Math.min(1, Math.max(0, Number(progress) || 0));
+      engine.setSectionProgress(index, currentLocal);
+      scenes[index]?.setLocalProgress?.(currentLocal);
     },
     setPointer(x, y) {
       engine.setPointer(x, y);
     },
     getState() {
       const engineState = engine.getState();
-      const floatIndex = (engineState.progress || 0) * Math.max(1, sections.length - 1);
-      const active = Math.min(sections.length - 1, Math.max(0, Math.round(floatIndex)));
+      const active = engineState.activeIndex;
       return {
         ...engineState,
         activeSceneIndex: active,
+        localProgress: Number(currentLocal.toFixed(3)),
         scenes: scenes.map((scene, index) => ({
           id: scene.group.name,
           companion: scene.companion,
           prop: scene.prop,
-          localProgress: Number((index === active ? Math.min(1, Math.max(0, (floatIndex - active + 0.35) / 0.7)) : 0).toFixed(3)),
+          localProgress: Number((index === active ? currentLocal : 0).toFixed(3)),
           ...(scene.getState?.() || {})
         }))
       };

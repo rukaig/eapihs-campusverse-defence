@@ -5,6 +5,7 @@ export const content = {
     brand: "CampusVerse - Innovation Defence",
     editionTagline: "A scroll-driven paper defence · November 2026",
     sectionIndexLabel: "Sections",
+    appTourLabel: "IX · App tour",
     themeButton: "Themes",
     helpButton: "?",
     holdButton: "Hold scene",
@@ -515,8 +516,1598 @@ export const content = {
       ]
     },
     {
+      "id": "tour-today",
+      "chapter": "IX",
+      "numeral": "01",
+      "eyebrow": "Inside CampusVerse · app page 01",
+      "title": "Today",
+      "tagline": "The daily front door",
+      "lead": "Home gathers navigation, the Philippine-time clock and the day's starting points in one calm dashboard.",
+      "status": {
+        "text": "Verified in local checks",
+        "kind": "checks"
+      },
+      "points": [],
+      "cards": [
+        {
+          "label": "Start here",
+          "body": "One place to reach reading, tools and study rooms.",
+          "actionLabel": "Page",
+          "actionText": "index.html · src/pages/home.js"
+        },
+        {
+          "label": "Philippine time",
+          "body": "Greeting, dates and daily content follow Asia/Manila.",
+          "actionLabel": "Proof",
+          "actionText": "117 local checks include the PHT clock and page reopening."
+        },
+        {
+          "label": "No account needed",
+          "body": "Local-first use works without sign-in or a network call.",
+          "actionLabel": "Limit",
+          "actionText": "Shared rooms and sign-in are prepared, not live-verified."
+        },
+        {
+          "label": "Own layout",
+          "body": "The dashboard is not a repeated card template.",
+          "actionLabel": "Paper",
+          "actionText": "Each main page keeps its own visual identity."
+        }
+      ],
+      "scene": {
+        "id": "app-tour",
+        "pageId": "home",
+        "device": "laptop",
+        "screenshot": "index-1280.png",
+        "screenLabel": "index.html",
+        "screenNote": "Local audit screenshot",
+        "set": "desk",
+        "deskRole": "surface2",
+        "camera": {
+          "from": {
+            "x": -1.4,
+            "y": 2.0,
+            "z": 6.2,
+            "lookX": -0.4,
+            "lookY": 0.9,
+            "fov": 58,
+            "roll": -0.008
+          },
+          "to": {
+            "x": 1.2,
+            "y": 1.5,
+            "z": 3.4,
+            "lookX": 0.3,
+            "lookY": 0.7,
+            "fov": 54,
+            "roll": 0.008
+          }
+        },
+        "companion": "moss",
+        "mood": "idle",
+        "prop": "books",
+        "reactions": [
+          {
+            "companion": "moss",
+            "mood": "thinking",
+            "threshold": 0.14,
+            "text": "One door, then a next step."
+          },
+          {
+            "companion": "moss",
+            "mood": "happy",
+            "threshold": 0.55,
+            "text": "The clock is on Manila time."
+          }
+        ]
+      },
+      "notes": [
+        "Show the dashboard before any feature: this is where a student begins.",
+        "Name the Philippine-time clock, but do not claim that it was checked on real devices.",
+        "Local-first means work stays on the device until sign-in is chosen."
+      ]
+    },
+    {
+      "id": "tour-library",
+      "chapter": "IX",
+      "numeral": "02",
+      "eyebrow": "Inside CampusVerse · app page 02",
+      "title": "Knowledge Library",
+      "tagline": "Read with the source in view",
+      "lead": "Search, filter and read explainers that show their source list and admit their draft status.",
+      "status": {
+        "text": "Verified in local checks",
+        "kind": "checks"
+      },
+      "points": [],
+      "cards": [
+        {
+          "label": "17 explainers",
+          "body": "Original short reading across 11 subjects.",
+          "actionLabel": "Paper",
+          "actionText": "The paper's counts are used in the defence."
+        },
+        {
+          "label": "4 study paths",
+          "body": "Trust, planning, daily problems and subject foundations.",
+          "actionLabel": "Paper",
+          "actionText": "Guided paths are published in the library."
+        },
+        {
+          "label": "Research help",
+          "body": "Ask, check the publisher, open the source, record it.",
+          "actionLabel": "Status",
+          "actionText": "45 links checked 27 Oct 2026; 10 newer entries checked 12 Nov 2026."
+        },
+        {
+          "label": "APA + review gate",
+          "body": "Copy an APA citation; no reviewer or date is invented.",
+          "actionLabel": "Limit",
+          "actionText": "A verified badge needs a named reviewer, review date, HTTPS and an allowlisted publisher."
+        }
+      ],
+      "scene": {
+        "id": "app-tour",
+        "pageId": "library",
+        "device": "phone",
+        "screenshot": "library-375.png",
+        "screenLabel": "library.html",
+        "screenNote": "Local audit screenshot",
+        "set": "shelf",
+        "deskRole": "accentSoft",
+        "camera": {
+          "from": {
+            "x": 1.6,
+            "y": 1.8,
+            "z": 5.6,
+            "lookX": 0.3,
+            "lookY": 0.9,
+            "fov": 57,
+            "roll": 0.01
+          },
+          "to": {
+            "x": -1.3,
+            "y": 1.4,
+            "z": 3.0,
+            "lookX": -0.1,
+            "lookY": 0.7,
+            "fov": 53,
+            "roll": -0.006
+          }
+        },
+        "companion": "lumen",
+        "mood": "idle",
+        "prop": "books",
+        "reactions": [
+          {
+            "companion": "lumen",
+            "mood": "curious",
+            "threshold": 0.16,
+            "text": "Who stands behind this page?"
+          },
+          {
+            "companion": "lumen",
+            "mood": "happy",
+            "threshold": 0.58,
+            "text": "Sources stay beside the reading."
+          }
+        ]
+      },
+      "notes": [
+        "Use the paper's 17 explainers and 11 subjects, even though the source now contains more entries.",
+        "Open one article and point to the source list and the editorial-draft label.",
+        "A checked link is a network check, not a fact check."
+      ]
+    },
+    {
+      "id": "tour-article",
+      "chapter": "IX",
+      "numeral": "03",
+      "eyebrow": "Inside CampusVerse · app page 03",
+      "title": "Article reader",
+      "tagline": "One explanation, traceable",
+      "lead": "An article opens by id with its sources, status and citation beside the reading.",
+      "status": {
+        "text": "Verified in local checks",
+        "kind": "checks"
+      },
+      "points": [],
+      "cards": [
+        {
+          "label": "Read by id",
+          "body": "A library card opens one focused explanation.",
+          "actionLabel": "Page",
+          "actionText": "article.html · src/pages/article.js"
+        },
+        {
+          "label": "Sources shown",
+          "body": "Publisher links stay visible next to the text.",
+          "actionLabel": "Status",
+          "actionText": "Link checks are recorded with dates; no endorsement is claimed."
+        },
+        {
+          "label": "Citation copy",
+          "body": "APA-style citation can be copied for a student's notes.",
+          "actionLabel": "Paper",
+          "actionText": "Citations follow a recognised style [2]."
+        },
+        {
+          "label": "Print view",
+          "body": "The article can be printed from the page.",
+          "actionLabel": "Limit",
+          "actionText": "All entries remain editorial drafts; none is subject-specialist reviewed."
+        }
+      ],
+      "scene": {
+        "id": "app-tour",
+        "pageId": "article",
+        "device": "laptop",
+        "screenshot": "article-1280.png",
+        "screenLabel": "article.html",
+        "screenNote": "Local audit screenshot",
+        "set": "shelf",
+        "deskRole": "surface",
+        "camera": {
+          "from": {
+            "x": -1.8,
+            "y": 1.6,
+            "z": 6.4,
+            "lookX": -0.2,
+            "lookY": 1.0,
+            "fov": 59,
+            "roll": -0.012
+          },
+          "to": {
+            "x": 1.4,
+            "y": 1.3,
+            "z": 3.6,
+            "lookX": 0.4,
+            "lookY": 0.8,
+            "fov": 55,
+            "roll": 0.01
+          }
+        },
+        "companion": "lumen",
+        "mood": "idle",
+        "prop": "books",
+        "reactions": [
+          {
+            "companion": "lumen",
+            "mood": "happy",
+            "threshold": 0.15,
+            "text": "One light, one source list."
+          },
+          {
+            "companion": "lumen",
+            "mood": "thinking",
+            "threshold": 0.52,
+            "text": "Draft means draft."
+          }
+        ]
+      },
+      "notes": [
+        "This is the page behind the library card, not a new public article collection.",
+        "Point to the source list and the status label, not to a grade or review badge.",
+        "No article has been approved by a named subject specialist."
+      ]
+    },
+    {
+      "id": "tour-solver",
+      "chapter": "IX",
+      "numeral": "04",
+      "eyebrow": "Inside CampusVerse · app page 04",
+      "title": "School Problem Solver",
+      "tagline": "Safety before troubleshooting",
+      "lead": "Twelve school situations are answered with urgent guidance first and ordinary advice only after it.",
+      "status": {
+        "text": "Verified in local checks",
+        "kind": "checks"
+      },
+      "points": [],
+      "cards": [
+        {
+          "label": "12 situations",
+          "body": "Gas, electricity, fire, health, focus, study, writing and more.",
+          "actionLabel": "Page",
+          "actionText": "solver.html · src/data/solver.js"
+        },
+        {
+          "label": "Safety first",
+          "body": "Urgent wording suppresses ordinary study advice.",
+          "actionLabel": "Rule",
+          "actionText": "Emergency guidance always appears before troubleshooting."
+        },
+        {
+          "label": "No hazard repair",
+          "body": "Never asks a student to open, reset or investigate a hazard.",
+          "actionLabel": "Rule",
+          "actionText": "Move away only if safe, contact help and follow instructions."
+        },
+        {
+          "label": "Limited detector",
+          "body": "Keyword-based, not a monitor or emergency service.",
+          "actionLabel": "Limit",
+          "actionText": "Professional review is still outstanding."
+        }
+      ],
+      "scene": {
+        "id": "app-tour",
+        "pageId": "solver",
+        "device": "phone",
+        "screenshot": "solver-375.png",
+        "screenLabel": "solver.html",
+        "screenNote": "Local audit screenshot",
+        "set": "kiosk",
+        "deskRole": "warning",
+        "camera": {
+          "from": {
+            "x": 1.9,
+            "y": 2.1,
+            "z": 5.8,
+            "lookX": 0.4,
+            "lookY": 0.9,
+            "fov": 56,
+            "roll": 0.014
+          },
+          "to": {
+            "x": -1.4,
+            "y": 1.6,
+            "z": 3.2,
+            "lookX": -0.2,
+            "lookY": 0.65,
+            "fov": 52,
+            "roll": -0.01
+          }
+        },
+        "companion": "pip",
+        "mood": "idle",
+        "prop": "star",
+        "reactions": [
+          {
+            "companion": "pip",
+            "mood": "thinking",
+            "threshold": 0.14,
+            "text": "Ask the bold question first."
+          },
+          {
+            "companion": "pip",
+            "mood": "happy",
+            "threshold": 0.56,
+            "text": "Safety stays in front."
+          }
+        ]
+      },
+      "notes": [
+        "Demonstrate an urgent phrase and show that safety text comes before study tips.",
+        "Never describe the classifier as complete or as a crisis service.",
+        "Gas, electrical, fire and chemical hazards are escalation flows, not repair guides."
+      ]
+    },
+    {
+      "id": "tour-crisis",
+      "chapter": "IX",
+      "numeral": "05",
+      "eyebrow": "Inside CampusVerse · app page 05",
+      "title": "Crisis contacts",
+      "tagline": "Numbers to check, not dial",
+      "lead": "NCMH, Hopeline and 911 cards link to official pages; the page itself never starts a call.",
+      "status": {
+        "text": "Verified in local checks",
+        "kind": "checks"
+      },
+      "points": [],
+      "cards": [
+        {
+          "label": "Three services",
+          "body": "NCMH, Hopeline and 911 are presented as contact cards.",
+          "actionLabel": "Page",
+          "actionText": "emergency.html · src/data/emergency-contacts.js"
+        },
+        {
+          "label": "Official links",
+          "body": "Each card opens the source that publishes the number.",
+          "actionLabel": "Rule",
+          "actionText": "Nothing here dials automatically."
+        },
+        {
+          "label": "8 of 10 checked",
+          "body": "Eight numbers checked against official pages on 14 Nov 2026.",
+          "actionLabel": "Limit",
+          "actionText": "Two NCMH numbers remain marked unconfirmed."
+        },
+        {
+          "label": "Review pending",
+          "body": "School review of the contact sheet is still open.",
+          "actionLabel": "Limit",
+          "actionText": "Do not present the page as an emergency service."
+        }
+      ],
+      "scene": {
+        "id": "app-tour",
+        "pageId": "crisis",
+        "device": "phone",
+        "screenshot": "emergency-375.png",
+        "screenLabel": "emergency.html",
+        "screenNote": "Local audit screenshot",
+        "set": "kiosk",
+        "deskRole": "coral600",
+        "camera": {
+          "from": {
+            "x": -1.7,
+            "y": 2.2,
+            "z": 5.4,
+            "lookX": -0.3,
+            "lookY": 0.8,
+            "fov": 58,
+            "roll": -0.01
+          },
+          "to": {
+            "x": 1.3,
+            "y": 1.5,
+            "z": 2.9,
+            "lookX": 0.2,
+            "lookY": 0.6,
+            "fov": 54,
+            "roll": 0.012
+          }
+        },
+        "companion": "moss",
+        "mood": "idle",
+        "prop": "star",
+        "reactions": [
+          {
+            "companion": "moss",
+            "mood": "calm",
+            "threshold": 0.16,
+            "text": "Check the number before you call."
+          },
+          {
+            "companion": "moss",
+            "mood": "thinking",
+            "threshold": 0.57,
+            "text": "School review is still open."
+          }
+        ]
+      },
+      "notes": [
+        "State plainly that the page shows links, not auto-dialling.",
+        "Name the checked and unconfirmed counts exactly; do not smooth over the two unconfirmed numbers.",
+        "This is a signpost, not counselling or emergency response."
+      ]
+    },
+    {
+      "id": "tour-arcade",
+      "chapter": "IX",
+      "numeral": "06",
+      "eyebrow": "Inside CampusVerse · app page 06",
+      "title": "Practice Arcade",
+      "tagline": "Ten games, no leaderboard",
+      "lead": "The game hub opens ten different practice activities with their own rules and controls.",
+      "status": {
+        "text": "Verified in local checks",
+        "kind": "checks"
+      },
+      "points": [],
+      "cards": [
+        {
+          "label": "Ten games",
+          "body": "Chess, words, equations, mysteries, patterns and more.",
+          "actionLabel": "Page",
+          "actionText": "arcade.html · games/*.html"
+        },
+        {
+          "label": "Practice only",
+          "body": "No rating, rank, leaderboard or school-issued score.",
+          "actionLabel": "Rule",
+          "actionText": "Practice outcomes are not measured improvement."
+        },
+        {
+          "label": "Different rules",
+          "body": "Each game has a separate start, help, pause and restart flow.",
+          "actionLabel": "Paper",
+          "actionText": "Ten genuinely different practice activities are an objective."
+        },
+        {
+          "label": "Local chess",
+          "body": "Stockfish 10 runs in a local Web Worker.",
+          "actionLabel": "Limit",
+          "actionText": "Positions are not sent to a server; levels are practice descriptions."
+        }
+      ],
+      "scene": {
+        "id": "app-tour",
+        "pageId": "arcade",
+        "device": "laptop",
+        "screenshot": "arcade-1280.png",
+        "screenLabel": "arcade.html",
+        "screenNote": "Local audit screenshot",
+        "set": "bridge",
+        "deskRole": "lav600",
+        "camera": {
+          "from": {
+            "x": 1.7,
+            "y": 1.9,
+            "z": 6.1,
+            "lookX": 0.1,
+            "lookY": 0.9,
+            "fov": 57,
+            "roll": 0.009
+          },
+          "to": {
+            "x": -1.2,
+            "y": 1.4,
+            "z": 3.5,
+            "lookX": -0.1,
+            "lookY": 0.7,
+            "fov": 53,
+            "roll": -0.008
+          }
+        },
+        "companion": "pip",
+        "mood": "idle",
+        "prop": "chess",
+        "reactions": [
+          {
+            "companion": "pip",
+            "mood": "cheering",
+            "threshold": 0.13,
+            "text": "Ten doors, no scoreboard."
+          },
+          {
+            "companion": "pip",
+            "mood": "happy",
+            "threshold": 0.54,
+            "text": "Practice is the point."
+          }
+        ]
+      },
+      "notes": [
+        "Name the ten games only as practice; do not imply a rank or measured gain.",
+        "Chess uses a local engine and a separate board palette.",
+        "The paper's ten-game count is intentional even though the current source has eleven pages."
+      ]
+    },
+    {
+      "id": "tour-planner",
+      "chapter": "IX",
+      "numeral": "07",
+      "eyebrow": "Inside CampusVerse · app page 07",
+      "title": "Planner",
+      "tagline": "Tasks, Budget, Notes",
+      "lead": "One planner holds the weekly task board, a pesos-and-centavos budget and a local notes studio.",
+      "status": {
+        "text": "Verified in local checks",
+        "kind": "checks"
+      },
+      "points": [],
+      "cards": [
+        {
+          "label": "Tasks",
+          "body": "Task list and week board with local saving and warnings.",
+          "actionLabel": "Page",
+          "actionText": "planner.html#tasks"
+        },
+        {
+          "label": "Budget",
+          "body": "PHP planning, CSV, print and validated JSON backup.",
+          "actionLabel": "Limit",
+          "actionText": "Planning aid only; no bank, wallet or financial advice."
+        },
+        {
+          "label": "Notes Studio",
+          "body": "Local notes with strict HTML sanitisation and exports.",
+          "actionLabel": "Limit",
+          "actionText": "DOCX/PDF browser rendering remains unverified."
+        },
+        {
+          "label": "Local-first",
+          "body": "Student and teacher views change layout, never permissions.",
+          "actionLabel": "Proof",
+          "actionText": "Budget and Notes make no outside requests."
+        }
+      ],
+      "scene": {
+        "id": "app-tour",
+        "pageId": "planner",
+        "device": "laptop",
+        "screenshot": "planner-1280.png",
+        "screenLabel": "planner.html",
+        "screenNote": "Local audit screenshot",
+        "set": "desk",
+        "deskRole": "blue700",
+        "camera": {
+          "from": {
+            "x": -1.3,
+            "y": 2.0,
+            "z": 6.6,
+            "lookX": -0.5,
+            "lookY": 0.95,
+            "fov": 58,
+            "roll": -0.007
+          },
+          "to": {
+            "x": 1.1,
+            "y": 1.5,
+            "z": 3.7,
+            "lookX": 0.2,
+            "lookY": 0.75,
+            "fov": 54,
+            "roll": 0.009
+          }
+        },
+        "companion": "juniper",
+        "mood": "idle",
+        "prop": "books",
+        "reactions": [
+          {
+            "companion": "juniper",
+            "mood": "thinking",
+            "threshold": 0.15,
+            "text": "Three tabs, one quiet plan."
+          },
+          {
+            "companion": "juniper",
+            "mood": "happy",
+            "threshold": 0.58,
+            "text": "Save a copy before you leave."
+          }
+        ]
+      },
+      "notes": [
+        "Keep the original Tasks behaviour unchanged when describing the added tabs.",
+        "Budget uses integer centavos and neutralises spreadsheet formulas on export.",
+        "Notes sanitises HTML on load, paste, import and export."
+      ]
+    },
+    {
+      "id": "tour-groups",
+      "chapter": "IX",
+      "numeral": "08",
+      "eyebrow": "Inside CampusVerse · app page 08",
+      "title": "Study Rooms",
+      "tagline": "A place to study together",
+      "lead": "Rooms can be created or joined with a code, with member-only metadata and registry-driven activities.",
+      "status": {
+        "text": "Prepared, not verified",
+        "kind": "prepared"
+      },
+      "points": [],
+      "cards": [
+        {
+          "label": "Create or join",
+          "body": "Room codes open a shared study space.",
+          "actionLabel": "Page",
+          "actionText": "groups.html · src/pages/groups.js"
+        },
+        {
+          "label": "Member rules",
+          "body": "Only current members can be listed as players or invitees.",
+          "actionLabel": "Rule",
+          "actionText": "Owners delete rooms; narrow membership mutations are enforced."
+        },
+        {
+          "label": "Activities",
+          "body": "A published registry decides which shared games can be invited.",
+          "actionLabel": "Rule",
+          "actionText": "Raw game ids from a URL or chat are not trusted."
+        },
+        {
+          "label": "Still to prove",
+          "body": "Two real signed-in clients have not been tried.",
+          "actionLabel": "Status",
+          "actionText": "Prepared with rules and synthetic checks, not live-verified."
+        }
+      ],
+      "scene": {
+        "id": "app-tour",
+        "pageId": "groups",
+        "device": "phone",
+        "screenshot": "groups-375.png",
+        "screenLabel": "groups.html",
+        "screenNote": "Local audit screenshot",
+        "set": "bridge",
+        "deskRole": "sage600",
+        "camera": {
+          "from": {
+            "x": 1.5,
+            "y": 2.0,
+            "z": 5.9,
+            "lookX": 0.2,
+            "lookY": 0.9,
+            "fov": 57,
+            "roll": 0.01
+          },
+          "to": {
+            "x": -1.4,
+            "y": 1.4,
+            "z": 3.2,
+            "lookX": -0.2,
+            "lookY": 0.65,
+            "fov": 53,
+            "roll": -0.009
+          }
+        },
+        "companion": "moss",
+        "mood": "idle",
+        "prop": "board",
+        "reactions": [
+          {
+            "companion": "moss",
+            "mood": "curious",
+            "threshold": 0.16,
+            "text": "One room, one clear member list."
+          },
+          {
+            "companion": "moss",
+            "mood": "thinking",
+            "threshold": 0.56,
+            "text": "Two real clients still to test."
+          }
+        ]
+      },
+      "notes": [
+        "Describe Firestore rules as prepared, not as a live-access certificate.",
+        "Group list queries use memberIds plus createdAt so the composite index applies.",
+        "There is no public player page, ranking or leaderboard."
+      ]
+    },
+    {
+      "id": "tour-chat",
+      "chapter": "IX",
+      "numeral": "09",
+      "eyebrow": "Inside CampusVerse · app page 09",
+      "title": "Room chat + video",
+      "tagline": "Messages and a 1:1 check-in",
+      "lead": "Room messages and activity invitations share the room; the one-to-one video check-in remains a trial gate.",
+      "status": {
+        "text": "Prepared, not verified",
+        "kind": "prepared"
+      },
+      "points": [],
+      "cards": [
+        {
+          "label": "Room messages",
+          "body": "Chat lives in group messages, not an unbounded array.",
+          "actionLabel": "Page",
+          "actionText": "group-chat.html · groups/{id}/messages"
+        },
+        {
+          "label": "In-page notices",
+          "body": "Call notices and lounges use aria-live, not push alerts.",
+          "actionLabel": "Limit",
+          "actionText": "The Node WebSocket module is legacy and unused."
+        },
+        {
+          "label": "One-to-one video",
+          "body": "Firestore signaling with public STUN by default.",
+          "actionLabel": "Status",
+          "actionText": "Awaiting two-person test."
+        },
+        {
+          "label": "Not included",
+          "body": "No TURN relay, recording, moderation or multi-party call.",
+          "actionLabel": "Status",
+          "actionText": "Prepared, not verified with separate real users."
+        }
+      ],
+      "scene": {
+        "id": "app-tour",
+        "pageId": "chat",
+        "device": "phone",
+        "screenshot": "group-chat-375.png",
+        "screenLabel": "group-chat.html",
+        "screenNote": "Local audit screenshot",
+        "set": "bridge",
+        "deskRole": "blue700",
+        "camera": {
+          "from": {
+            "x": -1.6,
+            "y": 1.9,
+            "z": 5.7,
+            "lookX": -0.2,
+            "lookY": 0.85,
+            "fov": 58,
+            "roll": -0.011
+          },
+          "to": {
+            "x": 1.4,
+            "y": 1.4,
+            "z": 3.1,
+            "lookX": 0.2,
+            "lookY": 0.65,
+            "fov": 54,
+            "roll": 0.008
+          }
+        },
+        "companion": "juniper",
+        "mood": "idle",
+        "prop": "board",
+        "reactions": [
+          {
+            "companion": "juniper",
+            "mood": "thinking",
+            "threshold": 0.15,
+            "text": "Messages stay in the room."
+          },
+          {
+            "companion": "juniper",
+            "mood": "calm",
+            "threshold": 0.55,
+            "text": "Video waits for two people."
+          }
+        ]
+      },
+      "notes": [
+        "Show the call label as awaiting two-person test; do not call it a verified call.",
+        "The synthetic same-browser harness is local evidence only.",
+        "No recording, moderation, multi-party support or TURN relay is claimed."
+      ]
+    },
+    {
+      "id": "tour-calculator",
+      "chapter": "IX",
+      "numeral": "10",
+      "eyebrow": "Inside CampusVerse · app page 10",
+      "title": "Calculator",
+      "tagline": "A safe parser, not eval",
+      "lead": "Scientific arithmetic, memory and history are evaluated by a tokenizer and parser.",
+      "status": {
+        "text": "Verified in local checks",
+        "kind": "checks"
+      },
+      "points": [],
+      "cards": [
+        {
+          "label": "Scientific",
+          "body": "Powers, roots, percentages, logs, trigonometry and constants.",
+          "actionLabel": "Page",
+          "actionText": "calculator.html · calculator.js"
+        },
+        {
+          "label": "Safe input",
+          "body": "No eval or Function for any user expression.",
+          "actionLabel": "Rule",
+          "actionText": "The tokenizer/parser path handles every calculation."
+        },
+        {
+          "label": "Memory + history",
+          "body": "Past work can be reviewed and reused.",
+          "actionLabel": "Proof",
+          "actionText": "Calculator behaviour is among the 117 local checks."
+        },
+        {
+          "label": "Clear errors",
+          "body": "Impossible input produces a visible error.",
+          "actionLabel": "Limit",
+          "actionText": "No result is sent to a server."
+        }
+      ],
+      "scene": {
+        "id": "app-tour",
+        "pageId": "calculator",
+        "device": "phone",
+        "screenshot": "calculator-375.png",
+        "screenLabel": "calculator.html",
+        "screenNote": "Local audit screenshot",
+        "set": "desk",
+        "deskRole": "surface",
+        "camera": {
+          "from": {
+            "x": 1.8,
+            "y": 1.7,
+            "z": 5.5,
+            "lookX": 0.3,
+            "lookY": 0.9,
+            "fov": 56,
+            "roll": 0.012
+          },
+          "to": {
+            "x": -1.2,
+            "y": 1.3,
+            "z": 3.0,
+            "lookX": -0.1,
+            "lookY": 0.65,
+            "fov": 52,
+            "roll": -0.007
+          }
+        },
+        "companion": "pip",
+        "mood": "idle",
+        "prop": "calculator",
+        "reactions": [
+          {
+            "companion": "pip",
+            "mood": "cheering",
+            "threshold": 0.14,
+            "text": "Ask the equation, not eval."
+          },
+          {
+            "companion": "pip",
+            "mood": "happy",
+            "threshold": 0.55,
+            "text": "Every step stays local."
+          }
+        ]
+      },
+      "notes": [
+        "Explicitly say the calculator does not use eval or Function.",
+        "The parser was built for calculator input, not arbitrary code.",
+        "History is on the device; no network request is part of a calculation."
+      ]
+    },
+    {
+      "id": "tour-companions",
+      "chapter": "IX",
+      "numeral": "11",
+      "eyebrow": "Inside CampusVerse · app page 11",
+      "title": "Animated Companions",
+      "tagline": "Four scripted study partners",
+      "lead": "Moss, Pip, Lumen and Juniper give deterministic encouragement, hints and short explanations.",
+      "status": {
+        "text": "Verified in local checks",
+        "kind": "checks"
+      },
+      "points": [],
+      "cards": [
+        {
+          "label": "Four personalities",
+          "body": "Steady, bold, observant and ink-pawed.",
+          "actionLabel": "Page",
+          "actionText": "companions.html · src/data/companions.js"
+        },
+        {
+          "label": "Scripted moods",
+          "body": "Bright, calm, sleepy, proud and curious lines are written in advance.",
+          "actionLabel": "Limit",
+          "actionText": "They are drawings, not live helpers or therapists."
+        },
+        {
+          "label": "Hints, not answers",
+          "body": "Content rules keep complete answers hidden.",
+          "actionLabel": "Limit",
+          "actionText": "No companion is crisis support."
+        },
+        {
+          "label": "No cross-device memory",
+          "body": "Visit counts stay in the current browser.",
+          "actionLabel": "Proof",
+          "actionText": "Companion behaviour is part of the local checks."
+        }
+      ],
+      "scene": {
+        "id": "app-tour",
+        "pageId": "companions",
+        "device": "laptop",
+        "screenshot": "companions-1280.png",
+        "screenLabel": "companions.html",
+        "screenNote": "Local audit screenshot",
+        "set": "shelf",
+        "deskRole": "gold600",
+        "camera": {
+          "from": {
+            "x": -1.5,
+            "y": 1.8,
+            "z": 6.0,
+            "lookX": -0.3,
+            "lookY": 0.9,
+            "fov": 59,
+            "roll": -0.01
+          },
+          "to": {
+            "x": 1.3,
+            "y": 1.4,
+            "z": 3.3,
+            "lookX": 0.2,
+            "lookY": 0.7,
+            "fov": 55,
+            "roll": 0.011
+          }
+        },
+        "companion": "lumen",
+        "mood": "idle",
+        "prop": "star",
+        "reactions": [
+          {
+            "companion": "lumen",
+            "mood": "happy",
+            "threshold": 0.13,
+            "text": "Small light, small step."
+          },
+          {
+            "companion": "lumen",
+            "mood": "curious",
+            "threshold": 0.54,
+            "text": "Written lines, not a live mind."
+          }
+        ]
+      },
+      "notes": [
+        "Use the exact names Moss, Pip, Lumen and Juniper.",
+        "Say scripted and deterministic; do not imply an AI companion.",
+        "They never replace a teacher, counsellor or emergency service."
+      ]
+    },
+    {
+      "id": "tour-strands",
+      "chapter": "IX",
+      "numeral": "12",
+      "eyebrow": "Inside CampusVerse · app page 12",
+      "title": "Strands & Well-being",
+      "tagline": "Calm prompts, no data",
+      "lead": "The hub gathers official links, safe ICT scenarios, hazard flows and reflection prompts without collecting personal data.",
+      "status": {
+        "text": "Prepared, not verified",
+        "kind": "prepared"
+      },
+      "points": [],
+      "cards": [
+        {
+          "label": "Official links",
+          "body": "18 video links to official channels, never embedded players.",
+          "actionLabel": "Limit",
+          "actionText": "A link check is not a fact check or endorsement."
+        },
+        {
+          "label": "ICT + hazards",
+          "body": "10 ordinary scenarios and 6 terminal hazard flows.",
+          "actionLabel": "Rule",
+          "actionText": "Hazards point to emergency help and adult escalation only."
+        },
+        {
+          "label": "Reflection only",
+          "body": "Citizenship checks have no input, score or persistence.",
+          "actionLabel": "Limit",
+          "actionText": "Prompts are study aids, not diagnosis or counselling."
+        },
+        {
+          "label": "No collection",
+          "body": "No analytics, cloud storage or mood history.",
+          "actionLabel": "Status",
+          "actionText": "Local deterministic tools only."
+        }
+      ],
+      "scene": {
+        "id": "app-tour",
+        "pageId": "strands",
+        "device": "laptop",
+        "screenshot": null,
+        "screenLabel": "strands.html",
+        "screenNote": "Local source mock",
+        "set": "shelf",
+        "deskRole": "sage600",
+        "camera": {
+          "from": {
+            "x": 1.6,
+            "y": 2.1,
+            "z": 6.3,
+            "lookX": 0.1,
+            "lookY": 1.0,
+            "fov": 57,
+            "roll": 0.008
+          },
+          "to": {
+            "x": -1.2,
+            "y": 1.5,
+            "z": 3.6,
+            "lookX": -0.1,
+            "lookY": 0.75,
+            "fov": 53,
+            "roll": -0.01
+          }
+        },
+        "companion": "moss",
+        "mood": "idle",
+        "prop": "books",
+        "reactions": [
+          {
+            "companion": "moss",
+            "mood": "calm",
+            "threshold": 0.15,
+            "text": "Observe, change one thing, record."
+          },
+          {
+            "companion": "moss",
+            "mood": "thinking",
+            "threshold": 0.56,
+            "text": "No mood history here."
+          }
+        ],
+        "mock": {
+          "header": "Strands & Well-being",
+          "sub": "Official links · reflection · safe ICT",
+          "tiles": [
+            "Videos",
+            "Well-being prompts",
+            "ICT scenarios",
+            "Hazard flows",
+            "Citizenship checks",
+            "Tool registry"
+          ],
+          "footer": "No personal data collected"
+        }
+      },
+      "notes": [
+        "This hub is a source addition absent from the paper; keep it honest.",
+        "Official videos remain links, never downloaded or rehosted files.",
+        "Urgent classifications suppress ordinary troubleshooting text."
+      ]
+    },
+    {
+      "id": "tour-assistant",
+      "chapter": "IX",
+      "numeral": "13",
+      "eyebrow": "Inside CampusVerse · app page 13",
+      "title": "Study Assistant",
+      "tagline": "Safety before any model call",
+      "lead": "The assistant checks urgent language first, then uses approved notes through a server-side route.",
+      "status": {
+        "text": "Prepared, not verified",
+        "kind": "prepared"
+      },
+      "points": [],
+      "cards": [
+        {
+          "label": "Safety gate",
+          "body": "Urgent guidance runs before any provider request.",
+          "actionLabel": "Rule",
+          "actionText": "The assistant is not an emergency service."
+        },
+        {
+          "label": "Server route",
+          "body": "Gemini-first with an OpenAI-compatible fallback behind /api/assistant.",
+          "actionLabel": "Limit",
+          "actionText": "Provider keys stay in .env or a hosting secret store."
+        },
+        {
+          "label": "Approved notes",
+          "body": "Keyword retrieval over server knowledge notes.",
+          "actionLabel": "Limit",
+          "actionText": "Retrieval-augmented prompting, not fine-tuning or browsing."
+        },
+        {
+          "label": "Live path untested",
+          "body": "No live Gemini key has been exercised.",
+          "actionLabel": "Status",
+          "actionText": "Prepared, not verified; answers may be English or Filipino."
+        }
+      ],
+      "scene": {
+        "id": "app-tour",
+        "pageId": "assistant",
+        "device": "laptop",
+        "screenshot": "assistant-1280.png",
+        "screenLabel": "assistant.html",
+        "screenNote": "Local audit screenshot",
+        "set": "kiosk",
+        "deskRole": "lav600",
+        "camera": {
+          "from": {
+            "x": -1.9,
+            "y": 1.9,
+            "z": 6.2,
+            "lookX": -0.2,
+            "lookY": 0.95,
+            "fov": 58,
+            "roll": -0.013
+          },
+          "to": {
+            "x": 1.4,
+            "y": 1.4,
+            "z": 3.4,
+            "lookX": 0.3,
+            "lookY": 0.7,
+            "fov": 54,
+            "roll": 0.009
+          }
+        },
+        "companion": "pip",
+        "mood": "idle",
+        "prop": "star",
+        "reactions": [
+          {
+            "companion": "pip",
+            "mood": "curious",
+            "threshold": 0.14,
+            "text": "Ask, but safety first."
+          },
+          {
+            "companion": "pip",
+            "mood": "thinking",
+            "threshold": 0.55,
+            "text": "Retrieval is not a policy database."
+          }
+        ]
+      },
+      "notes": [
+        "Do not claim live Gemini verification while the key is empty or untested.",
+        "Describe keyword retrieval precisely; avoid saying fine-tuned or browsing.",
+        "English or Filipino answers do not mean full app localisation."
+      ]
+    },
+    {
+      "id": "tour-profile",
+      "chapter": "IX",
+      "numeral": "14",
+      "eyebrow": "Inside CampusVerse · app page 14",
+      "title": "Private Profile",
+      "tagline": "Owner-only, never public",
+      "lead": "A student can edit a private profile and a cropped avatar, with no public player page or report.",
+      "status": {
+        "text": "Verified in local checks",
+        "kind": "checks"
+      },
+      "points": [],
+      "cards": [
+        {
+          "label": "Owner-only",
+          "body": "Profile reads and writes are restricted to the owner.",
+          "actionLabel": "Page",
+          "actionText": "profile.html · src/pages/profile.js"
+        },
+        {
+          "label": "Private avatar",
+          "body": "The only upload is a cropped image at avatars/{uid}.",
+          "actionLabel": "Limit",
+          "actionText": "Live Storage upload is still unverified."
+        },
+        {
+          "label": "No public identity",
+          "body": "No ranking, rating, leaderboard or player page exists.",
+          "actionLabel": "Rule",
+          "actionText": "Profiles never store an email address."
+        },
+        {
+          "label": "Demo is local",
+          "body": "Demo mode is unsecured and stays in this browser.",
+          "actionLabel": "Status",
+          "actionText": "Prepared, not production authentication."
+        }
+      ],
+      "scene": {
+        "id": "app-tour",
+        "pageId": "profile",
+        "device": "phone",
+        "screenshot": "profile-375.png",
+        "screenLabel": "profile.html",
+        "screenNote": "Local audit screenshot",
+        "set": "table",
+        "deskRole": "blue700",
+        "camera": {
+          "from": {
+            "x": 1.7,
+            "y": 1.8,
+            "z": 5.6,
+            "lookX": 0.3,
+            "lookY": 0.85,
+            "fov": 56,
+            "roll": 0.011
+          },
+          "to": {
+            "x": -1.3,
+            "y": 1.3,
+            "z": 3.0,
+            "lookX": -0.1,
+            "lookY": 0.6,
+            "fov": 52,
+            "roll": -0.008
+          }
+        },
+        "companion": "juniper",
+        "mood": "idle",
+        "prop": "books",
+        "reactions": [
+          {
+            "companion": "juniper",
+            "mood": "thinking",
+            "threshold": 0.16,
+            "text": "Private by design."
+          },
+          {
+            "companion": "juniper",
+            "mood": "happy",
+            "threshold": 0.55,
+            "text": "No public player page."
+          }
+        ]
+      },
+      "notes": [
+        "Never show a public profile, ranking or report screen.",
+        "Storage rules are written and compiled, but a live upload has not been demonstrated.",
+        "Demo mode is explicitly local and unsecured."
+      ]
+    },
+    {
+      "id": "tour-login",
+      "chapter": "IX",
+      "numeral": "15",
+      "eyebrow": "Inside CampusVerse · app page 15",
+      "title": "Sign-in gate",
+      "tagline": "Firebase, or local demo",
+      "lead": "Firebase sign-in is prepared for real accounts; the demo gate only opens when Firebase is not configured.",
+      "status": {
+        "text": "Prepared, not verified",
+        "kind": "prepared"
+      },
+      "points": [],
+      "cards": [
+        {
+          "label": "Firebase auth",
+          "body": "Real sign-in is wired to the live project configuration.",
+          "actionLabel": "Status",
+          "actionText": "Prepared, not verified with real student accounts."
+        },
+        {
+          "label": "Demo gate",
+          "body": "?demo=1 can create a local demo profile only without Firebase.",
+          "actionLabel": "Rule",
+          "actionText": "It must never bypass Firebase authentication."
+        },
+        {
+          "label": "Prepared rules",
+          "body": "Owner-only and group access rules compile cleanly.",
+          "actionLabel": "Limit",
+          "actionText": "A written rule is not a live access test."
+        },
+        {
+          "label": "Keys in private",
+          "body": "Public client config is separate from server secrets.",
+          "actionLabel": "Rule",
+          "actionText": "No provider key belongs in browser code or the build."
+        }
+      ],
+      "scene": {
+        "id": "app-tour",
+        "pageId": "login",
+        "device": "laptop",
+        "screenshot": "login-1280.png",
+        "screenLabel": "login.html",
+        "screenNote": "Local audit screenshot",
+        "set": "kiosk",
+        "deskRole": "textStrong",
+        "camera": {
+          "from": {
+            "x": -1.6,
+            "y": 2.0,
+            "z": 6.0,
+            "lookX": -0.3,
+            "lookY": 0.9,
+            "fov": 58,
+            "roll": -0.009
+          },
+          "to": {
+            "x": 1.3,
+            "y": 1.5,
+            "z": 3.3,
+            "lookX": 0.2,
+            "lookY": 0.7,
+            "fov": 54,
+            "roll": 0.01
+          }
+        },
+        "companion": "moss",
+        "mood": "idle",
+        "prop": "star",
+        "reactions": [
+          {
+            "companion": "moss",
+            "mood": "calm",
+            "threshold": 0.15,
+            "text": "Demo is not production."
+          },
+          {
+            "companion": "moss",
+            "mood": "thinking",
+            "threshold": 0.56,
+            "text": "Real accounts still need a trial."
+          }
+        ]
+      },
+      "notes": [
+        "Keep real sign-in and demo mode visibly separate.",
+        "Do not say Firebase Auth or Firestore has been live-verified.",
+        "Never place a key in browser code, dist, tests or docs."
+      ]
+    },
+    {
+      "id": "tour-install",
+      "chapter": "IX",
+      "numeral": "16",
+      "eyebrow": "Inside CampusVerse · app page 16",
+      "title": "Install Guide",
+      "tagline": "Return to the app easily",
+      "lead": "PWA metadata, a QR and platform steps explain how to install the app on a phone or computer.",
+      "status": {
+        "text": "Verified in local checks",
+        "kind": "checks"
+      },
+      "points": [],
+      "cards": [
+        {
+          "label": "PWA basics",
+          "body": "Manifest, icons and a local service worker support return visits.",
+          "actionLabel": "Page",
+          "actionText": "install.html · manifest.webmanifest · sw.js"
+        },
+        {
+          "label": "QR + URL",
+          "body": "A bundled QR and copyable address reduce typing errors.",
+          "actionLabel": "Proof",
+          "actionText": "Service-worker exclusions are among the 117 local checks."
+        },
+        {
+          "label": "Platform steps",
+          "body": "Phone and computer instructions are written separately.",
+          "actionLabel": "Limit",
+          "actionText": "No physical-device trial has been recorded."
+        },
+        {
+          "label": "Open trial",
+          "body": "A clean install and offline trial remain pending.",
+          "actionLabel": "Status",
+          "actionText": "Prepared, not verified end to end."
+        }
+      ],
+      "scene": {
+        "id": "app-tour",
+        "pageId": "install",
+        "device": "phone",
+        "screenshot": "install-375.png",
+        "screenLabel": "install.html",
+        "screenNote": "Local audit screenshot",
+        "set": "table",
+        "deskRole": "accentSoft",
+        "camera": {
+          "from": {
+            "x": 1.6,
+            "y": 1.9,
+            "z": 5.8,
+            "lookX": 0.2,
+            "lookY": 0.85,
+            "fov": 57,
+            "roll": 0.013
+          },
+          "to": {
+            "x": -1.2,
+            "y": 1.4,
+            "z": 3.1,
+            "lookX": -0.1,
+            "lookY": 0.6,
+            "fov": 53,
+            "roll": -0.007
+          }
+        },
+        "companion": "juniper",
+        "mood": "idle",
+        "prop": "books",
+        "reactions": [
+          {
+            "companion": "juniper",
+            "mood": "happy",
+            "threshold": 0.15,
+            "text": "Install once, return easily."
+          },
+          {
+            "companion": "juniper",
+            "mood": "thinking",
+            "threshold": 0.56,
+            "text": "Clean install still to try."
+          }
+        ]
+      },
+      "notes": [
+        "Do not claim a clean install or offline trial that has not happened.",
+        "Service-worker caching is same-origin only.",
+        "The QR and URL are local guidance, not an external service."
+      ]
+    },
+    {
+      "id": "tour-appearance",
+      "chapter": "IX",
+      "numeral": "17",
+      "eyebrow": "Inside CampusVerse · app page 17",
+      "title": "Appearance",
+      "tagline": "Theme, subject, motion",
+      "lead": "Twelve colour themes, sixteen subject looks and reduced motion are saved before the page paints.",
+      "status": {
+        "text": "Verified in local checks",
+        "kind": "checks"
+      },
+      "points": [],
+      "cards": [
+        {
+          "label": "12 colour themes",
+          "body": "Ivory through High contrast, plus Follow device.",
+          "actionLabel": "Proof",
+          "actionText": "Themes are among the 117 local checks."
+        },
+        {
+          "label": "16 subject looks",
+          "body": "An additive skin layer over the chosen colour theme.",
+          "actionLabel": "Rule",
+          "actionText": "Subject looks do not change page content."
+        },
+        {
+          "label": "Reduced motion",
+          "body": "A saved preference is applied with the theme before paint.",
+          "actionLabel": "Limit",
+          "actionText": "New colours need a fresh contrast audit; no screen-reader claim is made."
+        },
+        {
+          "label": "Local settings",
+          "body": "Preferences stay in this browser.",
+          "actionLabel": "Status",
+          "actionText": "Verified in local checks, not on physical devices or other browsers."
+        }
+      ],
+      "scene": {
+        "id": "app-tour",
+        "pageId": "appearance",
+        "device": "laptop",
+        "screenshot": null,
+        "screenLabel": "settings panel",
+        "screenNote": "Local source mock",
+        "set": "desk",
+        "deskRole": "accent",
+        "camera": {
+          "from": {
+            "x": -1.4,
+            "y": 2.1,
+            "z": 6.4,
+            "lookX": -0.4,
+            "lookY": 0.95,
+            "fov": 59,
+            "roll": -0.008
+          },
+          "to": {
+            "x": 1.2,
+            "y": 1.5,
+            "z": 3.5,
+            "lookX": 0.3,
+            "lookY": 0.7,
+            "fov": 55,
+            "roll": 0.012
+          }
+        },
+        "companion": "lumen",
+        "mood": "idle",
+        "prop": "star",
+        "reactions": [
+          {
+            "companion": "lumen",
+            "mood": "happy",
+            "threshold": 0.14,
+            "text": "Twelve colours, sixteen skins."
+          },
+          {
+            "companion": "lumen",
+            "mood": "calm",
+            "threshold": 0.55,
+            "text": "Motion can be reduced."
+          }
+        ],
+        "mock": {
+          "header": "Appearance",
+          "sub": "Colour · subject look · motion",
+          "tiles": [
+            "12 colour themes",
+            "Follow device",
+            "16 subject looks",
+            "Reduced motion",
+            "Saved before paint",
+            "Local browser only"
+          ],
+          "footer": "Contrast audit still required for new colours"
+        }
+      },
+      "notes": [
+        "Appearance settings is a panel, not an eighteenth HTML route; it is the required final tour stop.",
+        "Follow device is a saved choice, not a thirteenth theme.",
+        "Do not claim a screen-reader or cross-browser audit from the local contrast check."
+      ]
+    },
+    {
       id: "closing",
-      numeral: "IX",
+      numeral: "X",
       eyebrow: "Defence close",
       title: "Thank you",
       tagline: "Questions",

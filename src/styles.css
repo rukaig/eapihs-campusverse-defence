@@ -212,6 +212,9 @@ a.chrome-button {
   background: var(--cv-surface);
   box-shadow: 0 12px 30px color-mix(in srgb, var(--cv-text-strong) 10%, transparent);
   backdrop-filter: blur(8px);
+  max-height: calc(100vh - 9rem);
+  overflow-y: auto;
+  scrollbar-width: thin;
 }
 
 .side-index-label {
@@ -256,6 +259,24 @@ a.chrome-button {
 
 .index-button[aria-current="true"] .numeral {
   color: var(--cv-accent-strong);
+}
+
+.index-divider {
+  margin: 0.75rem 0 0.25rem;
+  padding: 0.35rem 0.4rem;
+  border-top: 1px solid var(--cv-line);
+  font-size: 0.56rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cv-accent-strong);
+}
+
+.index-button.is-tour {
+  min-height: 26px;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  font-size: 0.66rem;
 }
 
 .deck {
@@ -319,6 +340,48 @@ a.chrome-button {
   font-weight: 400;
   line-height: 1.05;
   color: var(--cv-accent-strong);
+}
+
+.section[data-chapter="IX"] .heading-row {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+}
+
+.section[data-chapter="IX"] .title {
+  max-width: 18ch;
+  font-size: clamp(2.6rem, 5.3vw, 5.2rem);
+}
+
+.section[data-chapter="IX"] .tagline {
+  max-width: 32ch;
+  font-size: clamp(1.2rem, 2.3vw, 2rem);
+}
+
+.section[data-chapter="IX"] .points:empty {
+  display: none;
+}
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  margin: 0 0 1rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid color-mix(in srgb, var(--cv-accent) 45%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--cv-accent-soft) 80%, transparent);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cv-accent-strong);
+}
+
+.status-chip.prepared {
+  border-color: color-mix(in srgb, var(--cv-warning, var(--cv-accent)) 55%, transparent);
+  background: color-mix(in srgb, var(--cv-surface2) 92%, var(--cv-accent-soft) 8%);
+  color: var(--cv-text-muted);
 }
 
 .lead {
@@ -1053,6 +1116,23 @@ a.chrome-button {
 
   .index-button .numeral {
     font-size: 1rem;
+  }
+
+  .index-divider {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0 0.3rem;
+    border-top: 0;
+    border-right: 1px solid var(--cv-line);
+    line-height: 1.8rem;
+  }
+
+  .index-button.is-tour {
+    min-height: 0;
+  }
+
+  .section[data-chapter="IX"] .title {
+    font-size: clamp(2.3rem, 10vw, 4rem);
   }
 
   .section {
