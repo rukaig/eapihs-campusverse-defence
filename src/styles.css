@@ -93,6 +93,25 @@ a:focus-visible {
   bottom: -10vw;
 }
 
+.stage-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.stage-fallback {
+  position: absolute;
+  right: var(--cv-edge);
+  bottom: 4.5rem;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cv-text-muted);
+}
+
 .chrome {
   position: fixed;
   z-index: 20;
@@ -102,11 +121,24 @@ a:focus-visible {
   top: var(--cv-edge);
   left: var(--cv-edge);
   max-width: 60vw;
-  font-size: 0.7rem;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.brand-name {
+  font-size: 0.72rem;
   font-weight: 800;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--cv-text-muted);
+  color: var(--cv-text-strong);
+}
+
+.brand-sub {
+  font-family: var(--cv-serif);
+  font-size: 0.95rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
+  color: var(--cv-accent-strong);
 }
 
 .chrome-actions {
@@ -296,11 +328,26 @@ a:focus-visible {
 }
 
 .card {
+  position: relative;
+  overflow: hidden;
   padding: 1.1rem 1.2rem;
   border: 1px solid color-mix(in srgb, var(--cv-line) 85%, transparent);
   border-radius: 16px;
   background: color-mix(in srgb, var(--cv-surface) 92%, var(--cv-bg-deep) 8%);
   box-shadow: 0 12px 32px color-mix(in srgb, var(--cv-text-strong) 8%, transparent);
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  right: -24px;
+  bottom: -30px;
+  width: 78px;
+  height: 78px;
+  border: 1px solid var(--cv-accent);
+  border-radius: 50%;
+  opacity: 0.16;
+  pointer-events: none;
 }
 
 .card-label {
@@ -338,6 +385,116 @@ a:focus-visible {
   font-size: 0.76rem;
   line-height: 1.45;
   color: var(--cv-text-muted);
+}
+
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: var(--cv-edge);
+  background: var(--cv-bg);
+  transition: opacity 620ms ease, visibility 620ms ease;
+}
+
+.loading-screen.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loading-inner {
+  width: min(100%, 420px);
+  text-align: center;
+}
+
+.loading-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cv-text-muted);
+}
+
+.loading-title {
+  margin: 0 0 0.5rem;
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: var(--cv-text-strong);
+}
+
+.loading-text {
+  margin: 0 0 1.6rem;
+  font-family: var(--cv-serif);
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--cv-accent-strong);
+}
+
+.loading-line {
+  display: block;
+  width: 100%;
+  height: 2px;
+  overflow: hidden;
+  background: var(--cv-line);
+}
+
+.loading-line span {
+  display: block;
+  width: 38%;
+  height: 100%;
+  background: var(--cv-accent);
+  animation: loading-sweep 1.25s ease-in-out infinite;
+}
+
+@keyframes loading-sweep {
+  0% { transform: translateX(-110%); }
+  100% { transform: translateX(310%); }
+}
+
+.progress {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 24;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.55rem var(--cv-edge) 0.7rem;
+  background: linear-gradient(to top, color-mix(in srgb, var(--cv-bg) 92%, transparent), transparent);
+}
+
+.progress-label,
+.progress-count {
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cv-text-muted);
+  white-space: nowrap;
+}
+
+.progress-track {
+  display: block;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--cv-line) 90%, transparent);
+}
+
+.progress-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--cv-accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 220ms ease, background-color 520ms ease;
 }
 
 .overlay {
@@ -523,6 +680,11 @@ a:focus-visible {
   backdrop-filter: none;
 }
 
+.low-graphics .stage-canvas,
+.reduced-motion .stage-canvas {
+  filter: saturate(0.82) contrast(0.96);
+}
+
 .hold-scene .stage * {
   animation-play-state: paused !important;
 }
@@ -561,6 +723,15 @@ a:focus-visible {
     padding-left: var(--cv-edge);
     padding-right: var(--cv-edge);
     padding-bottom: 7rem;
+  }
+
+  .progress {
+    bottom: 3.4rem;
+    padding-bottom: 0.35rem;
+  }
+
+  .status-pill {
+    bottom: 5.2rem;
   }
 
   .points,

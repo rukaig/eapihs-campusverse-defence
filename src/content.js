@@ -2,7 +2,8 @@
 // Edit copy here; scene and UI code only reads these values.
 export const content = {
   ui: {
-    brand: "EAPIHS CAMPUSVERSE · DEFENCE EDITION",
+    brand: "CampusVerse - Innovation Defence",
+    editionTagline: "A scroll-driven paper defence · November 2026",
     sectionIndexLabel: "Sections",
     themeButton: "Themes",
     helpButton: "?",
@@ -33,7 +34,10 @@ export const content = {
     ],
     notesUnavailable: "[Speaker notes to be added.]",
     timerRunning: "Running",
-    timerPaused: "Paused"
+    timerPaused: "Paused",
+    loadingTitle: "EAPIHS CampusVerse",
+    loadingText: "Preparing the 3D stage",
+    progressLabel: "Presentation progress"
   },
 
   sections: [

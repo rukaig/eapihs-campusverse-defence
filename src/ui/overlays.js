@@ -23,12 +23,16 @@ function overlay(id, title, body, closeLabel) {
 }
 
 export function renderOverlays(ui) {
-  const colorButtons = listColorThemes().map(theme => `
-    <button class="theme-option" type="button" data-color-theme="${escapeHtml(theme.id)}" aria-pressed="false">
-      <span class="swatch" style="background:${escapeHtml(theme.dark ? "#0d1720" : "#fbf6ec")}"></span>
-      <span>${escapeHtml(theme.label)}</span>
-    </button>
-  `).join("");
+  const colorButtons = listColorThemes().map(theme => {
+    const bg = theme.palette?.bg || (theme.id === "system" ? "#12263a" : "#fbf6ec");
+    const accent = theme.palette?.accent || (theme.id === "system" ? "#fbf6ec" : "#3f6b55");
+    return `
+      <button class="theme-option" type="button" data-color-theme="${escapeHtml(theme.id)}" aria-pressed="false">
+        <span class="swatch" style="background:linear-gradient(135deg, ${escapeHtml(bg)} 0 50%, ${escapeHtml(accent)} 50% 100%)"></span>
+        <span>${escapeHtml(theme.label)}</span>
+      </button>
+    `;
+  }).join("");
 
   const subjectButtons = listSubjectThemes().map(theme => {
     const swatch = theme.previewColors[0] || "#fbf6ec";

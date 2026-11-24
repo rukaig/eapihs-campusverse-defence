@@ -33,7 +33,10 @@ at runtime.
 
 ## Phase status
 
-- Phase 1: scaffold, source study, content, theme registry, flat scroll shell,
-  side index, presenter overlays and keyboard controls.
-- Phase 2+: three.js stage, procedural companions, section scenes and final
-  verification (not built yet).
+- Phase 0: recon in `RECON.md` (paper summary, video style analysis, scene plan).
+- Phase 1 foundation: offline Vite scaffold, persistent three.js stage, scroll
+  camera rail, mouse parallax, fog/lights, loading screen, app-derived theme
+  registry with live recolour, video-style UI shell, progress indicator,
+  presenter controls, and one reusable test scene registered for all sections.
+- Next: replace the test scene with the eight paper-part scenes and full app
+  tour from `RECON.md`.

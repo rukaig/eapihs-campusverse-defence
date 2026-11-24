@@ -108,7 +108,7 @@ export function subscribeToTheme(listener) {
 }
 
 export function listColorThemes() {
-  return colorThemes.map(({ id, label, dark }) => ({ id, label, dark }));
+  return colorThemes.map(({ id, label, dark, palette }) => ({ id, label, dark, palette }));
 }
 
 export function listSubjectThemes() {
