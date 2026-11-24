@@ -22,7 +22,14 @@ const FALLBACK_COLORS = {
   blue700: "#28546f",
   danger: "#8e3c34",
   warning: "#7d5a1d",
-  success: "#2f5544"
+  success: "#2f5544",
+  textMuted: "#626963",
+  lineStrong: "#cbbda6",
+  link: "#2f5544",
+  focus: "#2c6a8a",
+  onDark: "#f7f3e8",
+  onLight: "#23303a",
+  onAccent: "#fffdf7"
 };
 
 function color(value, fallback = "#ffffff") {
@@ -42,13 +49,23 @@ function createFallbackEngine(container, count) {
   notice.className = "stage-fallback";
   notice.textContent = "3D stage unavailable — flat presentation mode";
   container.appendChild(notice);
+  const fallbackGeometry = {
+    plane: new THREE.PlaneGeometry(1, 1),
+    box: new THREE.BoxGeometry(1, 1, 1),
+    sphere: new THREE.SphereGeometry(1, 20, 14),
+    lowSphere: new THREE.SphereGeometry(1, 10, 8),
+    icosa: new THREE.IcosahedronGeometry(1, 0),
+    torus: new THREE.TorusGeometry(1, 0.035, 10, 64),
+    cone: new THREE.ConeGeometry(1, 1, 12)
+  };
   return {
     THREE,
     SPACING,
-    geometry: {},
+    geometry: fallbackGeometry,
     addSection() {},
     registerLayer() {},
     registerLowGraphics() {},
+    registerUpdatable() {},
     trackMaterial() {},
     setPalette() {},
     setScrollProgress() {},
@@ -60,6 +77,7 @@ function createFallbackEngine(container, count) {
     start() {},
     dispose() {
       notice.remove();
+      for (const item of Object.values(fallbackGeometry)) item.dispose();
     },
     getState() {
       return {
@@ -72,6 +90,7 @@ function createFallbackEngine(container, count) {
         lowGraphics: false,
         hold: false,
         reducedMotion: false,
+        updatables: 0,
         drawCalls: 0,
         triangles: 0,
         fogColor: "#f4ecdd",
@@ -145,6 +164,7 @@ export function createStageEngine({ container, count }) {
   const sections = [];
   const layers = [];
   const lowGraphicsObjects = [];
+  const updatables = new Set();
   const colorPairs = [];
   const materials = new Set();
   const fogTarget = color(FALLBACK_COLORS.bgDeep);
@@ -154,18 +174,33 @@ export function createStageEngine({ container, count }) {
   colorPairs.push({ color: scene.fog.color, target: fogTarget });
   colorPairs.push({ color: rim.color, target: rimTarget });
 
-  function trackMaterial(material, role) {
+  function trackColor(target, role, options = {}) {
+    const identity = options.identity || FALLBACK_COLORS[role] || "#ffffff";
+    const mix = typeof options.mix === "number" ? Math.min(1, Math.max(0, options.mix)) : 1;
+    const base = color(identity);
+    colorPairs.push({
+      color: target,
+      target: base.clone(),
+      base,
+      mix,
+      colorRole: role
+    });
+  }
+
+  function trackMaterial(material, role, options = {}) {
+    const property = options.property || "color";
     const list = Array.isArray(material) ? material : [material];
     for (const item of list) {
-      if (!item || !item.color) continue;
+      if (!item || !item[property] || !item[property].isColor) continue;
       materials.add(item);
       item.userData.colorRole = role;
-      colorPairs.push({
-        color: item.color,
-        target: color(FALLBACK_COLORS[role]),
-        colorRole: role
-      });
+      trackColor(item[property], role, options);
     }
+  }
+
+  function registerUpdatable(callback) {
+    if (typeof callback === "function") updatables.add(callback);
+    return () => updatables.delete(callback);
   }
 
   function registerLayer(object, factor) {
@@ -188,10 +223,10 @@ export function createStageEngine({ container, count }) {
   function setPalette(palette = {}) {
     const get = role => palette[role] || FALLBACK_COLORS[role] || "#ffffff";
     for (const pair of colorPairs) {
-      if (pair.colorRole) {
-        pair.target.set(get(pair.colorRole));
-        if (!paletteInitialized) pair.color.copy(pair.target);
-      }
+      if (!pair.colorRole) continue;
+      const themed = color(get(pair.colorRole));
+      pair.target.copy(pair.base).lerp(themed, pair.mix);
+      if (!paletteInitialized) pair.color.copy(pair.target);
     }
     fogTarget.set(palette.bgDeep || palette.bg || FALLBACK_COLORS.bgDeep);
     rimTarget.set(palette.accentStrong || palette.accent || FALLBACK_COLORS.accent);
@@ -286,16 +321,27 @@ export function createStageEngine({ container, count }) {
       pair.color.lerp(pair.target, colorEase);
     }
 
-    if (!state.hold && !state.reducedMotion) {
+    const animationDelta = !state.hold && !state.reducedMotion ? delta : 0;
+    if (animationDelta) {
       for (const object of layers) {
         const spin = object.userData.idleSpin;
-        if (spin) object.rotation.y += spin * delta;
+        if (spin) object.rotation.y += spin * animationDelta;
         const bob = object.userData.idleBob;
         if (bob) {
           object.rotation.z = Math.sin(state.time * bob.speed + bob.phase) * bob.amount;
         }
       }
     }
+
+    const frameContext = {
+      delta: animationDelta,
+      realDelta: delta,
+      time: state.time,
+      pointer: state.pointer,
+      reducedMotion: state.reducedMotion,
+      hold: state.hold
+    };
+    for (const update of updatables) update(frameContext);
 
     renderer.render(scene, camera);
   }
@@ -320,6 +366,7 @@ export function createStageEngine({ container, count }) {
     addSection,
     registerLayer,
     registerLowGraphics,
+    registerUpdatable,
     trackMaterial,
     setPalette,
     setScrollProgress,
@@ -334,6 +381,7 @@ export function createStageEngine({ container, count }) {
     dispose() {
       renderer.setAnimationLoop(null);
       window.removeEventListener("resize", resize);
+      updatables.clear();
       for (const item of materials) item.dispose();
       for (const item of Object.values(geometry)) item.dispose();
       renderer.dispose();
@@ -354,6 +402,7 @@ export function createStageEngine({ container, count }) {
         lowGraphics: state.lowGraphics,
         hold: state.hold,
         reducedMotion: state.reducedMotion,
+        updatables: updatables.size,
         drawCalls: renderer.info.render.calls,
         triangles: renderer.info.render.triangles,
         fogColor: `#${scene.fog.color.getHexString()}`,

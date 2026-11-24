@@ -1,6 +1,7 @@
-import { companionDesigns } from "../characters/index.js";
+import { companionDesigns, propDesigns, createCompanion, createProp } from "../characters/index.js";
 
 const SHARD_ROLES = ["coral600", "gold600", "lav600", "sage600", "blue700"];
+const MOOD_CYCLE = ["idle", "happy", "thinking", "cheering"];
 
 function standardMaterial(engine, role, options = {}) {
   const material = new engine.THREE.MeshStandardMaterial({
@@ -25,97 +26,7 @@ function place(mesh, x, y, z, sx = 1, sy = sx, sz = sx) {
   return mesh;
 }
 
-function makeCompanion(engine, index) {
-  const { THREE, geometry } = engine;
-  const design = companionDesigns[index % companionDesigns.length];
-  const roles = {
-    moss: "sage600",
-    pip: "coral600",
-    lumen: "gold600",
-    juniper: "lav600"
-  };
-  const bodyRole = roles[design.id] || "accent";
-  const group = new THREE.Group();
-  group.userData.companion = design.id;
-
-  const body = place(
-    new THREE.Mesh(geometry.sphere, standardMaterial(engine, bodyRole)),
-    0, 0, 0, 0.72, 0.62, 0.64
-  );
-  const head = place(
-    new THREE.Mesh(geometry.sphere, standardMaterial(engine, "surface")),
-    0, 0.68, 0.12, 0.46, 0.44, 0.44
-  );
-  group.add(body, head);
-
-  const eyeMaterial = standardMaterial(engine, "textStrong", { roughness: 0.35 });
-  for (const x of [-0.17, 0.17]) {
-    group.add(place(new THREE.Mesh(geometry.lowSphere, eyeMaterial), x, 0.74, 0.52, 0.055, 0.07, 0.04));
-  }
-
-  if (design.id === "moss") {
-    const shell = place(
-      new THREE.Mesh(geometry.icosa, standardMaterial(engine, "sage600", { roughness: 0.8 })),
-      0, -0.05, -0.38, 0.86, 0.58, 0.3
-    );
-    group.add(shell);
-    for (const x of [-0.55, 0.55]) {
-      group.add(place(
-        new THREE.Mesh(geometry.sphere, standardMaterial(engine, bodyRole)),
-        x, -0.38, 0.18, 0.26, 0.2, 0.32
-      ));
-    }
-  } else if (design.id === "pip") {
-    const beak = place(
-      new THREE.Mesh(geometry.cone, standardMaterial(engine, "gold600")),
-      0, 0.66, 0.56, 0.15, 0.32, 0.15
-    );
-    beak.rotation.x = Math.PI / 2;
-    group.add(beak);
-    for (const x of [-0.62, 0.62]) {
-      const wing = place(
-        new THREE.Mesh(geometry.sphere, standardMaterial(engine, "coral600")),
-        x, 0.12, -0.1, 0.42, 0.18, 0.3
-      );
-      wing.rotation.z = x < 0 ? 0.4 : -0.4;
-      group.add(wing);
-    }
-  } else if (design.id === "lumen") {
-    for (const x of [-0.58, 0.58]) {
-      const wing = place(
-        new THREE.Mesh(geometry.icosa, standardMaterial(engine, "surface2", { transparent: true, opacity: 0.86 })),
-        x, 0.36, -0.18, 0.62, 0.38, 0.08
-      );
-      wing.rotation.z = x < 0 ? -0.35 : 0.35;
-      group.add(wing);
-    }
-    for (const x of [-0.18, 0.18]) {
-      const antenna = place(
-        new THREE.Mesh(geometry.cone, standardMaterial(engine, "gold600")),
-        x, 1.18, 0.08, 0.06, 0.34, 0.06
-      );
-      antenna.rotation.z = x < 0 ? 0.3 : -0.3;
-      group.add(antenna);
-    }
-  } else {
-    for (const x of [-0.29, 0.29]) {
-      group.add(place(
-        new THREE.Mesh(geometry.cone, standardMaterial(engine, "lav600")),
-        x, 1.05, 0.05, 0.2, 0.46, 0.2
-      ));
-    }
-    const tail = place(
-      new THREE.Mesh(geometry.cone, standardMaterial(engine, "lav600")),
-      -0.78, -0.12, -0.32, 0.24, 0.8, 0.24
-    );
-    tail.rotation.z = 1.1;
-    group.add(tail);
-  }
-
-  return group;
-}
-
-export function createTestScene({ engine, index, section }) {
+export function createTestScene({ engine, kit, index, section }) {
   const { THREE, geometry } = engine;
   const group = new THREE.Group();
   group.name = `scene-${section.id}`;
@@ -219,18 +130,40 @@ export function createTestScene({ engine, index, section }) {
     if (i > 3) engine.registerLowGraphics(shard);
   }
 
-  const companion = makeCompanion(engine, index);
-  companion.position.set(4.9, -1.35, 1.25);
-  companion.scale.setScalar(0.82);
-  companion.userData.idleBob = { speed: 0.9, amount: 0.055, phase: index * 0.7 };
-  group.add(companion);
-  engine.registerLayer(companion, 0.8);
+  const design = companionDesigns[index % companionDesigns.length];
+  const companion = createCompanion(engine, kit, design.id);
+  companion.group.scale.setScalar(0.82);
+  companion.setMood(MOOD_CYCLE[index % MOOD_CYCLE.length]);
+  const companionHolder = new THREE.Group();
+  companionHolder.position.set(4.9, -1.35, 1.25);
+  companionHolder.add(companion.group);
+  companionHolder.userData.idleBob = { speed: 0.8, amount: 0.035, phase: index * 0.7 };
+  group.add(companionHolder);
+  engine.registerLayer(companionHolder, 0.8);
+
+  const propDesign = propDesigns[index % propDesigns.length];
+  const prop = createProp(engine, kit, propDesign.id);
+  prop.group.scale.setScalar(0.62);
+  const propHolder = new THREE.Group();
+  propHolder.position.set(-5.05, -1.7, 1.35);
+  propHolder.add(prop.group);
+  group.add(propHolder);
+  engine.registerLayer(propHolder, 0.66);
 
   return {
     group,
-    companion: companion.userData.companion,
+    companion: design.id,
+    prop: propDesign.id,
+    companionApi: companion,
+    propApi: prop,
     setActive(active) {
       group.userData.active = active;
+      if (active && index % 3 === 0) companion.say(design.tagline, { duration: 3.4 });
+    },
+    dispose() {
+      companion.dispose();
+      prop.dispose();
+      group.removeFromParent();
     }
   };
 }

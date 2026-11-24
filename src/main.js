@@ -47,6 +47,7 @@ actions.className = "chrome chrome-actions";
 actions.innerHTML = `
   <button class="chrome-button" type="button" data-open-theme>${escapeHtml(ui.themeButton)}</button>
   <button class="chrome-button" type="button" data-toggle-low>${escapeHtml(ui.lowGraphicsButton)}</button>
+  <a class="chrome-button" href="./characters/">Characters</a>
   <button class="chrome-button" type="button" data-open-help>${escapeHtml(ui.helpButton)}</button>
 `;
 
@@ -250,6 +251,7 @@ window.__campusversePresentation = {
   getActive: () => ({ index: activeIndex, section: sections[activeIndex].id }),
   getActiveTheme,
   getStageState: () => sceneApi.getState(),
+  getCharacters: () => sceneApi.getCharacters(),
   toggleHold,
   toggleLowGraphics,
   scrollToProgress(ratio) {

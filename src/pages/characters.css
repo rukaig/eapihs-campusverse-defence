@@ -1,0 +1,226 @@
+.lab {
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.lab-stage {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 18%, color-mix(in srgb, var(--cv-accent) 16%, transparent), transparent 42%),
+    linear-gradient(180deg, var(--cv-bg), var(--cv-bg-deep));
+}
+
+.lab-header {
+  position: fixed;
+  z-index: 10;
+  top: clamp(1rem, 3vw, 2rem);
+  left: clamp(1rem, 3vw, 2rem);
+  display: grid;
+  gap: 0.3rem;
+  max-width: min(46vw, 420px);
+}
+
+.lab-kicker {
+  margin: 0;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--cv-accent-strong);
+}
+
+.lab-title {
+  margin: 0;
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+  color: var(--cv-text-strong);
+}
+
+.lab-subtitle {
+  margin: 0.3rem 0 0;
+  font-family: var(--cv-serif);
+  font-size: clamp(0.95rem, 2vw, 1.25rem);
+  font-style: italic;
+  color: var(--cv-text-muted);
+}
+
+.lab-back {
+  justify-self: start;
+  margin-top: 0.6rem;
+  min-height: 44px;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--cv-line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--cv-surface) 90%, transparent);
+  color: var(--cv-text);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.lab-panel {
+  position: fixed;
+  z-index: 10;
+  top: clamp(1rem, 3vw, 2rem);
+  right: clamp(1rem, 3vw, 2rem);
+  bottom: clamp(1rem, 3vw, 2rem);
+  width: min(360px, 34vw);
+  min-width: 290px;
+  overflow: auto;
+  padding: 1rem;
+  border: 1px solid var(--cv-line);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--cv-surface) 94%, transparent);
+  box-shadow: 0 18px 46px color-mix(in srgb, var(--cv-text-strong) 12%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+.lab-panel h2 {
+  margin: 0 0 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cv-accent-strong);
+}
+
+.lab-section {
+  padding: 0.8rem 0;
+  border-top: 1px solid var(--cv-line);
+}
+
+.lab-section:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.lab-select-row {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.lab-select-row label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--cv-text-muted);
+}
+
+.lab-select-row select {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 0.6rem;
+  border: 1px solid var(--cv-line);
+  border-radius: 10px;
+  background: var(--cv-surface);
+  color: var(--cv-text);
+  font: inherit;
+  font-size: 0.78rem;
+}
+
+.lab-figure {
+  display: grid;
+  gap: 0.45rem;
+  margin-bottom: 0.75rem;
+}
+
+.lab-figure:last-child {
+  margin-bottom: 0;
+}
+
+.lab-figure-name {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--cv-text-strong);
+}
+
+.lab-figure-name span {
+  font-size: 0.66rem;
+  font-weight: 600;
+  color: var(--cv-text-muted);
+}
+
+.lab-button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.lab-button {
+  min-height: 44px;
+  padding: 0 0.65rem;
+  border: 1px solid var(--cv-line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--cv-text);
+  cursor: pointer;
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.lab-button:hover {
+  background: var(--cv-accent-soft);
+}
+
+.lab-button[aria-pressed="true"] {
+  border-color: var(--cv-accent);
+  color: var(--cv-accent-strong);
+  background: var(--cv-accent-soft);
+}
+
+.lab-prop-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.72rem;
+  line-height: 1.65;
+  color: var(--cv-text-muted);
+}
+
+.lab-hint {
+  position: fixed;
+  z-index: 10;
+  left: clamp(1rem, 3vw, 2rem);
+  bottom: clamp(1rem, 3vw, 2rem);
+  max-width: min(46vw, 420px);
+  margin: 0;
+  font-size: 0.7rem;
+  line-height: 1.55;
+  color: var(--cv-text-muted);
+}
+
+.lab-hint strong {
+  color: var(--cv-accent-strong);
+}
+
+@media (max-width: 900px) {
+  .lab-header {
+    max-width: calc(100% - 2rem);
+  }
+
+  .lab-panel {
+    top: auto;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    width: auto;
+    min-width: 0;
+    max-height: 42vh;
+  }
+
+  .lab-hint {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lab-panel {
+    backdrop-filter: none;
+  }
+}

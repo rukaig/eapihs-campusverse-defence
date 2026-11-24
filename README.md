@@ -33,10 +33,16 @@ at runtime.
 
 ## Phase status
 
-- Phase 0: recon in `RECON.md` (paper summary, video style analysis, scene plan).
+- Phase 0: recon in `RECON.md` (paper summary, video style analysis, scene plan,
+  full app-source inventory and paper-vs-source differences).
 - Phase 1 foundation: offline Vite scaffold, persistent three.js stage, scroll
   camera rail, mouse parallax, fog/lights, loading screen, app-derived theme
   registry with live recolour, video-style UI shell, progress indicator,
   presenter controls, and one reusable test scene registered for all sections.
+- Phase 2 characters: procedural 3D Moss, Pip, Lumen and Juniper built from the
+  app's SVG shapes and exact source data, with idle motion, blink, head-follow,
+  three moods, speech bubbles, `say()` / `setMood()` / `walkTo()`, theme-aware
+  identity colours, plus nine original study props. Debug turntable is at
+  `/characters` in dev and `/characters/` in the built folder.
 - Next: replace the test scene with the eight paper-part scenes and full app
   tour from `RECON.md`.
