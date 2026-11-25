@@ -30,6 +30,15 @@ function renderTimelineGroup(label, items, config) {
 
 function renderSectionExtras(section) {
   const blocks = [];
+  if (section.scene?.screenshot) {
+    const shot = `${import.meta.env.BASE_URL}app-shots/${section.scene.screenshot}`;
+    blocks.push(`
+      <figure class="app-shot-preview" data-app-shot>
+        <img src="${escapeHtml(shot)}" alt="${escapeHtml(section.title)} interface preview" loading="lazy" />
+        <figcaption>App screen preview - click or hover to enlarge</figcaption>
+      </figure>
+    `);
+  }
   if (section.scene?.generalText) {
     blocks.push(`
       <div class="objective-general">
@@ -214,6 +223,11 @@ sideIndex.innerHTML = `
 
 const deck = document.createElement("main");
 deck.className = "deck";
+deck.addEventListener("click", event => {
+  const preview = event.target.closest("[data-app-shot]");
+  if (!preview) return;
+  preview.classList.toggle("is-expanded");
+});
 deck.innerHTML = sections.map((section, index) => `
   <section class="section" id="section-${escapeHtml(section.id)}" data-section-index="${index}" data-chapter="${escapeHtml(section.chapter || "")}">
     <div class="section-inner">

@@ -1287,3 +1287,53 @@ a.chrome-button {
     animation-duration: 0.01ms !important;
   }
 }
+
+.app-shot-preview {
+  margin: 1rem 0 1.25rem;
+  padding: 0.75rem;
+  border: 1px solid var(--cv-line);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--cv-surface) 88%, transparent);
+  overflow: hidden;
+  cursor: zoom-in;
+  transition: transform 320ms ease, box-shadow 320ms ease, border-color 320ms ease;
+}
+
+.app-shot-preview img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  transition: transform 320ms ease;
+}
+
+.app-shot-preview figcaption {
+  margin-top: 0.55rem;
+  font-size: 0.72rem;
+  color: var(--cv-text-muted);
+}
+
+.app-shot-preview:hover {
+  transform: translateY(-2px);
+  border-color: var(--cv-accent);
+  box-shadow: 0 18px 48px color-mix(in srgb, var(--cv-text-strong) 18%, transparent);
+}
+
+.app-shot-preview:hover img {
+  transform: scale(1.03);
+}
+
+.app-shot-preview.is-expanded {
+  position: fixed;
+  inset: 1rem;
+  z-index: 80;
+  margin: 0;
+  cursor: zoom-out;
+  background: color-mix(in srgb, var(--cv-bg) 96%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+.app-shot-preview.is-expanded img {
+  max-height: calc(100vh - 4rem);
+  object-fit: contain;
+}
