@@ -1,30 +1,30 @@
 import * as THREE from "three";
 
 const SPACING = 22;
-const FOG_NEAR = 16;
-const FOG_FAR = 64;
+const FOG_NEAR = 20;
+const FOG_FAR = 84;
 
 const FALLBACK_COLORS = {
-  bg: "#fbf6ec",
-  bgDeep: "#f4ecdd",
-  surface: "#fffdf8",
-  surface2: "#f8f1e4",
-  text: "#12263a",
-  textStrong: "#0c1a26",
-  line: "#e2d8c7",
-  accent: "#3f6b55",
-  accentStrong: "#2f5544",
-  accentSoft: "#eaf2e7",
-  coral600: "#b95448",
-  lav600: "#6a5b8f",
-  gold600: "#a77b2f",
-  sage600: "#3f6b55",
-  blue700: "#28546f",
+  bg: "#0b1110",
+  bgDeep: "#050807",
+  surface: "#111816",
+  surface2: "#17211f",
+  text: "#f4f7f2",
+  textStrong: "#ffffff",
+  line: "#26322f",
+  accent: "#9be564",
+  accentStrong: "#b7f36b",
+  accentSoft: "#17311f",
+  coral600: "#ff7a59",
+  lav600: "#9f8cff",
+  gold600: "#f2c14f",
+  sage600: "#9be564",
+  blue700: "#58b7ff",
   danger: "#8e3c34",
   warning: "#7d5a1d",
   success: "#2f5544",
-  textMuted: "#626963",
-  lineStrong: "#cbbda6",
+  textMuted: "#aeb8b2",
+  lineStrong: "#34423f",
   link: "#2f5544",
   focus: "#2c6a8a",
   onDark: "#f7f3e8",
@@ -129,8 +129,8 @@ export function createStageEngine({ container, count }) {
   const scene = new THREE.Scene();
   scene.fog = new THREE.Fog(color(FALLBACK_COLORS.bgDeep).getHex(), FOG_NEAR, FOG_FAR);
 
-  const camera = new THREE.PerspectiveCamera(52, width / height, 0.1, 86);
-  camera.position.set(0, 1.2, 10);
+  const camera = new THREE.PerspectiveCamera(48, width / height, 0.1, 92);
+  camera.position.set(0, 1.1, 9.4);
 
   const ambient = new THREE.AmbientLight(0xfff8ea, 1.05);
   const key = new THREE.DirectionalLight(0xfff4df, 1.7);
@@ -347,11 +347,11 @@ export function createStageEngine({ container, count }) {
     state.pointer.y = lerp(state.pointer.y, state.pointerTarget.y, pointerEase);
 
     const sectionTarget = getCameraTarget();
-    const cameraEase = state.reducedMotion ? 1 : 1 - Math.exp(-delta * 3.4);
+    const cameraEase = state.reducedMotion ? 1 : 1 - Math.exp(-delta * 2.6);
     if (state.transitionFrom) {
       state.transitionAmount = state.reducedMotion
         ? 1
-        : Math.min(1, state.transitionAmount + delta * 2.2);
+        : Math.min(1, state.transitionAmount + delta * 1.7);
       const raw = state.transitionAmount;
       const blend = raw * raw * (3 - 2 * raw);
       const cameraTarget = {};
@@ -393,7 +393,7 @@ export function createStageEngine({ container, count }) {
     for (const group of sections) {
       if (!group) continue;
       group.visible = group.userData.active;
-      const targetScale = group.userData.active ? 1.03 : 0.985;
+      const targetScale = group.userData.active ? 1.06 : 0.99;
       const scale = lerp(group.scale.x, targetScale, state.reducedMotion ? 1 : 1 - Math.exp(-delta * 3.4));
       group.scale.setScalar(scale);
     }

@@ -34,7 +34,7 @@ export function resolveColorChoice(choice) {
   return colorThemeById[choice] ? choice : "light";
 }
 
-let colorChoice = colorThemeById[readStorage(COLOR_KEY)] ? readStorage(COLOR_KEY) : "light";
+let colorChoice = colorThemeById[readStorage(COLOR_KEY)] ? readStorage(COLOR_KEY) : "dark";
 let subjectChoice = subjectPalettes[readStorage(SUBJECT_KEY)] ? readStorage(SUBJECT_KEY) : "campus";
 
 function modeFor(choice = colorChoice) {

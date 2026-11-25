@@ -33,7 +33,7 @@ export function addLabel(kit, parent, title, subtitle, position, scale = [1.85, 
   return tag;
 }
 
-export function addCompanion(engine, kit, parent, id, position, scale = 0.82, mood = "idle") {
+export function addCompanion(engine, kit, parent, id, position, scale = 1.0, mood = "idle") {
   const companion = createCompanion(engine, kit, id);
   companion.group.position.set(position[0], position[1], position[2]);
   companion.group.scale.setScalar(scale);

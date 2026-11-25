@@ -4,23 +4,23 @@
 @import "@fontsource/cormorant-garamond/600.css";
 
 :root {
-  --cv-bg: #fbf6ec;
-  --cv-bg-deep: #f4ecdd;
-  --cv-surface: #fffdf8;
-  --cv-surface2: #f8f1e4;
-  --cv-text: #12263a;
-  --cv-text-strong: #0c1a26;
-  --cv-text-muted: #626963;
-  --cv-line: #e2d8c7;
-  --cv-accent: #3f6b55;
-  --cv-accent-strong: #2f5544;
-  --cv-accent-soft: #eaf2e7;
-  --cv-on-accent: #fffdf7;
-  --cv-focus: #2c6a8a;
+  --cv-bg: #0b1110;
+  --cv-bg-deep: #050807;
+  --cv-surface: #111816;
+  --cv-surface2: #17211f;
+  --cv-text: #f4f7f2;
+  --cv-text-strong: #ffffff;
+  --cv-text-muted: #aeb8b2;
+  --cv-line: #26322f;
+  --cv-accent: #9be564;
+  --cv-accent-strong: #b7f36b;
+  --cv-accent-soft: #17311f;
+  --cv-on-accent: #08110d;
+  --cv-focus: #7cff9a;
   --cv-sans: "Manrope Variable", "Segoe UI", system-ui, sans-serif;
   --cv-serif: "Cormorant Garamond", Georgia, serif;
   --cv-edge: clamp(1rem, 3vw, 3.5rem);
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 html[data-mode="dark"] {
@@ -43,7 +43,7 @@ body {
   color: var(--cv-text);
   font-family: var(--cv-sans);
   -webkit-font-smoothing: antialiased;
-  transition: background-color 520ms ease, color 520ms ease;
+  transition: background-color 720ms ease, color 720ms ease;
 }
 
 body::before {
@@ -144,7 +144,7 @@ a:focus-visible {
     radial-gradient(circle at 78% 22%, color-mix(in srgb, var(--cv-accent) 20%, transparent), transparent 36%),
     radial-gradient(circle at 12% 82%, color-mix(in srgb, var(--cv-bg-deep) 90%, var(--cv-accent) 10%), transparent 42%),
     linear-gradient(135deg, var(--cv-bg), var(--cv-bg-deep));
-  transition: background 520ms ease;
+  transition: background 720ms ease;
 }
 
 .stage::before,
@@ -244,7 +244,7 @@ a:focus-visible {
   letter-spacing: 0.04em;
   cursor: pointer;
   backdrop-filter: blur(10px);
-  transition: background-color 220ms ease, transform 220ms ease;
+  transition: background-color 320ms ease, transform 320ms ease;
 }
 
 a.chrome-button {
@@ -302,7 +302,7 @@ a.chrome-button {
   font-weight: 700;
   cursor: pointer;
   text-align: left;
-  transition: color 220ms ease, background-color 220ms ease;
+  transition: color 320ms ease, background-color 320ms ease;
 }
 
 .index-button .numeral {
@@ -940,7 +940,7 @@ a.chrome-button {
   background: var(--cv-accent);
   transform: scaleX(0);
   transform-origin: left center;
-  transition: transform 220ms ease, background-color 520ms ease;
+  transition: transform 320ms ease, background-color 720ms ease;
 }
 
 .overlay {
