@@ -24,9 +24,11 @@ python3 -m http.server 8080 --directory dist
 Open `http://127.0.0.1:8080/`. `dist/` is self-contained; copy that folder to a
 USB drive or school machine and serve it with any static server. `base: "./"`
 keeps paths relative, so a subfolder works too. No CDN, runtime internet,
-account, API key or paid service is used. The built extra routes are
-`/characters/` for the character lab and `/presenter/` for the printable
-presenter kit.
+account, API key or paid service is used to view the deck. Firebase and sign-in
+are described only as part of the proposed app in the paper; this repository is
+the presentation, not an app that requires a user account. The built extra
+routes are `/characters/` for the character lab and `/presenter/` for the
+printable presenter kit.
 
 On a fresh machine with no `node_modules/`, `npm install` normally needs network
 access or a pre-filled npm cache. To build with no internet, copy `node_modules/`
