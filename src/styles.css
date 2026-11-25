@@ -73,6 +73,67 @@ a:focus-visible {
   outline-offset: 3px;
 }
 
+.skip-link {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 60;
+  min-height: 44px;
+  padding: 0.65rem 1rem;
+  border: 1px solid var(--cv-line-strong, var(--cv-line));
+  border-radius: 12px;
+  background: var(--cv-surface);
+  color: var(--cv-text-strong);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateY(-180%);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+.suggestion {
+  position: fixed;
+  right: var(--cv-edge);
+  bottom: clamp(5rem, 10vh, 7rem);
+  z-index: 45;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 0.9rem;
+  width: min(100% - 2 * var(--cv-edge), 34rem);
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--cv-line-strong, var(--cv-line));
+  border-radius: 16px;
+  background: var(--cv-surface);
+  box-shadow: 0 16px 48px color-mix(in srgb, var(--cv-text-strong) 16%, transparent);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.suggestion[hidden] {
+  display: none;
+}
+
+.suggestion-text {
+  flex: 1 1 14rem;
+}
+
+.suggestion-button {
+  min-height: 44px;
+  padding: 0.45rem 0.85rem;
+  border: 1px solid var(--cv-line-strong, var(--cv-line));
+  border-radius: 999px;
+  background: var(--cv-accent-soft);
+  color: var(--cv-accent-strong);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 .stage {
   position: fixed;
   inset: 0;
@@ -1072,6 +1133,47 @@ a.chrome-button {
 
 .hold-scene .stage * {
   animation-play-state: paused !important;
+}
+
+.brand-name-short,
+.action-short {
+  display: none;
+}
+
+@media (max-width: 560px) {
+  .brand-name-long,
+  .brand-sub,
+  .action-long {
+    display: none;
+  }
+
+  .brand-name-short,
+  .action-short {
+    display: inline;
+  }
+
+  .chrome-actions {
+    top: calc(var(--cv-edge) + 3.4rem);
+    left: var(--cv-edge);
+    right: var(--cv-edge);
+    justify-content: space-between;
+    gap: 0.35rem;
+  }
+
+  .chrome-button {
+    padding: 0 0.6rem;
+    font-size: 0.68rem;
+    white-space: nowrap;
+  }
+
+  .section,
+  #section-objectives,
+  #section-methodology,
+  #section-evaluation,
+  #section-sustainability,
+  #section-closing {
+    padding-top: clamp(8.5rem, 19vh, 11rem);
+  }
 }
 
 @media (max-width: 900px) {

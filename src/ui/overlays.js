@@ -90,6 +90,7 @@ export function wireOverlays(root, ui) {
   let elapsed = 0;
   let running = false;
   let interval = null;
+  let lastFocused = null;
 
   const display = root.querySelector("[data-timer-display]");
   const status = root.querySelector("[data-timer-status]");
@@ -103,23 +104,61 @@ export function wireOverlays(root, ui) {
     toggle.textContent = running ? ui.timerPause : ui.timerStart;
   }
 
+  function focusable(node) {
+    return [...node.querySelectorAll(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )].filter(element => element.getClientRects().length > 0);
+  }
+
   function open(name) {
     if (!overlays.has(name)) return;
-    closeAll();
-    overlays.get(name).classList.add("is-open");
+    if (!isOpen()) lastFocused = document.activeElement;
+    closeAll(false);
+    const node = overlays.get(name);
+    node.classList.add("is-open");
+    (focusable(node)[0] || node.querySelector(".overlay-close"))?.focus();
   }
 
   function close(name) {
-    overlays.get(name)?.classList.remove("is-open");
+    const node = overlays.get(name);
+    if (!node?.classList.contains("is-open")) return;
+    node.classList.remove("is-open");
+    if (!isOpen()) restoreFocus();
   }
 
-  function closeAll() {
+  function restoreFocus() {
+    if (lastFocused?.isConnected) lastFocused.focus();
+    lastFocused = null;
+  }
+
+  function closeAll(restore = true) {
     overlays.forEach(node => node.classList.remove("is-open"));
+    if (restore) restoreFocus();
   }
 
   function isOpen() {
     return [...overlays.values()].some(node => node.classList.contains("is-open"));
   }
+
+  root.addEventListener("keydown", event => {
+    if (event.key !== "Tab") return;
+    const node = [...overlays.values()].find(item => item.classList.contains("is-open"));
+    if (!node) return;
+    const items = focusable(node);
+    if (!items.length) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    } else if (!node.contains(document.activeElement)) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
 
   root.querySelectorAll("[data-close-overlay]").forEach(button => {
     button.addEventListener("click", () => close(button.dataset.closeOverlay));

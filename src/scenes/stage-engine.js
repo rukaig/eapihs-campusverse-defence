@@ -90,6 +90,8 @@ function createFallbackEngine(container, count) {
         lowGraphics: false,
         hold: false,
         reducedMotion: false,
+        transitioning: false,
+        transitionAmount: 1,
         updatables: 0,
         drawCalls: 0,
         triangles: 0,
@@ -160,7 +162,9 @@ export function createStageEngine({ container, count }) {
     lowGraphics: false,
     reducedMotion: false,
     time: 0,
-    lastFrame: 0
+    lastFrame: 0,
+    transitionFrom: null,
+    transitionAmount: 1
   };
 
   const cameraRig = {
@@ -250,37 +254,39 @@ export function createStageEngine({ container, count }) {
     paletteInitialized = true;
   }
 
+  function markActive(index, resetLocal) {
+    if (index !== state.activeIndex) {
+      state.transitionFrom = getCameraTarget();
+      state.transitionAmount = state.reducedMotion ? 1 : 0;
+    }
+    state.activeIndex = index;
+    if (resetLocal && state.explicitLocal) state.local = 0;
+    sections.forEach((group, current) => {
+      if (group) group.userData.active = current === index;
+    });
+  }
+
   function setScrollProgress(progress) {
     const clamped = Math.min(1, Math.max(0, Number(progress) || 0));
     state.progress = clamped;
     state.explicitLocal = false;
     state.targetZ = 10 - clamped * (count - 1) * SPACING;
-    state.activeIndex = Math.min(count - 1, Math.round(clamped * (count - 1)));
-    sections.forEach((group, index) => {
-      if (group) group.userData.active = index === state.activeIndex;
-    });
+    markActive(Math.min(count - 1, Math.round(clamped * (count - 1))), false);
   }
 
   function setSectionProgress(index, progress) {
     if (!Number.isInteger(index) || index < 0 || index >= count) return;
     const local = Math.min(1, Math.max(0, Number(progress) || 0));
-    state.activeIndex = index;
+    markActive(index, false);
     state.local = local;
     state.explicitLocal = true;
     state.progress = Math.min(1, (index + local * 0.7) / Math.max(1, count - 1));
     state.targetZ = 10 - (index + local * 0.7) * SPACING;
-    sections.forEach((group, current) => {
-      if (group) group.userData.active = current === index;
-    });
   }
 
-  function setActive(index) {
+  function setActive(index, options = {}) {
     if (!Number.isInteger(index) || index < 0 || index >= count) return;
-    state.activeIndex = index;
-    if (state.explicitLocal) state.local = 0;
-    sections.forEach((group, current) => {
-      if (group) group.userData.active = current === index;
-    });
+    markActive(index, options.resetLocal !== false);
   }
 
   function setPointer(x, y) {
@@ -340,10 +346,26 @@ export function createStageEngine({ container, count }) {
     state.pointer.x = lerp(state.pointer.x, state.pointerTarget.x, pointerEase);
     state.pointer.y = lerp(state.pointer.y, state.pointerTarget.y, pointerEase);
 
-    const cameraTarget = getCameraTarget();
+    const sectionTarget = getCameraTarget();
     const cameraEase = state.reducedMotion ? 1 : 1 - Math.exp(-delta * 3.4);
-    for (const key of Object.keys(cameraRig)) {
-      cameraRig[key] = lerp(cameraRig[key], cameraTarget[key], cameraEase);
+    if (state.transitionFrom) {
+      state.transitionAmount = state.reducedMotion
+        ? 1
+        : Math.min(1, state.transitionAmount + delta * 2.2);
+      const raw = state.transitionAmount;
+      const blend = raw * raw * (3 - 2 * raw);
+      const cameraTarget = {};
+      for (const key of Object.keys(sectionTarget)) {
+        cameraTarget[key] = lerp(state.transitionFrom[key], sectionTarget[key], blend);
+      }
+      if (raw >= 1) state.transitionFrom = null;
+      for (const key of Object.keys(cameraRig)) {
+        cameraRig[key] = lerp(cameraRig[key], cameraTarget[key], cameraEase);
+      }
+    } else {
+      for (const key of Object.keys(cameraRig)) {
+        cameraRig[key] = lerp(cameraRig[key], sectionTarget[key], cameraEase);
+      }
     }
     if (Math.abs(camera.fov - cameraRig.fov) > 0.01) {
       camera.fov = cameraRig.fov;
@@ -466,6 +488,8 @@ export function createStageEngine({ container, count }) {
         lowGraphics: state.lowGraphics,
         hold: state.hold,
         reducedMotion: state.reducedMotion,
+        transitioning: Boolean(state.transitionFrom),
+        transitionAmount: Number(state.transitionAmount.toFixed(3)),
         updatables: updatables.size,
         drawCalls: renderer.info.render.calls,
         triangles: renderer.info.render.triangles,

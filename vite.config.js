@@ -3,18 +3,19 @@ import { resolve } from "node:path";
 
 const root = process.cwd();
 
-function charactersRoute() {
+function pageRoute(name) {
+  const pattern = new RegExp(`^/${name}(?:/([^?]*))?(\\?.*)?$`);
   const rewrite = (request, _response, next) => {
     const url = request.url || "";
-    const match = /^\/characters(?:\/([^?]*))?(\?.*)?$/.exec(url);
+    const match = pattern.exec(url);
     if (match) {
       const rest = match[1] || "index.html";
-      request.url = `/characters/${rest}${match[2] || ""}`;
+      request.url = `/${name}/${rest}${match[2] || ""}`;
     }
     next();
   };
   return {
-    name: "characters-route",
+    name: `${name}-route`,
     configureServer(server) {
       server.middlewares.use(rewrite);
     },
@@ -26,7 +27,7 @@ function charactersRoute() {
 
 export default defineConfig({
   base: "./",
-  plugins: [charactersRoute()],
+  plugins: [pageRoute("characters"), pageRoute("presenter")],
   build: {
     target: "es2020",
     outDir: "dist",
@@ -35,7 +36,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(root, "index.html"),
-        characters: resolve(root, "characters/index.html")
+        characters: resolve(root, "characters/index.html"),
+        presenter: resolve(root, "presenter/index.html")
       }
     }
   },

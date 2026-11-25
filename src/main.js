@@ -149,6 +149,15 @@ document.body.prepend(loading);
 
 const app = document.getElementById("app");
 
+const skipLink = document.createElement("a");
+skipLink.className = "skip-link";
+skipLink.href = "#section-opening";
+skipLink.textContent = ui.skipLink;
+skipLink.addEventListener("click", event => {
+  event.preventDefault();
+  goTo(activeIndex);
+});
+
 const stage = document.createElement("div");
 stage.className = "stage";
 stage.id = "stage";
@@ -157,17 +166,27 @@ stage.setAttribute("aria-hidden", "true");
 const brand = document.createElement("div");
 brand.className = "chrome brand";
 brand.innerHTML = `
-  <span class="brand-name">${escapeHtml(ui.brand)}</span>
+  <span class="brand-name brand-name-long">${escapeHtml(ui.brand)}</span>
+  <span class="brand-name brand-name-short">${escapeHtml(ui.brandShort)}</span>
   <span class="brand-sub">${escapeHtml(ui.editionTagline)}</span>
 `;
 
 const actions = document.createElement("div");
 actions.className = "chrome chrome-actions";
 actions.innerHTML = `
-  <button class="chrome-button" type="button" data-open-theme>${escapeHtml(ui.themeButton)}</button>
-  <button class="chrome-button" type="button" data-toggle-low>${escapeHtml(ui.lowGraphicsButton)}</button>
-  <a class="chrome-button" href="./characters/">${escapeHtml(ui.charactersButton)}</a>
-  <button class="chrome-button" type="button" data-open-help>${escapeHtml(ui.helpButton)}</button>
+  <button class="chrome-button" type="button" data-open-theme aria-label="${escapeHtml(ui.themeButton)}">
+    <span class="action-long">${escapeHtml(ui.themeButton)}</span><span class="action-short">${escapeHtml(ui.themeButtonShort)}</span>
+  </button>
+  <button class="chrome-button" type="button" data-toggle-low aria-label="${escapeHtml(ui.lowGraphicsButton)}">
+    <span class="action-long">${escapeHtml(ui.lowGraphicsButton)}</span><span class="action-short">${escapeHtml(ui.lowGraphicsButtonShort)}</span>
+  </button>
+  <a class="chrome-button" href="./presenter/" aria-label="${escapeHtml(ui.presenterButton)}">
+    <span class="action-long">${escapeHtml(ui.presenterButton)}</span><span class="action-short">${escapeHtml(ui.presenterButtonShort)}</span>
+  </a>
+  <a class="chrome-button" href="./characters/" aria-label="${escapeHtml(ui.charactersButton)}">
+    <span class="action-long">${escapeHtml(ui.charactersButton)}</span><span class="action-short">${escapeHtml(ui.charactersButtonShort)}</span>
+  </a>
+  <button class="chrome-button" type="button" data-open-help aria-label="${escapeHtml(ui.helpButton)}">${escapeHtml(ui.helpButton)}</button>
 `;
 
 const sideIndex = document.createElement("nav");
@@ -232,7 +251,19 @@ const statusPill = document.createElement("div");
 statusPill.className = "status-pill";
 statusPill.hidden = true;
 
-app.append(stage, brand, actions, sideIndex, deck, progress, overlayRoot, statusPill);
+const suggestion = document.createElement("div");
+suggestion.className = "suggestion chrome";
+suggestion.id = "low-graphics-suggestion";
+suggestion.setAttribute("role", "status");
+suggestion.setAttribute("aria-live", "polite");
+suggestion.hidden = true;
+suggestion.innerHTML = `
+  <span class="suggestion-text">${escapeHtml(ui.lowGraphicsSuggestion)}</span>
+  <button class="suggestion-button" type="button" data-suggestion-accept>${escapeHtml(ui.lowGraphicsSuggestionAccept)}</button>
+  <button class="suggestion-button" type="button" data-suggestion-dismiss>${escapeHtml(ui.lowGraphicsSuggestionDismiss)}</button>
+`;
+
+app.append(skipLink, stage, brand, actions, sideIndex, deck, progress, overlayRoot, statusPill, suggestion);
 document.title = `${sections[0].title}: ${sections[0].tagline}`;
 
 initTheme();
@@ -250,6 +281,10 @@ let activeIndex = 0;
 let scrollRatio = 0;
 let holding = false;
 let lowGraphics = reduced;
+let suggestionDismissed = false;
+let fpsWindowStart = 0;
+let fpsFrames = 0;
+let slowWindows = 0;
 
 const progressFill = progress.querySelector(".progress-fill");
 const progressCount = progress.querySelector(".progress-count");
@@ -308,7 +343,56 @@ function toggleLowGraphics() {
   document.body.classList.toggle("low-graphics", lowGraphics);
   sceneApi.setLowGraphics(lowGraphics);
   updateStatus();
+  if (lowGraphics) hideLowGraphicsSuggestion();
 }
+
+function showLowGraphicsSuggestion() {
+  if (suggestionDismissed || lowGraphics || reduced || !suggestion.hidden) return;
+  suggestion.hidden = false;
+  slowWindows = 0;
+}
+
+function hideLowGraphicsSuggestion() {
+  suggestion.hidden = true;
+}
+
+suggestion.querySelector("[data-suggestion-accept]").addEventListener("click", () => {
+  hideLowGraphicsSuggestion();
+  suggestionDismissed = true;
+  if (!lowGraphics) toggleLowGraphics();
+});
+
+suggestion.querySelector("[data-suggestion-dismiss]").addEventListener("click", () => {
+  hideLowGraphicsSuggestion();
+  suggestionDismissed = true;
+});
+
+function monitorFrame(now) {
+  if (document.hidden) {
+    fpsWindowStart = now;
+    fpsFrames = 0;
+  } else {
+    if (!fpsWindowStart) fpsWindowStart = now;
+    fpsFrames += 1;
+    const elapsed = now - fpsWindowStart;
+    if (elapsed >= 2500) {
+      const fps = fpsFrames * 1000 / elapsed;
+      if (fps > 0 && fps < 45) slowWindows += 1;
+      else slowWindows = 0;
+      fpsWindowStart = now;
+      fpsFrames = 0;
+      if (slowWindows >= 2) showLowGraphicsSuggestion();
+    }
+  }
+  requestAnimationFrame(monitorFrame);
+}
+
+const lowCoreHint = (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4)
+  || (navigator.deviceMemory && navigator.deviceMemory <= 4);
+if (lowCoreHint && !reduced && !lowGraphics) {
+  window.setTimeout(showLowGraphicsSuggestion, 1800);
+}
+if (!reduced && !lowGraphics) requestAnimationFrame(monitorFrame);
 
 if (lowGraphics) {
   document.body.classList.add("low-graphics");
@@ -346,8 +430,8 @@ sectionsWithElements.forEach((section, index) => {
     trigger: section.element,
     start: "top 55%",
     end: "bottom 45%",
-    onEnter: () => setActive(index),
-    onEnterBack: () => setActive(index)
+    onEnter: () => setActive(index, { resetLocal: false }),
+    onEnterBack: () => setActive(index, { resetLocal: false })
   });
 
   ScrollTrigger.create({
@@ -408,6 +492,13 @@ window.__campusversePresentation = {
   getActiveTheme,
   getStageState: () => sceneApi.getState(),
   getCharacters: () => sceneApi.getCharacters(),
+  getUiState: () => ({
+    lowGraphics,
+    suggestionVisible: !suggestion.hidden,
+    suggestionDismissed,
+    skipLinkText: skipLink.textContent
+  }),
+  showLowGraphicsSuggestion,
   toggleHold,
   toggleLowGraphics,
   scrollToProgress(ratio) {

@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "themes:extract": "node scripts/extract-app-themes.mjs"
+    "themes:extract": "node scripts/extract-app-themes.mjs",
+    "audit:contrast": "node scripts/contrast-audit.mjs"
   },
   "dependencies": {
     "@fontsource-variable/manrope": "^5.2.8",

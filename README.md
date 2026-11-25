@@ -5,19 +5,55 @@ speaker notes live in `src/content.js`.
 
 ## Run
 
+With dependencies already installed (`node_modules/` present, as in this workspace):
+
 ```bash
-npm install
 npm run dev
 ```
 
-Build a static folder that works offline when served from any plain static host:
+`npm run dev` starts Vite on localhost. Nothing is fetched at runtime: three.js,
+GSAP, Lenis and the fonts are local npm packages bundled into the build.
+
+## Build and serve with no internet
 
 ```bash
 npm run build
-npm run preview
+python3 -m http.server 8080 --directory dist
 ```
 
-`vite.config.js` uses `base: "./"`, so `dist/` can be copied into a subfolder.
+Open `http://127.0.0.1:8080/`. `dist/` is self-contained; copy that folder to a
+USB drive or school machine and serve it with any static server. `base: "./"`
+keeps paths relative, so a subfolder works too. No CDN, runtime internet,
+account, API key or paid service is used. The built extra routes are
+`/characters/` for the character lab and `/presenter/` for the printable
+presenter kit.
+
+On a fresh machine with no `node_modules/`, `npm install` normally needs network
+access or a pre-filled npm cache. To build with no internet, copy `node_modules/`
+with the project or populate the npm cache first. The build itself never fetches
+from the network; `npm run preview` also needs the locally installed Vite.
+
+## Editing guide
+
+- All visible words, speaker notes, Q&A answers and unverified items live in
+  `src/content.js`: `ui` holds chrome, overlay and presenter labels; `sections`
+  holds the 38 slides; `qaMap` and `unverified` feed the presenter kit.
+  `src/main.js`, `src/pages/presenter.js` and the scene modules only read these
+  values. Add copy there, not in markup.
+- Presenter kit: `src/pages/presenter.js` and `src/pages/presenter.css`; its
+  print layout is the `@media print` block in that CSS. It is registered as a
+  Vite input in `vite.config.js`.
+- 3D sets and camera rails: `src/scenes/parts/`; register scenes in
+  `src/scenes/index.js`. Stage motion, section-to-section camera continuity and
+  Low graphics live in `src/scenes/stage-engine.js`.
+- Colour and subject look data: `src/themes/registry.js`, regenerated with
+  `npm run themes:extract`. Do not hand-edit the generated file. Run
+  `npm run audit:contrast` after theme or token changes.
+- Layout and responsive rules: `src/styles.css`; page-specific CSS stays in
+  `src/pages/`.
+- After any change: `npm run build`, serve `dist/` statically, then recheck the
+  six viewport sizes, all themes, reduced motion, the presenter kit and external
+  requests. Update the phase status below only with checks actually run.
 
 ## Theme data
 
@@ -140,12 +176,41 @@ at runtime.
   geometry and that each demo changes pixels over time. Settled full-slide and
   stage-only composites are stored under `reference/phase6/`. An initial
   `kiro-cli` visual review of the first eleven settled screenshots was run before
-  the camera correction; the final visual re-review could not be completed because
-  `kiro-cli` reached its monthly request limit. This remains local headless
-  Chromium and screenshot evidence only; it does not verify physical devices,
-  Safari/Edge/Firefox, screen readers, live Firebase, two independent clients,
-  student learning or school approval.
-- Next: Phase 7 polish and defence readiness — transitions, performance and Low
-  graphics, offline build/static-server/no-internet README steps, accessibility
-  and contrast, number and claim fact-check, presenter kit, README editing guide
-  and an explicit unverified report. Do not start before Phase 6 is accepted.
+  the camera correction; `kiro-cli` then reached its monthly request limit. A free
+  OpenCode vision model reviewed the final overview stage afterwards and described
+  the expected nodes and links, but it was not a full eleven-image re-review. This
+  remains local headless Chromium and screenshot evidence only; it does not verify
+  physical devices, Safari/Edge/Firefox, screen readers, live Firebase, two
+  independent clients, student learning or school approval.
+- Phase 7 polish and defence readiness: section changes now hand off camera poses
+  without discarding scroll-driven local progress; Low graphics can be suggested
+  automatically on slow devices and can be accepted or dismissed; a skip link and
+  focus-trapped dialogs improve keyboard use; and a new `/presenter/` kit prints
+  all 38 sections' speaker notes, eight Q&A answers and ten unverified items. The
+  build and offline static-server steps and this editing guide are documented
+  above. `npm run audit:contrast` was added. A full fact-check of `src/content.js`
+  against the paper and app source corrected seven claim mismatches: the demo gate,
+  profile email wording, Storage rules status, install steps, game sign-in, a
+  companion proof claim and the overview map wording.
+- Phase 7 verification: `npm run build` passes. Headless Chromium checks report zero
+  console/page errors, zero external requests and zero horizontal overflow at
+  1920×1080, 1280×720, 800×360, 800×1280, 360×800 and 375×812. The skip link takes
+  focus first, the theme dialog traps Tab and restores focus on Escape, all 13
+  colour choices and 16 subject looks apply, the Low graphics suggestion shows and
+  both buttons work, and a section change starts a bounded camera transition that
+  finishes. Reduced motion keeps one canvas and starts in Low graphics. The
+  presenter kit renders 38 section notes with 114 note lines, 8 Q&A entries and 10
+  unverified items; its print button and `@media print` rules are present with no
+  overflow at 1440×900, 375×812, 360×800 or 800×360. `npm run audit:contrast`
+  checks 1,248 used text-token pairs across 208 colour/subject combinations with
+  zero AA failures. Six settled screenshots in `reference/phase7/` were reviewed
+  with the free `opencode/nemotron-3.5-super-vl-free` vision model; it found a
+  cramped 375px chrome row, which was fixed and re-reviewed clean.
+- Still unverified: no claim of screen-reader or physical-device testing, Safari,
+  Edge or Firefox coverage, live Firebase or two independent clients, student or
+  teacher trials, learning impact, school approval, or professional review of
+  safety and library content. The automated contrast check covers the presentation
+  tokens only; it is not a full accessibility audit. The paper's counts remain the
+  source of truth even where the live app source is newer.
+- Next: present the deck, answer from the Q&A map, and hand the unverified list to
+  the school for real accounts, devices and content review.

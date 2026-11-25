@@ -3,6 +3,7 @@
 export const content = {
   ui: {
     brand: "CampusVerse - Innovation Defence",
+    brandShort: "CampusVerse",
     editionTagline: "A scroll-driven paper defence · November 2026",
     sectionIndexLabel: "Sections",
     appTourLabel: "IX · App tour",
@@ -12,6 +13,7 @@ export const content = {
       XI: "XI · One glance"
     },
     themeButton: "Themes",
+    themeButtonShort: "Theme",
     helpButton: "?",
     holdButton: "Hold scene",
     resumeButton: "Resume scene",
@@ -25,7 +27,9 @@ export const content = {
     timerPause: "Pause",
     timerReset: "Reset",
     lowGraphicsButton: "Graphics",
+    lowGraphicsButtonShort: "Gfx",
     charactersButton: "Characters",
+    charactersButtonShort: "Chars",
     lowGraphicsOn: "Low graphics: on",
     lowGraphicsOff: "Low graphics: off",
     helpTitle: "Presenter controls",
@@ -44,7 +48,24 @@ export const content = {
     timerPaused: "Paused",
     loadingTitle: "EAPIHS CampusVerse",
     loadingText: "Preparing the 3D stage",
-    progressLabel: "Presentation progress"
+    progressLabel: "Presentation progress",
+    skipLink: "Skip to the current section",
+    lowGraphicsSuggestion: "This device looks slow. Low graphics can help.",
+    lowGraphicsSuggestionAccept: "Use low graphics",
+    lowGraphicsSuggestionDismiss: "Not now",
+    presenterButton: "Presenter kit",
+    presenterButtonShort: "Kit",
+    presenterTitle: "Presenter kit",
+    presenterSubtitle: "Speaker notes, Q&A map and unverified work · November 2026",
+    presenterBack: "Back to the defence",
+    presenterPrint: "Print or save as PDF",
+    presenterPrintNote: "Use your browser's print dialog and choose Save as PDF.",
+    presenterNotesHeading: "Speaker notes",
+    presenterQaHeading: "Q&A map",
+    presenterQaIntro: "Short answers that keep prepared work separate from verified work.",
+    presenterUnverifiedHeading: "Unverified work",
+    presenterUnverifiedIntro: "Say these plainly if asked; do not describe them as passed checks.",
+    presenterFooter: "CampusVerse innovation defence · local presentation evidence only"
   },
 
   sections: [
@@ -547,10 +568,10 @@ export const content = {
           "actionText": "117 local checks include the PHT clock and page reopening."
         },
         {
-          "label": "No account needed",
-          "body": "Local-first use works without sign-in or a network call.",
+          "label": "No cloud required",
+          "body": "Local data and reading work without a network call.",
           "actionLabel": "Limit",
-          "actionText": "Shared rooms and sign-in are prepared, not live-verified."
+          "actionText": "Games and shared rooms need a local demo profile or sign-in."
         },
         {
           "label": "Own layout",
@@ -1475,8 +1496,8 @@ export const content = {
         {
           "label": "No cross-device memory",
           "body": "Visit counts stay in the current browser.",
-          "actionLabel": "Proof",
-          "actionText": "Companion behaviour is part of the local checks."
+          "actionLabel": "Status",
+          "actionText": "Scripted companions; no check record is claimed."
         }
       ],
       "scene": {
@@ -1758,8 +1779,8 @@ export const content = {
         {
           "label": "No public identity",
           "body": "No ranking, rating, leaderboard or player page exists.",
-          "actionLabel": "Rule",
-          "actionText": "Profiles never store an email address."
+          "actionLabel": "Limit",
+          "actionText": "Firestore profiles omit email; local sign-in may keep it."
         },
         {
           "label": "Demo is local",
@@ -1817,7 +1838,7 @@ export const content = {
       },
       "notes": [
         "Never show a public profile, ranking or report screen.",
-        "Storage rules are written and compiled, but a live upload has not been demonstrated.",
+        "Storage rules are written locally but unpublished and unverified; a live avatar upload has not been demonstrated.",
         "Demo mode is explicitly local and unsecured."
       ]
     },
@@ -1828,7 +1849,7 @@ export const content = {
       "eyebrow": "Inside CampusVerse · app page 15",
       "title": "Sign-in gate",
       "tagline": "Firebase, or local demo",
-      "lead": "Firebase sign-in is prepared for real accounts; the demo gate only opens when Firebase is not configured.",
+      "lead": "Firebase sign-in is prepared for real accounts. The automatic ?demo=1 path is ignored when Firebase is configured; a labelled local demo tab remains available.",
       "status": {
         "text": "Prepared, not verified",
         "kind": "prepared"
@@ -1843,9 +1864,9 @@ export const content = {
         },
         {
           "label": "Demo gate",
-          "body": "?demo=1 can create a local demo profile only without Firebase.",
+          "body": "The automatic ?demo=1 path is ignored when Firebase is configured.",
           "actionLabel": "Rule",
-          "actionText": "It must never bypass Firebase authentication."
+          "actionText": "A labelled local demo tab still opens with ?mode=demo."
         },
         {
           "label": "Prepared rules",
@@ -1920,7 +1941,7 @@ export const content = {
       "eyebrow": "Inside CampusVerse · app page 16",
       "title": "Install Guide",
       "tagline": "Return to the app easily",
-      "lead": "PWA metadata, a QR and platform steps explain how to install the app on a phone or computer.",
+      "lead": "PWA metadata and a QR explain return visits; separate written steps cover iPhone/iPad and Android.",
       "status": {
         "text": "Verified in local checks",
         "kind": "checks"
@@ -1941,9 +1962,9 @@ export const content = {
         },
         {
           "label": "Platform steps",
-          "body": "Phone and computer instructions are written separately.",
+          "body": "iPhone/iPad and Android steps are written separately.",
           "actionLabel": "Limit",
-          "actionText": "No physical-device trial has been recorded."
+          "actionText": "Computers use the browser install prompt or menu; no device trial."
         },
         {
           "label": "Open trial",
@@ -2134,7 +2155,7 @@ export const content = {
           "label": "Pass-and-play",
           "body": "Two people can alternate sides on one device.",
           "actionLabel": "Rule",
-          "actionText": "No account is required for a local game."
+          "actionText": "A local demo profile or Firebase sign-in opens the game page."
         },
         {
           "label": "Local engine",
@@ -2918,7 +2939,7 @@ export const content = {
       "eyebrow": "Inside CampusVerse · game 10",
       "title": "Cortex Run",
       "tagline": "90-second rounds",
-      "lead": "A calm 90-second procedural sprint through memory, sequences and shifting rules. Tap, click or use the keyboard; no account is needed.",
+      "lead": "A calm 90-second procedural sprint through memory, sequences and shifting rules. Tap, click or use the keyboard; no cloud account or network is needed for the game logic.",
       "status": {
         "text": "Local scores · no ranking",
         "kind": "checks"
@@ -2997,7 +3018,7 @@ export const content = {
       "notes": [
         "Cortex Run is the only game with 90-second rounds in this deck.",
         "Procedural tasks are practice, not a measured learning gain.",
-        "No account, rating, rank or leaderboard is attached to the result."
+        "A local demo profile or Firebase sign-in opens the page; no cloud save, rating, rank or leaderboard is attached to the result."
       ]
     },
     {
@@ -3007,7 +3028,7 @@ export const content = {
       "eyebrow": "Inside CampusVerse · overview",
       "title": "Everything in one glance",
       "tagline": "17 pages · 10 games",
-      "lead": "The camera flies through a constellation of every main page and every practice game, with page nodes and game nodes sharing one connected space.",
+      "lead": "The camera flies through a constellation built from the paper's 17-page and 10-game counts, with page nodes and game nodes sharing one connected diagram.",
       "status": {
         "text": "Diagram · not an app screen",
         "kind": "prepared"
@@ -3016,7 +3037,7 @@ export const content = {
       "cards": [
         {
           "label": "17 page nodes",
-          "body": "Each main page has a place in the constellation.",
+          "body": "The diagram uses the paper's count, not a verified page-by-page map.",
           "actionLabel": "Paper",
           "actionText": "The paper describes seventeen main pages."
         },
@@ -3129,7 +3150,70 @@ export const content = {
         "Do not end with a learning-impact claim; the paper explicitly refuses one."
       ]
     }
+  ],
+  qaMap: [
+    {
+      question: "Is CampusVerse finished?",
+      answer: "It is a working prototype with 17 main pages and 10 practice games. Sign-in, shared data and two-person video are prepared but not verified.",
+      evidence: "Paper §II and §IV",
+      status: "Prepared is not verified"
+    },
+    {
+      question: "What do the 117 checks prove?",
+      answer: "They describe app condition on 22 November 2026. They are not student feedback, a learning measure, or a school approval.",
+      evidence: "Paper §II and §VII",
+      status: "App checks only"
+    },
+    {
+      question: "Are the library articles verified?",
+      answer: "No. The 17 explainers remain editorial drafts. A verified badge needs a named reviewer, a review date and a checked publisher.",
+      evidence: "Paper §IV and §VII",
+      status: "Editorial draft"
+    },
+    {
+      question: "Does the solver replace emergency help?",
+      answer: "No. Urgent guidance comes first and points to emergency services or a responsible adult. The keyword classifier is limited.",
+      evidence: "Paper §III",
+      status: "Safety-first limit"
+    },
+    {
+      question: "Does the app improve grades or engagement?",
+      answer: "That was not measured. No claim of better grades, stronger engagement or improved learning is made.",
+      evidence: "Paper §IV and §VII",
+      status: "Not measured"
+    },
+    {
+      question: "What does PHP 0 cover?",
+      answer: "Local development and checking cost PHP 0. A paid service needs quotations and school approval before any figure is treated as real.",
+      evidence: "Paper §VI",
+      status: "Prototype cost"
+    },
+    {
+      question: "Does two-person video work?",
+      answer: "The 1:1 call is prepared with Firestore signaling and public STUN. A two-account call and TURN relay are not verified.",
+      evidence: "Paper §IV and §V",
+      status: "Not verified"
+    },
+    {
+      question: "What should happen next?",
+      answer: "Hand over for school ownership, real sign-in and video trials, student and teacher observation, source review and termly privacy review.",
+      evidence: "Paper §VIII",
+      status: "Open work"
+    }
+  ],
+  unverified: [
+    "Real Firebase sign-in and shared data with two independent accounts.",
+    "Two-person video, TURN relay, recording, moderation and multi-party calls.",
+    "Private profile avatar upload end to end with the live Storage bucket.",
+    "Student and teacher trials, usability observation and screen-reader testing.",
+    "Subject-specialist review of any library explainer or verified badge.",
+    "Professional review of solver guidance and confirmation of crisis contact details.",
+    "Clean install and offline use on school-managed devices.",
+    "Safari, Edge, Firefox and physical-device checks.",
+    "Live owner-only Firestore and Storage rules under real accounts.",
+    "School approval of the branded paper, contacts and final scope."
   ]
+
 };
 
 export default content;
