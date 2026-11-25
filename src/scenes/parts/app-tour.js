@@ -197,6 +197,7 @@ export function createAppTour({ engine, kit, section }) {
   device.position.set(0, baseDeviceY, 0.35);
   group.add(device);
   engine.registerLayer(device, 0.18);
+  device.scale.setScalar(isPhone ? 1.12 : 1.22);
 
   if (isPhone) {
     addShape(kit, device, kit.geometry.box,
@@ -228,7 +229,7 @@ export function createAppTour({ engine, kit, section }) {
   }
 
   const screenGlow = addShape(kit, group, kit.geometry.torus,
-    flat(engine, roles[0], { transparent: true, opacity: 0.24, depthWrite: false }),
+    flat(engine, roles[0], { transparent: true, opacity: 0.34, depthWrite: false }),
     [0, 0.18, -0.18], isPhone ? [1.05, 1.85, 1] : [2.45, 1.55, 1]);
   engine.registerLayer(screenGlow, 0.24);
   engine.registerLowGraphics(screenGlow);
@@ -251,7 +252,7 @@ export function createAppTour({ engine, kit, section }) {
 
   let active = false;
   let progress = 0;
-  const baseRotation = isPhone ? -0.12 : 0.06;
+  const baseRotation = 0;
   const unregister = engine.registerUpdatable(() => {
     const amount = active ? progress : 0;
     device.rotation.y = baseRotation + amount * 0.11;

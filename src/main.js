@@ -449,17 +449,17 @@ sectionsWithElements.forEach((section, index) => {
       trigger: section.element,
       start: "top 45%",
       end: "bottom 55%",
-      scrub: true,
+      scrub: 0.65,
       invalidateOnRefresh: true
     }
   })
     .fromTo(inner,
-      { opacity: 0, y: reduced ? 0 : 36 },
-      { opacity: 1, y: 0, duration: 0.15, ease: "none" }
+      { opacity: 0, y: reduced ? 0 : 24 },
+      { opacity: 1, y: 0, duration: 0.22, ease: "sine.inOut" }
     )
-    .to(inner, { opacity: 1, duration: 0.7 })
+    .to(inner, { opacity: 1, duration: 0.56 })
     .to(inner,
-      { opacity: 0, y: reduced ? 0 : -28, duration: 0.15, ease: "none" }
+      { opacity: 0, y: reduced ? 0 : -18, duration: 0.22, ease: "sine.inOut" }
     );
 });
 
