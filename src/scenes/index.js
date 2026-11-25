@@ -11,6 +11,7 @@ import { createEvidenceObservatory } from "./parts/evidence-observatory.js";
 import { createHandoverLibrary } from "./parts/handover-library.js";
 import { createThankYou } from "./parts/thank-you.js";
 import { createAppTour } from "./parts/app-tour.js";
+import { createGameTour, createConstellation } from "./parts/game-tour.js";
 
 const PART_SCENES = {
   "team-desk": createTeamDesk,
@@ -22,7 +23,9 @@ const PART_SCENES = {
   "evidence-observatory": createEvidenceObservatory,
   "handover-library": createHandoverLibrary,
   "thank-you": createThankYou,
-  "app-tour": createAppTour
+  "app-tour": createAppTour,
+  "game-tour": createGameTour,
+  "constellation": createConstellation
 };
 
 // Scene registry. Every paper part and the closing scene has its own 3D set;

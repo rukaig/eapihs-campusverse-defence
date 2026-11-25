@@ -173,16 +173,24 @@ actions.innerHTML = `
 const sideIndex = document.createElement("nav");
 sideIndex.className = "chrome side-index";
 sideIndex.setAttribute("aria-label", ui.sectionIndexLabel);
-const tourStart = sections.findIndex(section => section.chapter);
-sideIndex.innerHTML = `
-  <p class="side-index-label">${escapeHtml(ui.sectionIndexLabel)}</p>
-  ${sections.map((section, index) => `
-    ${index === tourStart ? `<p class="index-divider">${escapeHtml(ui.appTourLabel)}</p>` : ""}
+const chapterLabels = ui.chapterLabels || { IX: ui.appTourLabel };
+let lastChapter = "";
+const indexButtons = sections.map((section, index) => {
+  const divider = section.chapter && section.chapter !== lastChapter
+    ? `<p class="index-divider">${escapeHtml(chapterLabels[section.chapter] || section.chapter)}</p>`
+    : "";
+  lastChapter = section.chapter || "";
+  return `
+    ${divider}
     <button class="index-button${section.chapter ? " is-tour" : ""}" type="button" data-index="${index}" aria-current="false">
       <span class="numeral">${escapeHtml(section.numeral)}</span>
       <span class="index-name">${escapeHtml(section.title)}</span>
     </button>
-  `).join("")}
+  `;
+}).join("");
+sideIndex.innerHTML = `
+  <p class="side-index-label">${escapeHtml(ui.sectionIndexLabel)}</p>
+  ${indexButtons}
 `;
 
 const deck = document.createElement("main");

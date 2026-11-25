@@ -6,6 +6,11 @@ export const content = {
     editionTagline: "A scroll-driven paper defence · November 2026",
     sectionIndexLabel: "Sections",
     appTourLabel: "IX · App tour",
+    chapterLabels: {
+      IX: "IX · App tour",
+      X: "X · Game tour",
+      XI: "XI · One glance"
+    },
     themeButton: "Themes",
     helpButton: "?",
     holdButton: "Hold scene",
@@ -2106,8 +2111,983 @@ export const content = {
       ]
     },
     {
+      "id": "game-chess",
+      "chapter": "X",
+      "numeral": "01",
+      "eyebrow": "Inside CampusVerse · game 01",
+      "title": "Campus Chess",
+      "tagline": "Five-level practice opponent",
+      "lead": "Click a piece, then a highlighted square. Five practice levels and pass-and-play share the same local board.",
+      "status": {
+        "text": "Local scores · no ranking",
+        "kind": "checks"
+      },
+      "points": [],
+      "cards": [
+        {
+          "label": "Five levels",
+          "body": "Distinct practice depth, time and skill settings.",
+          "actionLabel": "Limit",
+          "actionText": "Levels are practice descriptions, not Elo or FIDE ratings."
+        },
+        {
+          "label": "Pass-and-play",
+          "body": "Two people can alternate sides on one device.",
+          "actionLabel": "Rule",
+          "actionText": "No account is required for a local game."
+        },
+        {
+          "label": "Local engine",
+          "body": "Stockfish 10 runs in a Web Worker on the device.",
+          "actionLabel": "Limit",
+          "actionText": "Positions are not sent to a server; hints stay local."
+        },
+        {
+          "label": "Local progress",
+          "body": "Scores and XP stay on the student's device.",
+          "actionLabel": "Rule",
+          "actionText": "No rating, rank, leaderboard or ranked mode."
+        }
+      ],
+      "scene": {
+        "id": "game-tour",
+        "game": "chess",
+        "set": "board",
+        "role": "sage600",
+        "companion": "pip",
+        "mood": "cheering",
+        "prop": "chess",
+        "demo": "A knight lifts, arcs to an L-shaped square and settles while the board token pulses.",
+        "camera": {
+        "from": {
+          "x": 0,
+          "y": 1.4,
+          "z": 18,
+          "lookX": 1.2,
+          "lookY": -1.4,
+          "fov": 58,
+          "roll": -0.008
+        },
+        "to": {
+          "x": 0.8,
+          "y": 1.0,
+          "z": 14,
+          "lookX": 1.2,
+          "lookY": -1.4,
+          "fov": 54,
+          "roll": 0.008
+        }
+      },
+        "reactions": [
+          {
+            "companion": "pip",
+            "mood": "thinking",
+            "threshold": 0.12,
+            "text": "Pick a level, then move a piece."
+          },
+          {
+            "companion": "pip",
+            "mood": "cheering",
+            "threshold": 0.58,
+            "text": "A knight's move, in practice."
+          }
+        ]
+      },
+      "notes": [
+        "The five levels are genuinely different practice settings, not verified rating equivalents.",
+        "Chess uses a local engine and a separate board palette; positions never leave the device.",
+        "There is no rating, rank, leaderboard or measured improvement claim."
+      ]
+    },
+    {
+      "id": "game-word",
+      "chapter": "X",
+      "numeral": "02",
+      "eyebrow": "Inside CampusVerse · game 02",
+      "title": "Word Forge",
+      "tagline": "Unscramble with a clue",
+      "lead": "Unscramble one of 120 school words using a clue, shuffle the letters or take one hint. Type the word or click letter tiles.",
+      "status": {
+        "text": "Local scores · no ranking",
+        "kind": "checks"
+      },
+      "points": [],
+      "cards": [
+        {
+          "label": "120 words",
+          "body": "A fixed word bank drawn from school topics.",
+          "actionLabel": "Paper",
+          "actionText": "The paper names ten different practice games, not a content library."
+        },
+        {
+          "label": "Gentle hints",
+          "body": "Shuffle the tiles or reveal one hint when stuck.",
+          "actionLabel": "Rule",
+          "actionText": "Hints support practice; they are not graded answers."
+        },
+        {
+          "label": "No timer",
+          "body": "There is no countdown pressure in this game.",
+          "actionLabel": "Limit",
+          "actionText": "Completion feedback stays on the device."
+        },
+        {
+          "label": "Local progress",
+          "body": "Scores and XP stay on the student's device.",
+          "actionLabel": "Rule",
+          "actionText": "No rating, rank, leaderboard or ranked mode."
+        }
+      ],
+      "scene": {
+        "id": "game-tour",
+        "game": "word",
+        "set": "forge",
+        "role": "gold600",
+        "companion": "lumen",
+        "mood": "happy",
+        "prop": "star",
+        "demo": "Six letter bars shuffle across the anvil, then click into an ordered word strip.",
+        "camera": {
+        "from": {
+          "x": 0,
+          "y": 1.4,
+          "z": 18,
+          "lookX": 1.2,
+          "lookY": -1.4,
+          "fov": 58,
+          "roll": -0.008
+        },
+        "to": {
+          "x": 0.8,
+          "y": 1.0,
+          "z": 14,
+          "lookX": 1.2,
+          "lookY": -1.4,
+          "fov": 54,
+          "roll": 0.008
+        }
+      },
+        "reactions": [
+          {
+            "companion": "lumen",
+            "mood": "curious",
+            "threshold": 0.14,
+            "text": "Letters can be rearranged."
+          },
+          {
+            "companion": "lumen",
+            "mood": "happy",
+            "threshold": 0.56,
+            "text": "One hint is enough."
+          }
+        ]
+      },
+      "notes": [
+        "This is a spelling and clue game, not a measured vocabulary assessment.",
+        "The letters and word bank are fixed; no generated content is used.",
+        "Scores and XP stay local, with no ranking or leaderboard."
+      ]
+    },
+    {
+      "id": "game-equation",
+      "chapter": "X",
+      "numeral": "03",
+      "eyebrow": "Inside CampusVerse · game 03",
+      "title": "Equation Forge",
+      "tagline": "Solve for x",
+      "lead": "Solve linear equations for x across three difficulty bands. Fractions are accepted and answers are checked exactly.",
+      "status": {
+        "text": "Local scores · no ranking",
+        "kind": "checks"
+      },
+      "points": [],
+      "cards": [
+        {
+          "label": "Three bands",
+          "body": "Linear equations increase in difficulty across three bands.",
+          "actionLabel": "Rule",
+          "actionText": "Each band is practice, not a school placement test."
+        },
+        {
+          "label": "Exact check",
+          "body": "Type the value of x and press Enter.",
+          "actionLabel": "Proof",
+          "actionText": "Fraction answers are accepted and checked exactly."
+        },
+        {
+          "label": "Clear feedback",
+          "body": "The response tells whether the value satisfies the equation.",
+          "actionLabel": "Limit",
+          "actionText": "No result is sent to a server or recorded publicly."
+        },
+        {
+          "label": "Local progress",
+          "body": "Scores and XP stay on the student's device.",
+          "actionLabel": "Rule",
+          "actionText": "No rating, rank, leaderboard or ranked mode."
+        }
+      ],
+      "scene": {
+        "id": "game-tour",
+        "game": "equation",
+        "set": "balance",
+        "role": "blue700",
+        "companion": "juniper",
+        "mood": "thinking",
+        "prop": "calculator",
+        "demo": "A balance beam tilts, an x tile drops onto the lighter pan and the beam returns to level.",
+        "camera": {
+        "from": {
+          "x": 0,
+          "y": 1.4,
+          "z": 18,
+          "lookX": 1.2,
+          "lookY": -1.4,
+          "fov": 58,
+          "roll": -0.008
+        },
+        "to": {
+          "x": 0.8,
+          "y": 1.0,
+          "z": 14,
+          "lookX": 1.2,
+          "lookY": -1.4,
+          "fov": 54,
+          "roll": 0.008
+        }
+      },
+        "reactions": [
+          {
+            "companion": "juniper",
+            "mood": "thinking",
+            "threshold": 0.13,
+            "text": "Keep both sides level."
+          },
+          {
+            "companion": "juniper",
+            "mood": "proud",
+            "threshold": 0.57,
+            "text": "The x tile is correct."
+          }
+        ]
+      },
+      "notes": [
+        "Equations are checked exactly; a near miss is not rounded into a pass.",
+        "The three bands are practice settings, not grade levels or certification.",
+        "Local scores and XP are not a ranking or leaderboard."
+      ]
+    },
+    {
+      "id": "game-mystery",
+      "chapter": "X",
+      "numeral": "04",
+      "eyebrow": "Inside CampusVerse · game 04",
+      "title": "The Missing Margin",
+      "tagline": "Mark, accuse, check",
+      "lead": "Read one of three original mini-mysteries, mark suspects cleared or accused, then accuse and check the reasoning against every clue.",
+      "status": {
+        "text": "Local scores · no ranking",
+        "kind": "checks"
+      },
+      "points": [],
+      "cards": [
+        {
+          "label": "Three mysteries",
+          "body": "Short original cases with their own clue sets.",
+          "actionLabel": "Paper",
+          "actionText": "The game is listed among ten different practice activities."
+        },
+        {
+          "label": "Suspect board",
+          "body": "Mark each suspect cleared or accused before choosing.",
+          "actionLabel": "Rule",
+          "actionText": "The check compares the accusation with every clue."
+        },
+        {
+          "label": "Reasoning first",
+          "body": "Feedback explains which clues support the answer.",
+          "actionLabel": "Limit",
+          "actionText": "This is practice reasoning, not an exam result."
+        },
+        {
+          "label": "Local progress",
+          "body": "Scores and XP stay on the student's device.",
+          "actionLabel": "Rule",
+          "actionText": "No rating, rank, leaderboard or ranked mode."
+        }
+      ],
+      "scene": {
+        "id": "game-tour",
+        "game": "mystery",
+        "set": "dossier",
+        "role": "lav600",
+        "companion": "lumen",
+        "mood": "curious",
+        "prop": "books",
+        "demo": "Clue pins light in sequence and an accusation marker moves to the supported suspect.",
+        "camera": {
+        "from": {
+          "x": 0,
+          "y": 1.4,
+          "z": 18,
+          "lookX": 1.2,
+          "lookY": -1.4,
+          "fov": 58,
+          "roll": -0.008
+        },
+        "to": {
+          "x": 0.8,
+          "y": 1.0,
+          "z": 14,
+          "lookX": 1.2,
+          "lookY": -1.4,
+          "fov": 54,
+          "roll": 0.008
+        }
+      },
+        "reactions": [
+          {
+            "companion": "lumen",
+            "mood": "curious",
+            "threshold": 0.15,
+            "text": "Which clue rules them out?"
+          },
+          {
+            "companion": "lumen",
+            "mood": "happy",
+            "threshold": 0.58,
+            "text": "The margin is solved."
+          }
+        ]
+      },
+      "notes": [
+        "The mysteries are original and do not claim a real case or specialist review.",
+        "The check is against the written clues, not against an external answer key.",
+        "No rank, leaderboard or public player page is attached to the result."
+      ]
+    },
+    {
+      "id": "game-pattern",
+      "chapter": "X",
+      "numeral": "05",
+      "eyebrow": "Inside CampusVerse · game 05",
+      "title": "Pattern Pursuit",
+      "tagline": "Next term, four choices",
+      "lead": "Choose the next term in number or shape sequences. Three lives and a streak keep the practice light; wrong answers explain the rule.",
+      "status": {
+        "text": "Local scores · no ranking",
+        "kind": "checks"
+      },
+      "points": [],
+      "cards": [
+        {
+          "label": "Sequences",
+          "body": "Number and shape patterns share one clear track.",
+          "actionLabel": "Rule",
+          "actionText": "Choose one of four options for the next term."
+        },
+        {
+          "label": "Three lives",
+          "body": "Wrong answers explain the rule before play continues.",
+          "actionLabel": "Limit",
+          "actionText": "A streak is local practice feedback, not a rank."
+        },
+        {
+          "label": "Quick turns",
+          "body": "Each turn is short enough to pause and resume.",
+          "actionLabel": "Paper",
+          "actionText": "Games include start, restart and completion feedback."
+        },
+        {
+          "label": "Local progress",
+          "body": "Scores and XP stay on the student's device.",
+          "actionLabel": "Rule",
+          "actionText": "No rating, rank, leaderboard or ranked mode."
+        }
+      ],
+      "scene": {
+        "id": "game-tour",
+        "game": "pattern",
+        "set": "track",
+        "role": "coral600",
+        "companion": "pip",
+        "mood": "cheering",
+        "prop": "star",
+        "demo": "A highlight runs along five sequence nodes, then selects the matching option pedestal.",
+        "camera": {
+        "from": {
+          "x": 0,
+          "y": 1.4,
+          "z": 18,
+          "lookX": 1.2,
+          "lookY": -1.4,
+          "fov": 58,
+          "roll": -0.008
+        },
+        "to": {
+          "x": 0.8,
+          "y": 1.0,
+          "z": 14,
+          "lookX": 1.2,
+          "lookY": -1.4,
+          "fov": 54,
+          "roll": 0.008
+        }
+      },
+        "reactions": [
+          {
+            "companion": "pip",
+            "mood": "cheering",
+            "threshold": 0.14,
+            "text": "What comes next?"
+          },
+          {
+            "companion": "pip",
+            "mood": "proud",
+            "threshold": 0.57,
+            "text": "The rule holds."
+          }
+        ]
+      },
+      "notes": [
+        "Pattern Pursuit is a short practice loop, not a psychometric or aptitude test.",
+        "Wrong turns explain the rule; they are not a grade.",
+        "Scores and XP remain on the student's device with no ranking."
+      ]
+    },
+    {
+      "id": "game-memory",
+      "chapter": "X",
+      "numeral": "06",
+      "eyebrow": "Inside CampusVerse · game 06",
+      "title": "Study Shelf",
+      "tagline": "Pairs without pressure",
+      "lead": "Turn over pairs of subject-symbol cards with a move counter and no time pressure. Click two cards to find a pair.",
+      "status": {
+        "text": "Local scores · no ranking",
+        "kind": "checks"
+      },
+      "points": [],
+      "cards": [
+        {
+          "label": "Subject symbols",
+          "body": "Pairs use recognisable school-subject symbols.",
+          "actionLabel": "Paper",
+          "actionText": "The games are practice activities, not subject placement tests."
+        },
+        {
+          "label": "Move counter",
+          "body": "A move count replaces a countdown timer.",
+          "actionLabel": "Rule",
+          "actionText": "There is no time pressure in this game."
+        },
+        {
+          "label": "Turn and match",
+          "body": "Click two cards to reveal and compare them.",
+          "actionLabel": "Limit",
+          "actionText": "The board resets locally on restart."
+        },
+        {
+          "label": "Local progress",
+          "body": "Scores and XP stay on the student's device.",
+          "actionLabel": "Rule",
+          "actionText": "No rating, rank, leaderboard or ranked mode."
+        }
+      ],
+      "scene": {
+        "id": "game-tour",
+        "game": "memory",
+        "set": "shelf",
+        "role": "sage600",
+        "companion": "moss",
+        "mood": "calm",
+        "prop": "books",
+        "demo": "Two cards rotate open on a shelf, hold as a match, then close for the next turn.",
+        "camera": {
+        "from": {
+          "x": 0,
+          "y": 1.4,
+          "z": 18,
+          "lookX": 1.2,
+          "lookY": -1.4,
+          "fov": 58,
+          "roll": -0.008
+        },
+        "to": {
+          "x": 0.8,
+          "y": 1.0,
+          "z": 14,
+          "lookX": 1.2,
+          "lookY": -1.4,
+          "fov": 54,
+          "roll": 0.008
+        }
+      },
+        "reactions": [
+          {
+            "companion": "moss",
+            "mood": "calm",
+            "threshold": 0.15,
+            "text": "Turn one card, then another."
+          },
+          {
+            "companion": "moss",
+            "mood": "proud",
+            "threshold": 0.58,
+            "text": "A matching pair."
+          }
+        ]
+      },
+      "notes": [
+        "Study Shelf is a memory practice game with no time limit.",
+        "The subject symbols are decorative; no curriculum mapping is claimed.",
+        "Local scores and XP are not a leaderboard."
+      ]
+    },
+    {
+      "id": "game-code",
+      "chapter": "X",
+      "numeral": "07",
+      "eyebrow": "Inside CampusVerse · game 07",
+      "title": "Cipher Desk",
+      "tagline": "Shift and read",
+      "lead": "Decode a Caesar-shifted message using an adjustable shift and letter-frequency hints. There is no cryptography claim beyond the classroom puzzle.",
+      "status": {
+        "text": "Local scores · no ranking",
+        "kind": "checks"
+      },
+      "points": [],
+      "cards": [
+        {
+          "label": "Adjustable shift",
+          "body": "Turn the shift wheel until the message reads clearly.",
+          "actionLabel": "Rule",
+          "actionText": "The puzzle stays inside a fixed classroom cipher."
+        },
+        {
+          "label": "Letter hints",
+          "body": "Frequency hints point toward likely letters.",
+          "actionLabel": "Limit",
+          "actionText": "Hints are aids, not solutions or security advice."
+        },
+        {
+          "label": "Type the result",
+          "body": "Enter the decoded message or choose a shift.",
+          "actionLabel": "Paper",
+          "actionText": "The game is one of ten distinct practice activities."
+        },
+        {
+          "label": "Local progress",
+          "body": "Scores and XP stay on the student's device.",
+          "actionLabel": "Rule",
+          "actionText": "No rating, rank, leaderboard or ranked mode."
+        }
+      ],
+      "scene": {
+        "id": "game-tour",
+        "game": "cipher",
+        "set": "desk",
+        "role": "blue700",
+        "companion": "juniper",
+        "mood": "curious",
+        "prop": "board",
+        "demo": "Three rotor wheels step to a new shift while a decoded message strip slides into place.",
+        "camera": {
+        "from": {
+          "x": 0,
+          "y": 1.4,
+          "z": 18,
+          "lookX": 1.2,
+          "lookY": -1.4,
+          "fov": 58,
+          "roll": -0.008
+        },
+        "to": {
+          "x": 0.8,
+          "y": 1.0,
+          "z": 14,
+          "lookX": 1.2,
+          "lookY": -1.4,
+          "fov": 54,
+          "roll": 0.008
+        }
+      },
+        "reactions": [
+          {
+            "companion": "juniper",
+            "mood": "curious",
+            "threshold": 0.14,
+            "text": "Try another shift."
+          },
+          {
+            "companion": "juniper",
+            "mood": "happy",
+            "threshold": 0.57,
+            "text": "The message reads."
+          }
+        ]
+      },
+      "notes": [
+        "Caesar shifts are a classroom puzzle, not a secure communication system.",
+        "The frequency hint is deterministic and does not imply model-generated answers.",
+        "No score, XP or rank leaves the device."
+      ]
+    },
+    {
+      "id": "game-focus",
+      "chapter": "X",
+      "numeral": "08",
+      "eyebrow": "Inside CampusVerse · game 08",
+      "title": "Signal Garden",
+      "tagline": "Collect blooms, ignore stones",
+      "lead": "In a 45-second round, collect glowing blooms and ignore grey stones. Click or tap targets, or use Tab and Enter; pause any time.",
+      "status": {
+        "text": "Local scores · no ranking",
+        "kind": "checks"
+      },
+      "points": [],
+      "cards": [
+        {
+          "label": "45-second round",
+          "body": "A short focus round collects glowing blooms.",
+          "actionLabel": "Rule",
+          "actionText": "Pause is available at any point in the round."
+        },
+        {
+          "label": "Two targets",
+          "body": "Glowing blooms count; grey stones do not.",
+          "actionLabel": "Limit",
+          "actionText": "Reduced motion removes the drifting animation."
+        },
+        {
+          "label": "Keyboard path",
+          "body": "Tab to a target, then press Enter.",
+          "actionLabel": "Paper",
+          "actionText": "Games include keyboard support where useful."
+        },
+        {
+          "label": "Local progress",
+          "body": "Scores and XP stay on the student's device.",
+          "actionLabel": "Rule",
+          "actionText": "No rating, rank, leaderboard or ranked mode."
+        }
+      ],
+      "scene": {
+        "id": "game-tour",
+        "game": "signal",
+        "set": "garden",
+        "role": "sage600",
+        "companion": "moss",
+        "mood": "happy",
+        "prop": "star",
+        "demo": "A glowing bloom rises and pulses while a grey stone stays flat; a collect ring sweeps past.",
+        "camera": {
+        "from": {
+          "x": 0,
+          "y": 1.4,
+          "z": 18,
+          "lookX": 1.2,
+          "lookY": -1.4,
+          "fov": 58,
+          "roll": -0.008
+        },
+        "to": {
+          "x": 0.8,
+          "y": 1.0,
+          "z": 14,
+          "lookX": 1.2,
+          "lookY": -1.4,
+          "fov": 54,
+          "roll": 0.008
+        }
+      },
+        "reactions": [
+          {
+            "companion": "moss",
+            "mood": "calm",
+            "threshold": 0.13,
+            "text": "Bloom, not stone."
+          },
+          {
+            "companion": "moss",
+            "mood": "proud",
+            "threshold": 0.56,
+            "text": "One clean round."
+          }
+        ]
+      },
+      "notes": [
+        "Signal Garden uses a 45-second round; Cortex Run uses 90-second rounds.",
+        "Reduced motion removes drift, and the round can be paused.",
+        "The score is local practice feedback, not ranking evidence."
+      ]
+    },
+    {
+      "id": "game-css",
+      "chapter": "X",
+      "numeral": "09",
+      "eyebrow": "Inside CampusVerse · game 09",
+      "title": "CSS Atelier",
+      "tagline": "Choose from a fixed bank",
+      "lead": "Read a design goal and choose the declaration that makes it real. Only declarations from a fixed bank of twelve CSS tasks may reach the preview.",
+      "status": {
+        "text": "Local scores · no ranking",
+        "kind": "checks"
+      },
+      "points": [],
+      "cards": [
+        {
+          "label": "Fixed task bank",
+          "body": "Eight tasks per run come from a fixed bank.",
+          "actionLabel": "Rule",
+          "actionText": "Only approved declarations reach the live preview."
+        },
+        {
+          "label": "Four choices",
+          "body": "Pick one of four declarations for each goal.",
+          "actionLabel": "Limit",
+          "actionText": "User-authored CSS is never injected into the page."
+        },
+        {
+          "label": "Wrong answers",
+          "body": "Feedback says what the chosen declaration does first.",
+          "actionLabel": "Paper",
+          "actionText": "The explanation follows with the correct declaration."
+        },
+        {
+          "label": "Local progress",
+          "body": "Scores and XP stay on the student's device.",
+          "actionLabel": "Rule",
+          "actionText": "No rating, rank, leaderboard or ranked mode."
+        }
+      ],
+      "scene": {
+        "id": "game-tour",
+        "game": "css",
+        "set": "atelier",
+        "role": "lav600",
+        "companion": "lumen",
+        "mood": "thinking",
+        "prop": "laptop",
+        "demo": "A declaration chip slides from the task bank into the preview panel and the panel lights up.",
+        "camera": {
+        "from": {
+          "x": 0,
+          "y": 1.4,
+          "z": 18,
+          "lookX": 1.2,
+          "lookY": -1.4,
+          "fov": 58,
+          "roll": -0.008
+        },
+        "to": {
+          "x": 0.8,
+          "y": 1.0,
+          "z": 14,
+          "lookX": 1.2,
+          "lookY": -1.4,
+          "fov": 54,
+          "roll": 0.008
+        }
+      },
+        "reactions": [
+          {
+            "companion": "lumen",
+            "mood": "thinking",
+            "threshold": 0.14,
+            "text": "Which declaration fits?"
+          },
+          {
+            "companion": "lumen",
+            "mood": "proud",
+            "threshold": 0.58,
+            "text": "Preview updated."
+          }
+        ]
+      },
+      "notes": [
+        "CSS Atelier is a fixed task game; it never injects user-authored CSS.",
+        "The preview change comes only from declarations in the bank.",
+        "Completion is local practice, not a ranking or verified skill score."
+      ]
+    },
+    {
+      "id": "game-cortex",
+      "chapter": "X",
+      "numeral": "10",
+      "eyebrow": "Inside CampusVerse · game 10",
+      "title": "Cortex Run",
+      "tagline": "90-second rounds",
+      "lead": "A calm 90-second procedural sprint through memory, sequences and shifting rules. Tap, click or use the keyboard; no account is needed.",
+      "status": {
+        "text": "Local scores · no ranking",
+        "kind": "checks"
+      },
+      "points": [],
+      "cards": [
+        {
+          "label": "90 seconds",
+          "body": "Each round lasts ninety seconds, with a clear finish.",
+          "actionLabel": "Rule",
+          "actionText": "The timer is visible and the round can be restarted."
+        },
+        {
+          "label": "Three modes",
+          "body": "Memory, sequences and shifting rules rotate through the round.",
+          "actionLabel": "Limit",
+          "actionText": "Tasks are procedural practice, not an aptitude test."
+        },
+        {
+          "label": "Keyboard ready",
+          "body": "Tap, click or use the keyboard to respond.",
+          "actionLabel": "Paper",
+          "actionText": "Games include visible focus and reduced-motion behaviour."
+        },
+        {
+          "label": "Local progress",
+          "body": "Scores and XP stay on the student's device.",
+          "actionLabel": "Rule",
+          "actionText": "No rating, rank, leaderboard or ranked mode."
+        }
+      ],
+      "scene": {
+        "id": "game-tour",
+        "game": "cortex",
+        "set": "timer",
+        "role": "coral600",
+        "companion": "pip",
+        "mood": "cheering",
+        "prop": "star",
+        "demo": "A timer ring turns while three station tokens cycle through memory, sequence and rule prompts.",
+        "camera": {
+        "from": {
+          "x": 0,
+          "y": 1.4,
+          "z": 18,
+          "lookX": 1.2,
+          "lookY": -1.4,
+          "fov": 58,
+          "roll": -0.008
+        },
+        "to": {
+          "x": 0.8,
+          "y": 1.0,
+          "z": 14,
+          "lookX": 1.2,
+          "lookY": -1.4,
+          "fov": 54,
+          "roll": 0.008
+        }
+      },
+        "reactions": [
+          {
+            "companion": "pip",
+            "mood": "cheering",
+            "threshold": 0.12,
+            "text": "Ninety seconds."
+          },
+          {
+            "companion": "pip",
+            "mood": "proud",
+            "threshold": 0.57,
+            "text": "Round complete."
+          }
+        ]
+      },
+      "notes": [
+        "Cortex Run is the only game with 90-second rounds in this deck.",
+        "Procedural tasks are practice, not a measured learning gain.",
+        "No account, rating, rank or leaderboard is attached to the result."
+      ]
+    },
+    {
+      "id": "overview",
+      "chapter": "XI",
+      "numeral": "XI",
+      "eyebrow": "Inside CampusVerse · overview",
+      "title": "Everything in one glance",
+      "tagline": "17 pages · 10 games",
+      "lead": "The camera flies through a constellation of every main page and every practice game, with page nodes and game nodes sharing one connected space.",
+      "status": {
+        "text": "Diagram · not an app screen",
+        "kind": "prepared"
+      },
+      "points": [],
+      "cards": [
+        {
+          "label": "17 page nodes",
+          "body": "Each main page has a place in the constellation.",
+          "actionLabel": "Paper",
+          "actionText": "The paper describes seventeen main pages."
+        },
+        {
+          "label": "10 game nodes",
+          "body": "Each practice game has its own distinct node.",
+          "actionLabel": "Paper",
+          "actionText": "The paper names ten games and no leaderboard."
+        },
+        {
+          "label": "One connected space",
+          "body": "Links show how the parts meet in one app.",
+          "actionLabel": "Limit",
+          "actionText": "The constellation is a presentation diagram, not an app screen."
+        },
+        {
+          "label": "Then the close",
+          "body": "The defence ends on evidence and open work.",
+          "actionLabel": "Paper",
+          "actionText": "Prepared and verified claims stay separate to the end."
+        }
+      ],
+      "scene": {
+        "id": "constellation",
+        "companion": "lumen",
+        "mood": "happy",
+        "prop": "star",
+        "camera": {
+        "from": {
+          "x": 0.4,
+          "y": 2.6,
+          "z": 24,
+          "lookX": 2.2,
+          "lookY": 0.2,
+          "fov": 62,
+          "roll": -0.01
+        },
+        "to": {
+          "x": 0.8,
+          "y": 1.4,
+          "z": 20,
+          "lookX": 2.2,
+          "lookY": 0.2,
+          "fov": 54,
+          "roll": 0.01
+        }
+      },
+        "reactions": [
+          {
+            "companion": "lumen",
+            "mood": "happy",
+            "threshold": 0.12,
+            "text": "Every page has a place."
+          },
+          {
+            "companion": "lumen",
+            "mood": "proud",
+            "threshold": 0.58,
+            "text": "Ten games, no leaderboard."
+          }
+        ]
+      },
+      "notes": [
+        "This overview is a presentation device, not an eighteenth app page or a new feature.",
+        "Page nodes and game nodes are distinguished by shape and colour; no public player identity appears.",
+        "Use it to close the tour before the final Thank you and Questions scene."
+      ]
+    },
+    {
       id: "closing",
-      numeral: "X",
+      numeral: "XII",
       eyebrow: "Defence close",
       title: "Thank you",
       tagline: "Questions",

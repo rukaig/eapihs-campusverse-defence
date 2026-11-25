@@ -115,5 +115,37 @@ at runtime.
   headless Chromium and screenshot evidence only; it does not verify physical
   devices, Safari/Edge/Firefox, screen readers, live Firebase, two independent
   clients, student learning or school approval.
-- Next: Phase 6 game tour with ten dedicated sets and the closing constellation
-  overview; do not start before Phase 5 is accepted.
+- Phase 6 game tour: ten stops in the paper's exact order — Campus Chess, Word
+  Forge, Equation Forge, The Missing Margin, Pattern Pursuit, Study Shelf, Cipher
+  Desk, Signal Garden, CSS Atelier and Cortex Run. Each stop has a distinct
+  procedural 3D set, a short how-it-plays description, a looping demo of one
+  typical move or turn, four short function cards, complete speaker notes and a
+  local-score badge. Every game stop says scores and XP stay on the student's
+  device and that there is no rating, rank, leaderboard or ranked mode. Canteen
+  Crew is deliberately excluded because it is a source addition absent from the
+  paper. The next section, "Everything in one glance", is a presentation diagram
+  with 17 page nodes and 10 game nodes linked in one constellation; it is not an
+  app page or a new feature. The closing scene is now numbered XII.
+- Phase 6 verification: `npm run build` passes with 38 sections and 38 stages —
+  ten paper sections, 17 app-tour stops, ten game stops, the constellation
+  overview and the closing scene. Headless Chromium checks report zero console or
+  page errors, zero external requests and zero horizontal overflow at
+  1920×1080, 1280×720, 800×360, 800×1280 and 360×800. All eleven new stages become
+  active at their resting position; all eleven demo phases advance between two
+  samples; the constellation reports 17 page nodes and 10 game nodes; all twelve
+  colour themes plus Follow device apply with no overflow; reduced motion keeps
+  one canvas with demo phase 0; the progress counter reaches 38 / 38. A DOM
+  overlap sweep of the eleven new sections at two desktop viewports found no card
+  or chrome collisions. Canvas capture checks confirm every new set draws visible
+  geometry and that each demo changes pixels over time. Settled full-slide and
+  stage-only composites are stored under `reference/phase6/`. An initial
+  `kiro-cli` visual review of the first eleven settled screenshots was run before
+  the camera correction; the final visual re-review could not be completed because
+  `kiro-cli` reached its monthly request limit. This remains local headless
+  Chromium and screenshot evidence only; it does not verify physical devices,
+  Safari/Edge/Firefox, screen readers, live Firebase, two independent clients,
+  student learning or school approval.
+- Next: Phase 7 polish and defence readiness — transitions, performance and Low
+  graphics, offline build/static-server/no-internet README steps, accessibility
+  and contrast, number and claim fact-check, presenter kit, README editing guide
+  and an explicit unverified report. Do not start before Phase 6 is accepted.

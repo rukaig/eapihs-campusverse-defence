@@ -342,23 +342,23 @@ a.chrome-button {
   color: var(--cv-accent-strong);
 }
 
-.section[data-chapter="IX"] .heading-row {
+.section[data-chapter] .heading-row {
   flex-direction: column;
   align-items: flex-start;
   gap: 0.35rem;
 }
 
-.section[data-chapter="IX"] .title {
+.section[data-chapter] .title {
   max-width: 18ch;
   font-size: clamp(2.6rem, 5.3vw, 5.2rem);
 }
 
-.section[data-chapter="IX"] .tagline {
+.section[data-chapter] .tagline {
   max-width: 32ch;
   font-size: clamp(1.2rem, 2.3vw, 2rem);
 }
 
-.section[data-chapter="IX"] .points:empty {
+.section[data-chapter] .points:empty {
   display: none;
 }
 
@@ -1131,7 +1131,7 @@ a.chrome-button {
     min-height: 0;
   }
 
-  .section[data-chapter="IX"] .title {
+  .section[data-chapter] .title {
     font-size: clamp(2.3rem, 10vw, 4rem);
   }
 
